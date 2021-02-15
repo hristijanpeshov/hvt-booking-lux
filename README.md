@@ -1,7 +1,5 @@
 <h1 align="center">HVT Booking LUX</h1>
-<p align="center>
-          <img src="https://github.com/hristijanpeshov/hvt-booking-lux/logo/hvt booking logo2.jpg">
-          </p>
+<img src="https://github.com/hristijanpeshov/hvt-booking-lux/logo/hvt booking logo2.jpg">
 Application for booking apartments
 
 Teodor Penevski e zver
