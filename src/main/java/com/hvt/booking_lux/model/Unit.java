@@ -71,4 +71,32 @@ public class Unit {
     public List<UnitImages> getUnitImages() {
         return unitImages;
     }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setNumberPeople(int numberPeople) {
+        this.numberPeople = numberPeople;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setResObject(ResObject resObject) {
+        this.resObject = resObject;
+    }
+
+    public void setUnitImages(List<UnitImages> unitImages) {
+        this.unitImages = unitImages;
+    }
 }

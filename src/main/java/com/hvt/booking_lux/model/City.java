@@ -24,5 +24,16 @@ public class City {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
 
