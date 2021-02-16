@@ -30,4 +30,24 @@ public class Country {
         this.flagImage = flagImage;
         cityList = new ArrayList<>();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public String getFlagImage() {
+        return flagImage;
+    }
+
+    public List<City> getCityList() {
+        return cityList;
+    }
 }

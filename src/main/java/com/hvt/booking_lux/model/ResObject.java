@@ -70,4 +70,52 @@ public class ResObject {
     public Category getCategory() {
         return category;
     }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public List<ObjectImage> getObjectImages() {
+        return objectImages;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
+    }
+
+    public void setObjectImages(List<ObjectImage> objectImages) {
+        this.objectImages = objectImages;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }
