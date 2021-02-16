@@ -5,6 +5,7 @@ import com.hvt.booking_lux.enumeration.Role;
 import com.hvt.booking_lux.model.*;
 import com.hvt.booking_lux.repository.*;
 import lombok.Getter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,14 +19,16 @@ public class DataHolder  {
     private final UnitRepository unitRepository;
     private final ResObjectRepository resObjectRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository) {
+    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.cityRepository = cityRepository;
         this.countryRepository = countryRepository;
         this.unitRepository = unitRepository;
         this.resObjectRepository = resObjectRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -43,7 +46,7 @@ public class DataHolder  {
         City manchester = cityRepository.save(new City("Manchester", countryEn));
 
 
-        User user = userRepository.save(new User("user@user.com", Role.USER));
+        User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.USER));
 
 
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
