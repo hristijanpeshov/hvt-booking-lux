@@ -5,9 +5,11 @@ import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface ReservationObjectService {
     List<ResObject> listAll();
     List<ResObject> listByCountry(long countryId);

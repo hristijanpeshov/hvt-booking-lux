@@ -1,6 +1,7 @@
 package com.hvt.booking_lux.model;
 
 import com.hvt.booking_lux.enumeration.Category;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class ResObject {
     public Category getCategory() {
         return category;
     }
+
 
     public List<Unit> getUnits() {
         return units;
