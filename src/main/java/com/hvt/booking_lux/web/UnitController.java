@@ -1,6 +1,6 @@
 package com.hvt.booking_lux.web;
 
-import com.hvt.booking_lux.exceptions.InvalidCreatorException;
+import com.hvt.booking_lux.model.exceptions.InvalidCreatorException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.service.ReservationObjectService;

@@ -1,6 +1,6 @@
 package com.hvt.booking_lux.model;
 
-import com.hvt.booking_lux.enumeration.Role;
+import com.hvt.booking_lux.model.enumeration.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

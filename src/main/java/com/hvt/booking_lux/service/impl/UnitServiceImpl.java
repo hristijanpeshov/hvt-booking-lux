@@ -1,7 +1,7 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.exceptions.ResObjectNotFoundException;
-import com.hvt.booking_lux.exceptions.UnitNotFoundException;
+import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.repository.ResObjectRepository;

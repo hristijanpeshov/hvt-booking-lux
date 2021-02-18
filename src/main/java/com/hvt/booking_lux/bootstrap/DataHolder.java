@@ -1,7 +1,7 @@
 package com.hvt.booking_lux.bootstrap;
 
-import com.hvt.booking_lux.enumeration.Category;
-import com.hvt.booking_lux.enumeration.Role;
+import com.hvt.booking_lux.model.enumeration.Category;
+import com.hvt.booking_lux.model.enumeration.Role;
 import com.hvt.booking_lux.model.*;
 import com.hvt.booking_lux.repository.*;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.ZonedDateTime;
 
 @Component
 @Getter
@@ -20,15 +21,17 @@ public class DataHolder  {
     private final ResObjectRepository resObjectRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ReservationRepository reservationRepository;
 
 
-    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ReservationRepository reservationRepository) {
         this.cityRepository = cityRepository;
         this.countryRepository = countryRepository;
         this.unitRepository = unitRepository;
         this.resObjectRepository = resObjectRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.reservationRepository = reservationRepository;
     }
 
     @PostConstruct
@@ -56,16 +59,20 @@ public class DataHolder  {
         resObjectRepository.save(houseSRB);
         resObjectRepository.save(apartmentEn);
 
-        Unit unit1 = new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!");
-        Unit unit2 = new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!");
+
+
         Unit unit3 = new Unit(hotelMKD, 70, 5, 100, "Room for 5 people!");
         Unit unit4 = new Unit(hotelMKD, 25, 2, 35, "Room for 2 people!");
 
-        unitRepository.save(unit1);
-        unitRepository.save(unit2);
+        Unit unit1 = unitRepository.save(new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!"));
+        Unit unit2 = unitRepository.save(new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!"));
         unitRepository.save(unit3);
         unitRepository.save(unit4);
 
+
+        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
 
     }
 

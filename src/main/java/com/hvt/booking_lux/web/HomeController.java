@@ -1,7 +1,9 @@
 package com.hvt.booking_lux.web;
 
 import com.hvt.booking_lux.model.Country;
+import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.service.LocationService;
+import com.hvt.booking_lux.service.UserStatisticsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +15,18 @@ import java.util.List;
 @RequestMapping(value = {"/","/home"})
 public class HomeController {
 
-    private final LocationService locationService;
+//    private final LocationService locationService;
+    private final UserStatisticsService userStatisticsService;
 
-    public HomeController(LocationService locationService) {
-        this.locationService = locationService;
+    public HomeController(UserStatisticsService userStatisticsService) {
+        this.userStatisticsService = userStatisticsService;
     }
 
     @GetMapping
     public String homePage(Model model){
-        List<Country> countryList = locationService.listAllCountries();
-        model.addAttribute("countries",countryList);
+//        List<Country> countryList = locationService.listAllCountries();
+        userStatisticsService.findAllByCreator(new User());
+//        model.addAttribute("countries",countryList);
         return "";
     }
 }

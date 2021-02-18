@@ -1,9 +1,9 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.enumeration.Category;
-import com.hvt.booking_lux.exceptions.CityNotFoundException;
-import com.hvt.booking_lux.exceptions.CountryNotFoundException;
-import com.hvt.booking_lux.exceptions.ResObjectNotFoundException;
+import com.hvt.booking_lux.model.enumeration.Category;
+import com.hvt.booking_lux.model.exceptions.CityNotFoundException;
+import com.hvt.booking_lux.model.exceptions.CountryNotFoundException;
+import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
 import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.Country;
 import com.hvt.booking_lux.model.ResObject;

@@ -1,9 +1,8 @@
 package com.hvt.booking_lux.service;
 
-import com.hvt.booking_lux.enumeration.Category;
+import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.ResObject;
-import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import org.springframework.stereotype.Service;
 

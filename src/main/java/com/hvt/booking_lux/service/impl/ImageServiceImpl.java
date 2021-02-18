@@ -1,6 +1,6 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.exceptions.ImageNotFoundException;
+import com.hvt.booking_lux.model.exceptions.ImageNotFoundException;
 import com.hvt.booking_lux.model.ObjectImage;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;

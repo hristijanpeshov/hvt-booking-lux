@@ -20,6 +20,7 @@ public class Reservation {
 
     int numberNights;
 
+    private ZonedDateTime reservationDate;
     private ZonedDateTime fromDate;
 
     private ZonedDateTime toDate;
@@ -34,5 +35,6 @@ public class Reservation {
         this.numberNights = numberNights;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.reservationDate = ZonedDateTime.now();
     }
 }

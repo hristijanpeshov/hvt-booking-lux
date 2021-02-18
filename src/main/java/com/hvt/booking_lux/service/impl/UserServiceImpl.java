@@ -1,9 +1,9 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.enumeration.Role;
-import com.hvt.booking_lux.exceptions.InvalidUsernameOrPasswordException;
-import com.hvt.booking_lux.exceptions.PasswordNotMatchException;
-import com.hvt.booking_lux.exceptions.UsernameAlreadyExistsException;
+import com.hvt.booking_lux.model.enumeration.Role;
+import com.hvt.booking_lux.model.exceptions.InvalidUsernameOrPasswordException;
+import com.hvt.booking_lux.model.exceptions.PasswordNotMatchException;
+import com.hvt.booking_lux.model.exceptions.UsernameAlreadyExistsException;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.repository.UserRepository;
 import com.hvt.booking_lux.service.UserService;

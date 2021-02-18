@@ -1,7 +1,6 @@
 package com.hvt.booking_lux.model;
 
-import com.hvt.booking_lux.enumeration.Category;
-import lombok.Data;
+import com.hvt.booking_lux.model.enumeration.Category;
 
 import javax.persistence.*;
 import java.util.ArrayList;
