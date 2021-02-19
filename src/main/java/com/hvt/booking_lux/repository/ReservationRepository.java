@@ -27,5 +27,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             " group by ro.id, month", nativeQuery = true)
     List<ResObjectYearStatistics> findAnnualReservationCountForProperty(String creator, int year, long id);
 
-
+    List<Reservation> findAllByUser(User user);
 }

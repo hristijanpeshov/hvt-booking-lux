@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -64,5 +65,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation cancel(long reservationId) {
         return null;
+    }
+
+    @Override
+    public List<Reservation> findAllReservationsForUser(User user){
+        return findAllReservationsForUser(user);
     }
 }

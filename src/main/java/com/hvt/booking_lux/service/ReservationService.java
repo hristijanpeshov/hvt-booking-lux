@@ -16,4 +16,5 @@ public interface ReservationService {
     List<ResObject> findAllResObjectsThatAreReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate);
     Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate,ZonedDateTime toDate);
     Reservation cancel(long reservationId);
+    List<Reservation> findAllReservationsForUser(User user);
 }
