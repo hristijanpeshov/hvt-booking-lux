@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.enumeration;
+package com.hvt.booking_lux.model.enumeration;
 
 import org.springframework.security.core.GrantedAuthority;
 

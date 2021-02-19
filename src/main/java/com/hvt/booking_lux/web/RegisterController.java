@@ -1,7 +1,7 @@
 package com.hvt.booking_lux.web;
 
-import com.hvt.booking_lux.exceptions.InvalidArgumentException;
-import com.hvt.booking_lux.exceptions.PasswordNotMatchException;
+import com.hvt.booking_lux.model.exceptions.InvalidArgumentException;
+import com.hvt.booking_lux.model.exceptions.PasswordNotMatchException;
 import com.hvt.booking_lux.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

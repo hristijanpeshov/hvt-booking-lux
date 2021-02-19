@@ -1,5 +1,7 @@
 package com.hvt.booking_lux.model;
 
+import com.hvt.booking_lux.model.enumeration.BedType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,12 @@ public class Unit {
 
     private boolean status;
 
-    private int numberPeople;
-
     private double price;
+
+    private int numberOf;
+
+    @OneToMany
+    private List<BedTypes> bedTypes;
 
     private String description;
 
@@ -30,14 +35,34 @@ public class Unit {
     public Unit() {
     }
 
-    public Unit(ResObject resObject, double size, int numberPeople, double price, String description) {
+    public Unit(ResObject resObject, double size, int numberOf, double price, String description) {
         this.resObject = resObject;
         this.size = size;
-        this.numberPeople = numberPeople;
         this.price = price;
+        this.numberOf = numberOf;
         this.description = description;
         this.status = true;
+        this.bedTypes = new ArrayList<>();
         unitImages = new ArrayList<>();
+    }
+
+    public Unit(ResObject resObject, double size, int numberOf, double price, String description, List<BedTypes> bedTypes) {
+        this.resObject = resObject;
+        this.size = size;
+        this.price = price;
+        this.numberOf = numberOf;
+        this.description = description;
+        this.status = true;
+        this.bedTypes = bedTypes;
+        unitImages = new ArrayList<>();
+    }
+
+    public List<BedTypes> getBedTypes() {
+        return bedTypes;
+    }
+
+    public void setBedTypes(List<BedTypes> bedTypes) {
+        this.bedTypes = bedTypes;
     }
 
     public Long getId() {
@@ -52,8 +77,8 @@ public class Unit {
         return status;
     }
 
-    public int getNumberPeople() {
-        return numberPeople;
+    public int getNumberOf() {
+        return numberOf;
     }
 
     public double getPrice() {
@@ -80,8 +105,8 @@ public class Unit {
         this.status = status;
     }
 
-    public void setNumberPeople(int numberPeople) {
-        this.numberPeople = numberPeople;
+    public void setNumberOf(int numberPeople) {
+        this.numberOf = numberPeople;
     }
 
     public void setPrice(double price) {
