@@ -47,11 +47,14 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<ResObject> findAllResObjectsThatAreReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate) {
 //        (start1.isBefore(end2)) && (start2.isBefore(end1));
-        List<ResObject> resObjects = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (toDate.isBefore(s.getFromDate())))
-                .map(s-> s.getUnit().getResObject()).distinct().collect(Collectors.toList());
+        List<Unit> units = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
+                .map(Reservation::getUnit).distinct().collect(Collectors.toList());
+
+        List<ResObject> resObjects = units.stream().map(Unit::getResObject).distinct().collect(Collectors.toList());
+        resObjects = resObjects.stream().filter(s-> !(s.getUnits().size() > units.stream().filter(f-> f.getResObject().getId().equals(s.getId())).count())).collect(Collectors.toList());
         List<ResObject> returnObjects = reservationObjectService.listAll();
         returnObjects.removeAll(resObjects);
-        return resObjects;
+        return returnObjects;
     }
 
     @Override

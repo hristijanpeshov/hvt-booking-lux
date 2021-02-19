@@ -6,7 +6,7 @@ import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.service.ReservationObjectService;
-import org.apache.tomcat.jni.Local;
+import com.hvt.booking_lux.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,9 +24,11 @@ import java.util.List;
 public class AccommodationController {
 
     private final ReservationObjectService reservationObjectService;
+    private final ReservationService reservationService;
 
-    public AccommodationController(ReservationObjectService reservationObjectService) {
+    public AccommodationController(ReservationObjectService reservationObjectService, ReservationService reservationService) {
         this.reservationObjectService = reservationObjectService;
+        this.reservationService = reservationService;
     }
 
 
@@ -39,11 +40,12 @@ public class AccommodationController {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             resObjectList = reservationObjectService.listByCityName(city);
+            resObjectList = reservationService.findAllResObjectsThatAreReservedAtThatTime(checkIn, checkOut);
         }
         else{
             resObjectList = reservationObjectService.listAll();
         }
-        model.addAttribute("reservationObjects",resObjectList);
+        model.addAttribute("reservationObjects", resObjectList);
         model.addAttribute("bodyContent", "rooms");
         return "master-template";
     }
