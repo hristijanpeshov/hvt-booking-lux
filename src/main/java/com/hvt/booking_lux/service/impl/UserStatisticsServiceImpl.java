@@ -27,15 +27,23 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
 
 
     @Override
-    public List<ResObject> findAllByCreator(User creator) {
+    public List<CreatorYearStatistics> findAnnualPropertyReservationCount(User creator, int year) {
         creator = userRepository.findById("user@user.com").orElseThrow(() -> new UsernameNotFoundException("user@user.com"));
 
         List<Reservation> reservations = reservationRepository.findAllByUnitResObjectCreator(creator);
 
-        List<ResObjectYearStatistics> objects = reservationRepository.findAnnualPropertyReservationCounta(creator.getUsername(), 2021, 1L);
+        List<CreatorYearStatistics> objects = new ArrayList<>();
+        objects = reservationRepository.findAnnualPropertyReservationCount(creator.getUsername(), year);
+        return objects;
+    }
 
+    @Override
+    public List<ResObjectYearStatistics> findAnnualReservationCountForProperty(User creator, int year, long resObjectId) {
+        List<Reservation> reservations = reservationRepository.findAllByUnitResObjectCreator(creator);
 
-        return new ArrayList<>();
+        List<ResObjectYearStatistics> objects = new ArrayList<>();
+        objects = reservationRepository.findAnnualReservationCountForProperty(creator.getUsername(), year, resObjectId);
+        return objects;
     }
 }
 

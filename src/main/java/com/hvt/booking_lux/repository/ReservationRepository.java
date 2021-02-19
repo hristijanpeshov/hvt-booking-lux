@@ -25,7 +25,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "join RES_OBJECT as ro on ro.id = u.res_object_id where ro.creator_username=?1" +
             " and ?2 = extract(year from r.reservation_date) and ro.id = ?3" +
             " group by ro.id, month", nativeQuery = true)
-    List<ResObjectYearStatistics> findAnnualPropertyReservationCounta(String creator, int year, long id);
+    List<ResObjectYearStatistics> findAnnualReservationCountForProperty(String creator, int year, long id);
 
 
 }

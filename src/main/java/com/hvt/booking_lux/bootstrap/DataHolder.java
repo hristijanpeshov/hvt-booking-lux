@@ -70,9 +70,9 @@ public class DataHolder  {
         unitRepository.save(unit4);
 
 
-        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberPeople(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
 
     }
 

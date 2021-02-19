@@ -44,7 +44,7 @@ public class UnitServiceImpl implements UnitService {
     public Unit edit(long unitId, double size, int numberPeople, double price, String description) {
         Unit unit = findById(unitId);
         unit.setSize(size);
-        unit.setNumberPeople(numberPeople);
+        unit.setNumberOf(numberPeople);
         unit.setPrice(price);
         unit.setDescription(description);
         return unitRepository.save(unit);

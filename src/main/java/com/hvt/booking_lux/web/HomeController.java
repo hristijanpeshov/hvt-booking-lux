@@ -25,7 +25,7 @@ public class HomeController {
     @GetMapping
     public String homePage(Model model){
 //        List<Country> countryList = locationService.listAllCountries();
-        userStatisticsService.findAllByCreator(new User());
+        userStatisticsService.findAnnualPropertyReservationCount(new User(), 2021);
 //        model.addAttribute("countries",countryList);
         return "";
     }
