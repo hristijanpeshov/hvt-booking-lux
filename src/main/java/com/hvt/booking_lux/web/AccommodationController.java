@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,7 @@ public class AccommodationController {
 
     @GetMapping
     public String listBySearchParams(@RequestParam(required = false) Long countryId,@RequestParam(required = false) Long cityId, Model model){
-        List<ResObject> resObjectList = null;
+        List<ResObject> resObjectList = new ArrayList<>();
         if(countryId!=null && cityId!=null)
         {
             resObjectList = reservationObjectService.listByCity(cityId);
