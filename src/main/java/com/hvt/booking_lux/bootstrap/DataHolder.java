@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Getter
@@ -53,6 +55,12 @@ public class DataHolder  {
         ResObject apartmentEn = new ResObject("Rooftop apartment", "england 11 22", "Rooftop apartment with wonderful view", Category.APARTMENT, user, london);
 
         ResObject hotelMKD = resObjectRepository.save( new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
+
+        List<ObjectImage> objectImageList = new ArrayList<>();
+        objectImageList.add(new ObjectImage(houseSRB, "assets/room-4"));
+
+        houseSRB.setObjectImages(objectImageList);
+
         resObjectRepository.save(houseSRB);
         resObjectRepository.save(apartmentEn);
 

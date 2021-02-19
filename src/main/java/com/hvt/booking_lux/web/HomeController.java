@@ -12,17 +12,18 @@ import java.util.List;
 @Controller
 @RequestMapping(value = {"/","/home"})
 public class HomeController {
-
-    private final LocationService locationService;
-
-    public HomeController(LocationService locationService) {
-        this.locationService = locationService;
-    }
+//
+//    private final LocationService locationService;
+//
+//    public HomeController(LocationService locationService) {
+//        this.locationService = locationService;
+//    }
 
     @GetMapping
     public String homePage(Model model){
-        List<Country> countryList = locationService.listAllCountries();
-        model.addAttribute("countries",countryList);
-        return "";
+//        List<Country> countryList = locationService.listAllCountries();
+//        model.addAttribute("countries",countryList);
+        model.addAttribute("bodyContent", "index");
+        return "master-template";
     }
 }

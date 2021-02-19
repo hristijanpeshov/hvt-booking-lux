@@ -22,4 +22,19 @@ public class ObjectImage {
         this.url = url;
     }
 
+    public ResObject getResObject() {
+        return resObject;
+    }
+
+    public void setResObject(ResObject resObject) {
+        this.resObject = resObject;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

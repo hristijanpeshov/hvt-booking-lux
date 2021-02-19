@@ -40,7 +40,8 @@ public class AccommodationController {
             resObjectList = reservationObjectService.listAll();
         }
         model.addAttribute("reservationObjects",resObjectList);
-        return "";
+        model.addAttribute("bodyContent", "rooms");
+        return "master-template";
     }
 
     @GetMapping("/{resObjectId}")
@@ -52,8 +53,9 @@ public class AccommodationController {
     }
 
     @GetMapping("/add")
-    public String addForm(){
-        return "";
+    public String addForm(Model model){
+        model.addAttribute("bodyContent", "add-accommodation");
+        return "master-template";
     }
     @PostMapping("/add")
     public String save(Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam City city)
