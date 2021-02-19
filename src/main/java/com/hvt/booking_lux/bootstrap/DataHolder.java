@@ -1,8 +1,8 @@
 package com.hvt.booking_lux.bootstrap;
 
-import com.hvt.booking_lux.enumeration.Category;
-import com.hvt.booking_lux.enumeration.Role;
 import com.hvt.booking_lux.model.*;
+import com.hvt.booking_lux.model.enumeration.Category;
+import com.hvt.booking_lux.model.enumeration.Role;
 import com.hvt.booking_lux.repository.*;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;

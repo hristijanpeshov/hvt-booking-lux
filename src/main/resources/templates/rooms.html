@@ -20,7 +20,7 @@
                         <div class="owl-stage-outer">
                             <div class="owl-stage" style="transform: translate3d(-1200px, 0px, 0px); transition: all 0s ease 0s; width: 4800px;">
                             <div th:each="img : ${res.getObjectImages()}" class="owl-item cloned" style="width: 600px;">
-                                <div class="room__pic__item set-bg" data-setbg="${img.getUrl()}" style="background-image: url('${img.getUrl()}');">
+                                <div class="room__pic__item set-bg" th:data-setbg="${img.getUrl()}" style="background-image: url('${img.getUrl()}');">
 
                                 </div>
                             </div>

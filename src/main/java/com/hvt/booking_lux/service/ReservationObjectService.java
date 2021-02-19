@@ -17,4 +17,5 @@ public interface ReservationObjectService {
     ResObject edit(long resObjectId,String name, String address, String description, Category category, User creator, City city);
     ResObject findResObjectById(long resObjectId);
     ResObject delete(long resObjectId);
+    List<ResObject> listByCityName(String city);
 }

@@ -6,11 +6,18 @@ import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.service.ReservationObjectService;
+import org.apache.tomcat.jni.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,15 +32,13 @@ public class AccommodationController {
 
 
     @GetMapping
-    public String listBySearchParams(@RequestParam(required = false) Long countryId,@RequestParam(required = false) Long cityId, Model model){
+    public String listBySearchParams(@RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam(required = false) Integer numPeople , Model model){
         List<ResObject> resObjectList = null;
-        if(countryId!=null && cityId!=null)
+        if(city!=null && checkInDate != null && checkOutDate!=null && numPeople!=null)
         {
-            resObjectList = reservationObjectService.listByCity(cityId);
-
-        }else if(countryId!=null)
-        {
-            resObjectList = reservationObjectService.listByCountry(countryId);
+            ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            resObjectList = reservationObjectService.listByCityName(city);
         }
         else{
             resObjectList = reservationObjectService.listAll();

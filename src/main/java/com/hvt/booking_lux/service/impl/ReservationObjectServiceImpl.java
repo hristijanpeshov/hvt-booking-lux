@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationObjectServiceImpl implements ReservationObjectService {
@@ -78,5 +79,19 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
         ResObject resObject = findResObjectById(resObjectId);
         resObjectRepository.delete(resObject);
         return resObject;
+    }
+
+    @Override
+    public List<ResObject> listByCityName(String city) {
+        Optional<City> city1 = cityRepository.findByNameContains(city);
+        if(city1.isPresent())
+        {
+            return resObjectRepository.findAllByCity(city1.get());
+        }
+        else
+        {
+            return resObjectRepository.findAll();
+        }
+
     }
 }
