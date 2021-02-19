@@ -1,5 +1,6 @@
 package com.hvt.booking_lux.bootstrap;
 
+
 import com.hvt.booking_lux.model.*;
 import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.enumeration.Role;
