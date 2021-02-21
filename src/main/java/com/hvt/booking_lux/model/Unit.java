@@ -1,5 +1,6 @@
 package com.hvt.booking_lux.model;
 
+import com.hvt.booking_lux.bootstrap.DataHolder;
 import com.hvt.booking_lux.model.enumeration.BedType;
 
 import javax.persistence.*;
@@ -91,6 +92,10 @@ public class Unit {
 
     public ResObject getResObject() {
         return resObject;
+    }
+
+    public int getNumberOfPeople() {
+        return bedTypes.stream().mapToInt(s-> DataHolder.peopleNumberMap.get(s.getBedType().toString()) * s.getCount()).sum();
     }
 
     public List<UnitImages> getUnitImages() {

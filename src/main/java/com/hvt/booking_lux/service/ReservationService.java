@@ -13,7 +13,7 @@ import java.util.List;
 public interface ReservationService {
     List<Reservation> listAll();
     Reservation findReservationById(long id);
-    List<ResObject> findAllResObjectsThatAreReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate);
+    List<ResObject> findAllResObjectsThatAreReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);
     Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate,ZonedDateTime toDate);
     Reservation cancel(long reservationId);
 }

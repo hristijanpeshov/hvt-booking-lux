@@ -2,15 +2,13 @@ package com.hvt.booking_lux.model;
 
 import com.hvt.booking_lux.model.enumeration.BedType;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class BedTypes {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Enumerated(EnumType.STRING)

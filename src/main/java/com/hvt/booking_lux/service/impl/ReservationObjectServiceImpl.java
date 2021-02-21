@@ -47,18 +47,27 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     }
 
     @Override
-    public List<Unit> listAllAvailableUnits(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate) {
-        List<Unit> units = reservationService.listAll().stream().filter(s-> s.getId().equals(resObjectId))
-                .filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
-                .map(Reservation::getUnit).distinct().collect(Collectors.toList());
+    public List<Unit> listAllNotAvailable(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+        List<Unit> units = reservationService.listAll().stream().filter(s-> s.getUnit().getResObject().getId().equals(resObjectId))
+                .filter(s-> (fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))).map(Reservation::getUnit).distinct()
+                .collect(Collectors.toList());
 //        List<ResObject> resObjects = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
 //                .map(s-> s.getUnit().getResObject()).distinct().collect(Collectors.toList());
         return units;
     }
 
     @Override
-    public double lowestPriceForUnit(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate) {
-        return listAllAvailableUnits(resObjectId, fromDate, toDate).stream().mapToDouble(Unit::getPrice).min().getAsDouble();
+    public double lowestPriceForUnit(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+        ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
+        resObject.getUnits().removeAll(listAllNotAvailable(resObjectId, fromDate, toDate, numberOfPeople));
+        return resObject.getUnits().stream().mapToDouble(Unit::getPrice).min().getAsDouble();
+    }
+
+    @Override
+    public List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city) {
+        List<ResObject> resObjects = reservationService.findAllResObjectsThatAreReservedAtThatTime(fromDate, toDate, numberOfPeople);
+        resObjects.forEach(s-> s.setLowestPrice(lowestPriceForUnit(s.getId(), fromDate, toDate, numberOfPeople)));
+        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city)).collect(Collectors.toList());
     }
 
     @Override

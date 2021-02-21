@@ -30,6 +30,9 @@ public class ResObject {
     @ManyToOne
     private User creator;
 
+    @Transient
+    private double lowestPrice;
+
     @ManyToOne
     private City city;
 
@@ -45,6 +48,14 @@ public class ResObject {
         this.city = city;
         objectImages = new ArrayList<>();
         units = new ArrayList<>();
+    }
+
+    public double getLowestPrice() {
+        return lowestPrice;
+    }
+
+    synchronized public void setLowestPrice(double lowestPrice) {
+        this.lowestPrice = lowestPrice;
     }
 
     public boolean getStatus(){

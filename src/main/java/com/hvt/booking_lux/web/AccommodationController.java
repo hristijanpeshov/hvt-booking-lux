@@ -39,8 +39,8 @@ public class AccommodationController {
         {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
-            resObjectList = reservationObjectService.listByCityName(city);
-            resObjectList = reservationService.findAllResObjectsThatAreReservedAtThatTime(checkIn, checkOut);
+//            resObjectList = reservationObjectService.listByCityName(city);
+            resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, 4, city);
         }
         else{
             resObjectList = reservationObjectService.listAll();
