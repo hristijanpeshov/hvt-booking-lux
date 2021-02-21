@@ -73,7 +73,7 @@ public class AccommodationController {
     @PostMapping("/add")
     public String save(Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam City city)
     {
-        reservationObjectService.save(name,address,description,category, (User) authentication.getPrincipal(),city);
+        reservationObjectService.save(name,address,description,category, (User) authentication.getDetails(),city);
         return "redirect:/accommodation";
     }
     @GetMapping("/edit/{resObjectId}")
