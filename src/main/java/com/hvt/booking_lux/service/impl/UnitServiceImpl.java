@@ -1,7 +1,7 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.exceptions.ResObjectNotFoundException;
-import com.hvt.booking_lux.exceptions.UnitNotFoundException;
+import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.repository.ResObjectRepository;
@@ -44,7 +44,7 @@ public class UnitServiceImpl implements UnitService {
     public Unit edit(long unitId, double size, int numberPeople, double price, String description) {
         Unit unit = findById(unitId);
         unit.setSize(size);
-        unit.setNumberPeople(numberPeople);
+        unit.setNumberOf(numberPeople);
         unit.setPrice(price);
         unit.setDescription(description);
         return unitRepository.save(unit);

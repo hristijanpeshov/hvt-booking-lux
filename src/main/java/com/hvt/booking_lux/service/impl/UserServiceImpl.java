@@ -1,9 +1,9 @@
 package com.hvt.booking_lux.service.impl;
 
-import com.hvt.booking_lux.enumeration.Role;
-import com.hvt.booking_lux.exceptions.InvalidUsernameOrPasswordException;
-import com.hvt.booking_lux.exceptions.PasswordNotMatchException;
-import com.hvt.booking_lux.exceptions.UsernameAlreadyExistsException;
+import com.hvt.booking_lux.model.enumeration.Role;
+import com.hvt.booking_lux.model.exceptions.InvalidUsernameOrPasswordException;
+import com.hvt.booking_lux.model.exceptions.PasswordNotMatchException;
+import com.hvt.booking_lux.model.exceptions.UsernameAlreadyExistsException;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.repository.UserRepository;
 import com.hvt.booking_lux.service.UserService;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         if(this.userRepository.findById(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
-        User user = new User(username, passwordEncoder.encode(password), firstName, lastName, Role.USER);
+        User user = new User(username, passwordEncoder.encode(password), firstName, lastName, Role.ROLE_USER);
         return userRepository.save(user);
     }
 

@@ -1,0 +1,81 @@
+<div class="breadcrumb-option set-bg"
+     data-setbg="/assets/room.png" style="background-image: url('/assets/room.png');" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h1>Add Unit</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="add-accommodation spad">
+    <div class="container">
+        <form method="post" id="contactForm" class="contact__form" name="contactForm" th:action="(${edit}==true? '/accommodation/' + ${resObjectId} + '/unit/edit/'+${unit.getId()} : '/accommodation/' + ${resObjectId} + '/unit/add')" xmlns:th="http://www.thymeleaf.org">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input id="title"
+                               class="form-control"
+                               type="text"
+                               name="title"
+                               th:value="(${unit}!=null ? '':'')"
+                               placeholder="title">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea id="description"
+                                  class="form-control"
+                                  name="description"
+                                  cols="30"
+                                  rows="4"
+
+                                  th:text="(${unit}!=null ? ${unit.getDescription()}:'')"
+                                  placeholder="Description"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input id="size"
+                               class="form-control"
+                               type="number"
+                               name="size"
+                               th:value="(${unit}!=null ? ${unit.getSize()}:'')"
+                               placeholder="size">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input id="numberPeople"
+                               class="form-control"
+                               type="number"
+                               name="numberPeople"
+                               th:value="(${unit}!=null ? ${unit.getNumberOf()}:'')"
+                               placeholder="numberPeople">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input id="price"
+                               class="form-control"
+                               type="number"
+                               name="price"
+                               th:value="(${unit}!=null ? ${unit.getPrice()}:'')"
+                               placeholder="price">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group" style="margin-top: 1rem">
+                        <input type="submit" value="Submit" class="btn primary-btn">
+                        <div class="submitting"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

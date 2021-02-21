@@ -1,6 +1,5 @@
 package com.hvt.booking_lux.service;
 
-import com.hvt.booking_lux.enumeration.Role;
 import com.hvt.booking_lux.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

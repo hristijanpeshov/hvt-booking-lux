@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.exceptions;
+package com.hvt.booking_lux.model.exceptions;
 
 public class CityNotFoundException extends RuntimeException {
     public CityNotFoundException(long id) {

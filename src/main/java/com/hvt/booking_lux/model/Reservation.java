@@ -20,6 +20,8 @@ public class Reservation {
 
     int numberNights;
 
+    private ZonedDateTime reservationDate;
+
     private ZonedDateTime fromDate;
 
     private ZonedDateTime toDate;
@@ -34,5 +36,40 @@ public class Reservation {
         this.numberNights = numberNights;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.reservationDate = ZonedDateTime.now();
+    }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public int getNumberNights() {
+        return numberNights;
+    }
+
+    public ZonedDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public ZonedDateTime getFromDate() {
+        return fromDate;
+    }
+
+    public ZonedDateTime getToDate() {
+        return toDate;
     }
 }

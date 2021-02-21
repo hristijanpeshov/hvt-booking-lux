@@ -1,12 +1,12 @@
-package com.hvt.booking_lux.enumeration;
+package com.hvt.booking_lux.model.enumeration;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
 
-    ADMIN,
-    MODERATOR,
-    USER;
+    ROLE_ADMIN,
+    ROLE_MODERATOR,
+    ROLE_USER;
 
     @Override
     public String getAuthority() {
