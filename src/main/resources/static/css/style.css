@@ -1742,6 +1742,10 @@ ol {
 	top: 0;
 }
 
+.mt-1rem{
+	margin-top: 1rem!important;
+}
+
 .room__details__desc {
 	margin-bottom: 70px;
 }

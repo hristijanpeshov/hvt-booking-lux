@@ -16,18 +16,19 @@
         <div class="row">
             <div th:each="res : ${reservationObjects}" class="row">
                 <div class="col-lg-6 p-0 order-lg-2 order-md-2 col-md-6">
+                    <div class="owl-carousel"></div>
                     <div class="room__pic__slider owl-carousel owl-loaded owl-drag">
                         <div class="owl-stage-outer">
                             <div class="owl-stage" style="transform: translate3d(-1200px, 0px, 0px); transition: all 0s ease 0s; width: 4800px;">
-                            <div th:each="img : ${res.getObjectImages()}" class="owl-item cloned" style="width: 600px;">
-                                <div class="room__pic__item set-bg" th:data-setbg="${img.getUrl()}" style="background-image: url('${img.getUrl()}');">
+                            <div th:each="img : ${res.getObjectImages()}" class="owl-item" style="width: 600px;">
+                                <div class="room__pic__item set-bg" th:data-setbg="${img.getUrl()}" th:style="background-image: url('${img.getUrl()}');">
 
                                 </div>
                             </div>
-                            <div class="owl-item cloned" style="width: 600px;">
-                                <div class="room__pic__item set-bg" data-setbg="${img.getUrl()}" style="background-image: url('${img.getUrl()}');">
-                                </div>
-                            </div>
+<!--                            <div class="owl-item cloned" style="width: 600px;">-->
+<!--                                <div class="room__pic__item set-bg" th:data-setbg="${img.getUrl()}" style="background-image: url('${img.getUrl()}');">-->
+<!--                                </div>-->
+<!--                            </div>-->
 <!--                                <div class="owl-item active" style="width: 600px;">-->
 <!--                                    <div class="room__pic__item set-bg" data-setbg="assets/room-1.jpg" style="background-image: url('assets/room-3.jpg');">-->
 <!--                                    </div>-->
@@ -78,9 +79,9 @@
                         <ul>
                             <li><span>Address:</span><span th:text="${res.getAddress()}"></span></li>
                             <li th:text="${res.getCategory()}"><span>Category:</span></li>
-<!--                            <li><span>Bed:</span>King Beds</li>-->
-<!--                            <li><span>Services:</span>Wifi, Television, Bathroom,...</li>-->
-<!--                            <li><span>View:</span>Sea View</li>-->
+                            <li><span>Bed:</span>King Beds</li>
+                            <li><span>Services:</span>Wifi, Television, Bathroom,...</li>
+                            <li><span>View:</span>Sea View</li>
                         </ul>
                         <a href="#">View Details</a>
                     </div>
@@ -101,3 +102,21 @@
 
     </div>
 </section>
+<script src="/js/owl.carousel.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+
+
+    // jQuery(document).ready(function() {
+    //     $.getJSON('/assets/owl.json').done(function (data) {
+    //         $.each(data.images, function(index, img) {
+    //             $('<img>', { src: img.url }).appendTo(".owl-carousel");
+    //         });
+    //
+    //         jQuery(".owl-carousel").owlCarousel({
+    //             dots:true
+    //         });
+    //     });
+    // });
+</script>
