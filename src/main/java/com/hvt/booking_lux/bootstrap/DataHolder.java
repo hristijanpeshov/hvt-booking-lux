@@ -2,6 +2,7 @@ package com.hvt.booking_lux.bootstrap;
 
 
 import com.hvt.booking_lux.model.*;
+import com.hvt.booking_lux.model.enumeration.BedType;
 import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.enumeration.Role;
 import com.hvt.booking_lux.repository.*;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.time.ZonedDateTime;
 
@@ -25,9 +27,11 @@ public class DataHolder  {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ReservationRepository reservationRepository;
+    private final BedTypesRepository bedTypesRepository;
+    public static HashMap<String, Integer> peopleNumberMap = new HashMap<>();
 
 
-    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ReservationRepository reservationRepository) {
+    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ReservationRepository reservationRepository, BedTypesRepository bedTypesRepository) {
         this.cityRepository = cityRepository;
         this.countryRepository = countryRepository;
         this.unitRepository = unitRepository;
@@ -35,10 +39,17 @@ public class DataHolder  {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.reservationRepository = reservationRepository;
+        this.bedTypesRepository = bedTypesRepository;
     }
 
     @PostConstruct
     public void init(){
+        DataHolder.peopleNumberMap.put(BedType.TWIN.toString(), 1);
+        DataHolder.peopleNumberMap.put(BedType.DOUBLE.toString(), 2);
+        DataHolder.peopleNumberMap.put(BedType.QUEEN.toString(), 2);
+        DataHolder.peopleNumberMap.put(BedType.KING.toString(), 2);
+        DataHolder.peopleNumberMap.put(BedType.SOFA.toString(), 1);
+
         Country countryMKD = countryRepository.save(new Country("Macedonia", "MKD", "flag"));
         Country countryEn = countryRepository.save(new Country("England", "EN", "flag"));
         Country countrySRB = countryRepository.save(new Country("Serbia", "SRB", "flag"));
@@ -75,12 +86,22 @@ public class DataHolder  {
 
         Unit unit1 = unitRepository.save(new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!"));
         Unit unit2 = unitRepository.save(new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!"));
+        Unit unit5 = unitRepository.save(new Unit(houseSRB, 125, 4, 150, "Room for 4 people!"));
+
+        BedTypes bedTypes = bedTypesRepository.save(new BedTypes(BedType.TWIN, 2));
+        BedTypes bedTypes1 = bedTypesRepository.save(new BedTypes(BedType.KING, 1));
+        List<BedTypes> bedTypesList = new ArrayList<>();
+        bedTypesList.add(bedTypes1);
+        bedTypesList.add(bedTypes);
+        unit5.setBedTypes(bedTypesList);
+        unitRepository.save(unit5);
+
         unitRepository.save(unit3);
         unitRepository.save(unit4);
 
 
         reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+//        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
         reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
 
     }

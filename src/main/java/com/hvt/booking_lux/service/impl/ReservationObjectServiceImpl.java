@@ -1,20 +1,20 @@
 package com.hvt.booking_lux.service.impl;
 
+import com.hvt.booking_lux.model.*;
 import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.exceptions.CityNotFoundException;
 import com.hvt.booking_lux.model.exceptions.CountryNotFoundException;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
-import com.hvt.booking_lux.model.City;
-import com.hvt.booking_lux.model.Country;
-import com.hvt.booking_lux.model.ResObject;
-import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.repository.*;
 import com.hvt.booking_lux.service.ReservationObjectService;
+import com.hvt.booking_lux.service.ReservationService;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationObjectServiceImpl implements ReservationObjectService {
@@ -23,12 +23,14 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     private final UnitRepository unitRepository;
     private final CityRepository cityRepository;
     private final CountryRepository countryRepository;
+    private final ReservationService reservationService;
 
-    public ReservationObjectServiceImpl(ResObjectRepository resObjectRepository, UnitRepository unitRepository, CityRepository cityRepository, CountryRepository countryRepository) {
+    public ReservationObjectServiceImpl(ResObjectRepository resObjectRepository, UnitRepository unitRepository, CityRepository cityRepository, CountryRepository countryRepository, ReservationService reservationService) {
         this.resObjectRepository = resObjectRepository;
         this.unitRepository = unitRepository;
         this.cityRepository = cityRepository;
         this.countryRepository = countryRepository;
+        this.reservationService = reservationService;
     }
 
     @Override
@@ -42,6 +44,30 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
         List<ResObject> resObjects = new ArrayList<>();
         country.getCityList().forEach(c-> resObjects.addAll(listByCity(c.getId())));
         return resObjects;
+    }
+
+    @Override
+    public List<Unit> listAllNotAvailable(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+        List<Unit> units = reservationService.listAll().stream().filter(s-> s.getUnit().getResObject().getId().equals(resObjectId))
+                .filter(s-> (fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))).map(Reservation::getUnit).distinct()
+                .collect(Collectors.toList());
+//        List<ResObject> resObjects = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
+//                .map(s-> s.getUnit().getResObject()).distinct().collect(Collectors.toList());
+        return units;
+    }
+
+    @Override
+    public double lowestPriceForUnit(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+        ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
+        resObject.getUnits().removeAll(listAllNotAvailable(resObjectId, fromDate, toDate, numberOfPeople));
+        return resObject.getUnits().stream().mapToDouble(Unit::getPrice).min().getAsDouble();
+    }
+
+    @Override
+    public List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city) {
+        List<ResObject> resObjects = reservationService.findAllResObjectsThatAreReservedAtThatTime(fromDate, toDate, numberOfPeople);
+        resObjects.forEach(s-> s.setLowestPrice(lowestPriceForUnit(s.getId(), fromDate, toDate, numberOfPeople)));
+        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city)).collect(Collectors.toList());
     }
 
     @Override

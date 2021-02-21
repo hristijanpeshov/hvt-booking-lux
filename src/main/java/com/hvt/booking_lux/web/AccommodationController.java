@@ -6,6 +6,7 @@ import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.security.CreatorCheck;
 import com.hvt.booking_lux.service.ReservationObjectService;
+import com.hvt.booking_lux.service.ReservationService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -26,10 +27,12 @@ public class AccommodationController {
 
     private final ReservationObjectService reservationObjectService;
     private final CreatorCheck creatorCheck;
+    private final ReservationService reservationService;
 
-    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck) {
+    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck,ReservationService reservationService) {
         this.reservationObjectService = reservationObjectService;
         this.creatorCheck = creatorCheck;
+        this.reservationService = reservationService;
     }
 
 
@@ -43,12 +46,13 @@ public class AccommodationController {
             request.getSession().setAttribute("numPeople",numPeople);
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
-            resObjectList = reservationObjectService.listByCityName(city);
+//            resObjectList = reservationObjectService.listByCityName(city);
+            resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, 4, city);
         }
         else{
             resObjectList = reservationObjectService.listAll();
         }
-        model.addAttribute("reservationObjects",resObjectList);
+        model.addAttribute("reservationObjects", resObjectList);
         model.addAttribute("bodyContent", "rooms");
         return "master-template";
     }
