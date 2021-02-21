@@ -4,11 +4,13 @@ import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
 import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
+import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.UnitRepository;
 import com.hvt.booking_lux.service.UnitService;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,6 +33,30 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public List<Unit> listUniqueUnitsForResObject(long id) {
         return null;
+    }
+
+    @Override
+    public Unit findTheMostExpensive() {
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        return unit;
+    }
+
+    @Override
+    public Unit findTheLeastExpensive() {
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        return unit;
+    }
+
+    @Override
+    public Unit findTheLargest() {
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        return unit;
+    }
+
+    @Override
+    public Unit findTheSmallest() {
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        return unit;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.exceptions.CityNotFoundException;
 import com.hvt.booking_lux.model.exceptions.CountryNotFoundException;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
 import com.hvt.booking_lux.repository.*;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.ReservationService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +37,10 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
 
     @Override
     public List<ResObject> listAll() {
-        return resObjectRepository.findAll();
+        List<ResObject> resObjects = resObjectRepository.findAll().stream().filter(s-> s.getUnits().size() > 0).collect(Collectors.toList());
+        resObjects.forEach(s-> s.setLowestPrice(
+                s.getUnits().stream().mapToDouble(Unit::getPrice).min().orElseThrow(UnitNumberIsZeroException::new)));
+        return resObjects;
     }
 
     @Override
@@ -54,6 +59,13 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
 //        List<ResObject> resObjects = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
 //                .map(s-> s.getUnit().getResObject()).distinct().collect(Collectors.toList());
         return units;
+    }
+
+    @Override
+    public List<Unit> listAllAvailableUnitsForResObject(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+        ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
+        resObject.getUnits().removeAll(listAllNotAvailable(resObjectId, fromDate, toDate, numberOfPeople));
+        return resObject.getUnits().stream().filter(s-> s.getNumberOfPeople() >= numberOfPeople).collect(Collectors.toList());
     }
 
     @Override
