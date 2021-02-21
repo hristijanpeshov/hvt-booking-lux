@@ -52,7 +52,7 @@ public class DataHolder  {
         City manchester = cityRepository.save(new City("Manchester", countryEn));
 
 
-        User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.USER));
+        User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.ROLE_USER));
 
 
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
