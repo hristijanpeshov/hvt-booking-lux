@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h1>Add Accommodation</h1>
+                    <h1 th:if="${edit}==false">Add Accommodation</h1>
+                    <h1 th:if="${edit}==true">Edit Accommodation</h1>
                 </div>
             </div>
         </div>
@@ -12,7 +13,7 @@
 </div>
 <section class="add-accommodation spad">
     <div class="container">
-        <form method="post" id="contactForm" class="contact__form" name="contactForm" xmlns:th="http://www.w3.org/1999/xhtml">
+        <form method="post" id="contactForm" class="contact__form" name="contactForm" th:action="(${edit}==true? '/accommodation/edit/' + ${reservationObject.getId()} : '/accommodation/add')" xmlns:th="http://www.thymeleaf.org">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -20,6 +21,7 @@
                                class="form-control"
                                type="text"
                                name="name"
+                               th:value="(${reservationObject}!=null? ${reservationObject.getName()}:'')"
                                placeholder="Name">
                     </div>
                 </div>
@@ -29,6 +31,7 @@
                                class="form-control"
                                type="text"
                                name="address"
+                               th:value="(${reservationObject}!=null? ${reservationObject.getAddress()}:'')"
                                placeholder="Address">
                     </div>
                 </div>
@@ -36,28 +39,28 @@
                     <div class="form-group">
                         <textarea id="description"
                                   class="form-control"
-                                  name="name"
+                                  name="description"
                                   cols="30"
                                   rows="4"
+                                  th:text="(${reservationObject}!=null? ${reservationObject.getDescription()}:'')"
                                   placeholder="Description"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <select id="category" name="category" style="display: none;">
-                            <option class="dropdown-item" value="HOTEL">HOTEL</option>
-                            <option value="HOUSE">HOUSE</option>
-                            <option value="APARTMENT">APARTMENT</option>
+                            <option th:selected="${reservationObject}==null" value="">Pick a category</option>
+                            <option th:each="category : ${T(com.hvt.booking_lux.model.enumeration.Category).values()}" th:value="${category}" th:text="${category}" th:selected="${reservationObject}!=null? ${reservationObject.category==category} :'false'">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" th:if="${edit}==false">
                     <div class="form-group">
-                        <select class="mt-1rem" id="city" name="city" style="display:none;">
-                            <option value="Skopje">SKOPJE</option>
-                            <option value="Bitola">BITOLA</option>
-                            <option value="Veles">VELES</option>
-                            <option value="Strumica">STRUMICA</option>
+                        <select class="mt-1rem" id="city" name="cityId" style="display:none;">
+                            <option value="1">SKOPJE</option>
+                            <option value="2">BITOLA</option>
+                            <option value="3">VELES</option>
+                            <option value="4">STRUMICA</option>
                         </select>
                     </div>
                 </div>

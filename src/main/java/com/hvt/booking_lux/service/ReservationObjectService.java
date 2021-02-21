@@ -18,8 +18,8 @@ public interface ReservationObjectService {
     double lowestPriceForUnit(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);
     List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city  );
     List<ResObject> listByCity(long cityId);
-    ResObject save(String name, String address, String description, Category category, User creator, City city);
-    ResObject edit(long resObjectId,String name, String address, String description, Category category, User creator, City city);
+    ResObject save(String name, String address, String description, Category category, User creator, long cityId);
+    ResObject edit(long resObjectId,String name, String address, String description, Category category);
     ResObject findResObjectById(long resObjectId);
     ResObject delete(long resObjectId);
     List<ResObject> listByCityName(String city);

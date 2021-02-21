@@ -68,12 +68,13 @@ public class AccommodationController {
     @GetMapping("/add")
     public String addForm(Model model){
         model.addAttribute("bodyContent", "add-accommodation");
+        model.addAttribute("edit",false);
         return "master-template";
     }
     @PostMapping("/add")
-    public String save(Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam City city)
+    public String save(Model model,Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam long cityId)
     {
-        reservationObjectService.save(name,address,description,category, (User) authentication.getDetails(),city);
+        reservationObjectService.save(name,address,description,category, (User) authentication.getPrincipal(),cityId);
         return "redirect:/accommodation";
     }
     @GetMapping("/edit/{resObjectId}")
@@ -82,14 +83,16 @@ public class AccommodationController {
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
         model.addAttribute("reservationObject",resObject);
-        return "";
+        model.addAttribute("edit",true);
+        model.addAttribute("bodyContent","add-accommodation");
+        return "master-template";
     }
     @PostMapping("/edit/{resObjectId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
-    public String edit(Authentication authentication,@PathVariable long resObjectId, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category)
+    public String edit(Model model,Authentication authentication,@PathVariable long resObjectId, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category)
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
-        reservationObjectService.edit(resObjectId,name,address,description,category,resObject.getCreator(),resObject.getCity());
+        reservationObjectService.edit(resObjectId,name,address,description,category);
         return "redirect:/accommodation";
     }
     @PostMapping("/delete/{resObjectId}")
