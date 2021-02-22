@@ -1,5 +1,6 @@
 package com.hvt.booking_lux.web;
 
+import com.hvt.booking_lux.service.LocationService;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.UnitService;
@@ -16,17 +17,21 @@ public class HomeController {
     private final ReservationObjectService reservationObjectService;
     private final ReservationService reservationService;
     private final UnitService unitService;
+    private final LocationService locationService;
 
-    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService) {
+    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, LocationService locationService) {
         this.reservationObjectService = reservationObjectService;
         this.reservationService = reservationService;
         this.unitService = unitService;
+        this.locationService = locationService;
     }
 
     @GetMapping
     public String homePage(Model model){
 //        List<Country> countryList = locationService.listAllCountries();
 //        model.addAttribute("countries",countryList);
+        model.addAttribute("cities",locationService.listAllCities());
+        model.addAttribute("searchForm","searchForm");
         model.addAttribute("bodyContent", "index");
         model.addAttribute("leastExpensive", unitService.findTheLeastExpensive());
         model.addAttribute("mostExpensive", unitService.findTheMostExpensive());

@@ -10,4 +10,6 @@ import java.util.List;
 public interface LocationService {
     List<City> listAllCities(long countryId);
     List<Country> listAllCountries();
+    List<City> listAllCities();
+    List<String> listAllCityNames();
 }

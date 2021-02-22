@@ -1,0 +1,46 @@
+<form method="get" action="/accommodation" class="filter__form" xmlns:th="http://www.thymeleaf.org">
+    <div class="filter__form__item filter__form__item--search">
+        <p>Location</p>
+        <div class="filter__form__input">
+            <input id="cityInput" type="text" placeholder="Search Location" name="city" th:value="${session?.cityName}">
+            <span class="icon_search"></span>
+        </div>
+    </div>
+    <div class="filter__form__item">
+        <p>Check In</p>
+        <div class="filter__form__datepicker">
+            <input type="date" class="datepicker_pop check__in hasDatepicker" id="dp1613504077692" name="checkInDate" th:value="${session?.checkIn}">
+        </div>
+    </div>
+    <div class="filter__form__item">
+        <p>Check Out</p>
+        <div class="filter__form__datepicker">
+            <input type="date" class="datepicker_pop check__in hasDatepicker" name="checkOutDate" th:value="${session?.checkOut}">
+        </div>
+    </div>
+    <div class="filter__form__item filter__form__item--select">
+        <p>Person</p>
+        <div class="filter__form__select">
+            <span class="icon_group"></span>
+            <select style="display: none;" name="numPeople">
+                <option value="3">2 Adult, 1 Children</option>
+                <option value="2">2 Adult</option>
+                <option value="1">1 Adult</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit">BOOK NOW</button>
+</form>
+<script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+    $(function() {
+        $.get(
+            "/api/cities",
+            function(data){
+                var availableCities = data;
+                $( "#cityInput" ).autocomplete({
+                    source: availableCities
+                });
+            }
+        )
+    });
+</script>

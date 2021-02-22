@@ -14,6 +14,11 @@
 <section xmlns:th="http://www.thymeleaf.org" class="rooms spad">
     <div class="container">
         <div class="row">
+            <div class="col-12">
+                <th:block th:include="${searchForm}"></th:block>
+            </div>
+        </div>
+        <div class="row">
             <div th:each="res : ${reservationObjects}" class="row">
                 <div class="col-lg-6 p-0 order-lg-2 order-md-2 col-md-6">
                     <div class="owl-carousel"></div>

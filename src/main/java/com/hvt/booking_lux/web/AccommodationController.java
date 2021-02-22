@@ -41,6 +41,7 @@ public class AccommodationController {
         List<ResObject> resObjectList = null;
         if(city!=null && checkInDate != null && checkOutDate!=null && numPeople!=null)
         {
+            request.getSession().setAttribute("cityName",city);
             request.getSession().setAttribute("checkIn",checkInDate);
             request.getSession().setAttribute("checkOut",checkOutDate);
             request.getSession().setAttribute("numPeople",numPeople);
@@ -53,6 +54,7 @@ public class AccommodationController {
         else{
             resObjectList = reservationObjectService.listAll();
         }
+        model.addAttribute("searchForm","searchForm");
         model.addAttribute("reservationObjects", resObjectList);
         model.addAttribute("bodyContent", "rooms");
         return "master-template";
