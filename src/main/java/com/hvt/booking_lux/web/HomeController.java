@@ -23,8 +23,7 @@ public class HomeController {
     private final LocationService locationService;
     private final ReviewService reviewService;
 
-    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, LocationService locationService) {
-    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, ReviewService reviewService) {
+    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, ReviewService reviewService, LocationService locationService) {
         this.reservationObjectService = reservationObjectService;
         this.reservationService = reservationService;
         this.unitService = unitService;
