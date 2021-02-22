@@ -81,7 +81,7 @@ public class DataHolder  {
 
 
 
-        apartmentEn.setObjectImages(objectImageList);
+        houseSRB.setObjectImages(objectImageList);
 
         resObjectRepository.save(houseSRB);
         resObjectRepository.save(apartmentEn);

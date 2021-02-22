@@ -51,9 +51,5 @@ public class HomeController {
         return "master-template";
     }
 
-    @GetMapping("/account/manage")
-    public String accountPage(Model model){
-        model.addAttribute("bodyContent", "manage-account");
-        return "master-template";
-    }
+
 }

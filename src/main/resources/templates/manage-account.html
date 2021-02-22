@@ -43,61 +43,67 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">First Name</h6>
+                    <form action="/account/manage" method="post">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">First Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="firstName" contenteditable="true">Teodor</span><a class="icon_pencil-edit float-right" data-edit="firstName" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" id="firstName" name="firstName" value="Teodor">
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Last Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="lastName" contenteditable="true">Penevski</span><a class="icon_pencil-edit float-right" data-edit="lastName" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Last Name</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="email" contenteditable="true">teodorpenevski@hvtinfo.com</span><a class="icon_pencil-edit float-right" data-edit="email" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            Penevski
-                            <input style="display: none" type="text" id="lastName" name="lastName" value="Penevski">
-                            <btn class="btn icon_pencil-edit" onclick="editForm(this)"></btn>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="phone" contenteditable="true">(389) 72 696 969</span><a class="icon_pencil-edit float-right" data-edit="phone" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Email</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Mobile</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="mobile" contenteditable="true">(389) 72 696 969</span><a class="icon_pencil-edit float-right" data-edit="mobile" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            teodorpenevski@hvtinfo.com
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span name="address" contenteditable="true">Bay Area, San Francisco, CA</span><a class="icon_pencil-edit float-right" data-edit="address" onclick="editForm(this)"></a>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Phone</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn primary-btn float-left">Save</button>
+                            </div>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            (389) 72 696 969
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Mobile</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            (389) 72 696 969
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Address</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            Bay Area, San Francisco, CA
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -107,7 +113,8 @@
 
 <script>
     function editForm(text){
-        $('.card-body .row input').removeAttr('style');
-        $(text).attr('style', 'display:none')
+        var editName = text.getAttribute('data-edit');
+        var toEdit = $(document).find("span[name='" + editName + "']");
+        toEdit.focus();
     }
 </script>
