@@ -48,6 +48,9 @@ public class AccommodationController {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
 //            resObjectList = reservationObjectService.listByCityName(city);
+            if(checkOut.isBefore(checkIn)){
+                return "redirect:/home?error=Check in date should be before check out date!";
+            }
             reservationObjectService.listAllAvailableUnitsForResObject(2, checkIn, checkOut, numPeople);
             resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, 4, city);
         }
@@ -74,12 +77,14 @@ public class AccommodationController {
         model.addAttribute("edit",false);
         return "master-template";
     }
+
     @PostMapping("/add")
     public String save(Model model,Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam long cityId)
     {
         reservationObjectService.save(name,address,description,category, (User) authentication.getPrincipal(),cityId);
         return "redirect:/accommodation";
     }
+
     @GetMapping("/edit/{resObjectId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
     public String edit(Authentication authentication,@PathVariable long resObjectId, Model model)
@@ -90,6 +95,7 @@ public class AccommodationController {
         model.addAttribute("bodyContent","add-accommodation");
         return "master-template";
     }
+
     @PostMapping("/edit/{resObjectId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
     public String edit(Model model,Authentication authentication,@PathVariable long resObjectId, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category)
@@ -98,6 +104,7 @@ public class AccommodationController {
         reservationObjectService.edit(resObjectId,name,address,description,category);
         return "redirect:/accommodation";
     }
+
     @PostMapping("/delete/{resObjectId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
     public String delete(@PathVariable long resObjectId)

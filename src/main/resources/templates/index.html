@@ -8,11 +8,12 @@
                     <h2>Experience the foreign like you're at home.</h2>
                 </div>
                 <th:block th:include="${searchForm}"></th:block>
+                <p class="text-danger font-weight-bold" th:text="${hasError != null ? error : ''}"></p>
             </div>
         </div>
     </div>
 </section>
-<section class="home-about" xmlns:th="http://www.thymeleaf.org">
+<section class="home-about">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
