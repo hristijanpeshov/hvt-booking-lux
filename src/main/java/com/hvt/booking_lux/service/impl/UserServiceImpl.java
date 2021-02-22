@@ -40,6 +40,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User edit(String username, String firstName, String lastName, String email) {
+        User user = (User) loadUserByUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User changePassword(String username, String password, String repeatPassword) {
+        if(password!=repeatPassword)
+        {
+            throw new PasswordNotMatchException();
+        }
+        User user = (User) loadUserByUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
+        return user;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findById(s).orElseThrow(() -> new UsernameNotFoundException(s));
         return user;

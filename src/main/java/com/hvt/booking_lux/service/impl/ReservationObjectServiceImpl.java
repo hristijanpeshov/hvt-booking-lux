@@ -79,7 +79,7 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     public List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city) {
         List<ResObject> resObjects = reservationService.findAllResObjectsThatAreReservedAtThatTime(fromDate, toDate, numberOfPeople);
         resObjects.forEach(s-> s.setLowestPrice(lowestPriceForUnit(s.getId(), fromDate, toDate, numberOfPeople)));
-        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city)).collect(Collectors.toList());
+        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city.toLowerCase())).collect(Collectors.toList());
     }
 
     @Override
