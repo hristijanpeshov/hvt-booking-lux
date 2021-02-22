@@ -64,7 +64,8 @@ public class DataHolder  {
 
 
         User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.ROLE_USER));
-
+        User user2 = userRepository.save(new User("user2@user.com", passwordEncoder.encode("user2"), "User", "user", Role.ROLE_USER));
+        User admin = userRepository.save(new User("admin@admin.com", passwordEncoder.encode("admin"), "User", "user", Role.ROLE_ADMIN));
 
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
         ResObject apartmentEn = new ResObject("Rooftop apartment", "england 11 22", "Rooftop apartment with wonderful view", Category.APARTMENT, user, london);
