@@ -108,6 +108,7 @@ ol {
   Helper CSS
 -----------------------*/
 
+
 .gutters-sm {
 	margin-right: -8px;
 	margin-left: -8px;
@@ -609,7 +610,7 @@ Custom CSS
 	font-size: 20px;
 	color: #1d1c1c;
 	width: 100%;
-	padding-left: 48px;
+	padding-left: 1rem;
 	height: 48px;
 	font-family: "Barlow Condensed", sans-serif;
 }
@@ -2717,7 +2718,7 @@ Custom CSS
 		right: 10px;
 	}
 	.filter__form__item .filter__form__datepicker input {
-		padding-left: 43px;
+		padding-left: 1rem;
 	}
 	.testimonial__text {
 		padding-top: 0;

@@ -1,5 +1,4 @@
 <section class="hero spad set-bg" data-setbg="assets/hotel4.jpg" style="background-image: url('assets/hotel4.jpg');"
-         xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
          xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="row">
@@ -18,13 +17,13 @@
                     </div>
                     <div class="filter__form__item">
                         <p>Check In</p>
-                        <div class="filter__form__datepicker">
+                        <div class="filter__form__datepicker firstdate">
                             <input type="date" class="datepicker_pop check__in hasDatepicker" id="dp1613504077692" name="checkInDate">
                         </div>
                     </div>
                     <div class="filter__form__item">
                         <p>Check Out</p>
-                        <div class="filter__form__datepicker">
+                        <div class="filter__form__datepicker seconddate">
                             <input type="date" class="datepicker_pop check__in hasDatepicker" name="checkOutDate">
                         </div>
                     </div>
@@ -120,3 +119,17 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function () {
+        $('.firstdate input').on('change', function() {
+            var datearray = $('.firstdate input').val().split("-");
+            var year = datearray[0];
+            var month = datearray[1];
+            var day = datearray[2];
+            var minDate = (year +"-"+ month +"-"+ day);
+            console.log(minDate);
+            $('.seconddate input').attr('min',minDate);
+        });
+    });
+</script>

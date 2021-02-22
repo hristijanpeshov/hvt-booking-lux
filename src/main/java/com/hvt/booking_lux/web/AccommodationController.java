@@ -63,7 +63,8 @@ public class AccommodationController {
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
         model.addAttribute("resObject",resObject);
-        return "";
+        model.addAttribute("bodyContent", "AccommodationDetails");
+        return "master-template";
     }
 
     @GetMapping("/add")
