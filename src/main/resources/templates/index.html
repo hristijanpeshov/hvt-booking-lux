@@ -1,4 +1,6 @@
-<section class="hero spad set-bg" data-setbg="assets/hotel4.jpg" style="background-image: url('assets/hotel4.jpg');">
+<section class="hero spad set-bg" data-setbg="assets/hotel4.jpg" style="background-image: url('assets/hotel4.jpg');"
+         xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+         xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -68,7 +70,7 @@
         </div>
     </div>
 </section>
-<section class="home-room spad">
+<section class="home-room spad" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -84,8 +86,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6 p-0">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-1.png" style="background-image: url('/assets/hr-1.png');">
                     <div class="home__room__title">
-                        <h4>Deluxe Room</h4>
-                        <h2><sup>$</sup>55<span>/day</span></h2>
+                        <h4>Cheapest Room</h4>
+                        <h2 th:utext="('<sup>$</sup>' + ${leastExpensive.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
                     <a href="#">More Details</a>
                 </div>
@@ -93,8 +95,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6 p-0">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-2.png" style="background-image: url('/assets/hr-2.png');">
                     <div class="home__room__title">
-                        <h4>Deluxe Room</h4>
-                        <h2><sup>$</sup>85<span>/day</span></h2>
+                        <h4>The Most Expensive Room</h4>
+                        <h2 th:utext="('<sup>$</sup>' + ${mostExpensive.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
                     <a href="#">More Details</a>
                 </div>
@@ -102,8 +104,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6 p-0">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-3.png" style="background-image: url('/assets/hr-3.png');">
                     <div class="home__room__title">
-                        <h4>Deluxe Room</h4>
-                        <h2><sup>$</sup>94<span>/day</span></h2>
+                        <h4>Smallest Room</h4>
+                        <h2 th:utext="('<sup>$</sup>' + ${smallest.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
                     <a href="#">More Details</a>
                 </div>
@@ -111,8 +113,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6 p-0">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-4.png" style="background-image: url('/assets/hr-4.png');">
                     <div class="home__room__title">
-                        <h4>Deluxe Room</h4>
-                        <h2><sup>$</sup>71<span>/day</span></h2>
+                        <h4>Largest Room</h4>
+                        <h2 th:utext="('<sup>$</sup>' + ${largest.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
                     <a href="#">More Details</a>
                 </div>
