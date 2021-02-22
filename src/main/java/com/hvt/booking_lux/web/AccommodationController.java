@@ -41,12 +41,12 @@ public class AccommodationController {
         List<ResObject> resObjectList = null;
         if(city!=null && checkInDate != null && checkOutDate!=null && numPeople!=null)
         {
-            request.getSession().setAttribute("cityName",city);
-            request.getSession().setAttribute("checkIn",checkInDate);
-            request.getSession().setAttribute("checkOut",checkOutDate);
-            request.getSession().setAttribute("numPeople",numPeople);
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            request.getSession().setAttribute("cityName",city);
+            request.getSession().setAttribute("checkIn",checkIn);
+            request.getSession().setAttribute("checkOut",checkOut);
+            request.getSession().setAttribute("numPeople",numPeople);
 //            resObjectList = reservationObjectService.listByCityName(city);
             if(checkOut.isBefore(checkIn)){
                 return "redirect:/home?error=Check in date should be before check out date!";
