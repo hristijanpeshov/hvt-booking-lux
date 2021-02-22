@@ -44,3 +44,16 @@
         )
     });
 </script>
+<script>
+    $(document).ready(function () {
+        $('.firstdate input').on('change', function() {
+            var datearray = $('.firstdate input').val().split("-");
+            var year = datearray[0];
+            var month = datearray[1];
+            var day = datearray[2];
+            var minDate = (year +"-"+ month +"-"+ day);
+            console.log(minDate);
+            $('.seconddate input').attr('min',minDate);
+        });
+    });
+</script>
