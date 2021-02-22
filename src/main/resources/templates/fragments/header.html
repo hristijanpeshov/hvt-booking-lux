@@ -15,14 +15,15 @@
                                 <li><a href="/accommodation">Accommodation</a></li>
                                 <li><a href="/about">About Us</a></li>
                                 <li><a href="/accommodation/add">Add</a></li>
-                                <!--                                <li><a href="#">Pages</a>-->
-                                <!--                                    <ul class="dropdown">-->
-                                <!--                                        <li><a href="./about.html">About Us</a></li>-->
-                                <!--                                        <li><a href="./room-details.html">Room Details</a></li>-->
-                                <!--                                        <li><a href="./blog-details.html">Blog Details</a></li>-->
-                                <!--                                    </ul>-->
-                                <!--                                </li>-->
                                 <li><a href="/contact">Contact Us</a></li>
+                                <li><a href="#">Account</a>
+                                    <ul class="dropdown">
+                                        <li class="hoverable"><a href="/listings">My Listings</a></li>
+                                        <li class="hoverable"><a href="/reservations">My Reservations</a></li>
+                                        <li class="hoverable"><a href="/account/manage">Manage Account</a></li>
+                                        <li class="hoverable"><a href="/account/logout">Sign Out</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                         <!--                        <div class="header__nav__widget">-->
@@ -42,7 +43,6 @@
     $(function(){
         var current = location.pathname.split("/");
         var curr = current[current.length-1];
-        console.log(curr.length);
         if(curr.length) {
             $('#nav li a').each(function () {
                 var $this = $(this);

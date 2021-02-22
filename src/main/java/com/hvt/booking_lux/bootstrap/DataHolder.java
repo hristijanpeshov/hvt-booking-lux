@@ -74,10 +74,14 @@ public class DataHolder  {
 
         ResObject hotelMKD = resObjectRepository.save( new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
 
-        List<ObjectImage> objectImageList = new ArrayList<>();
-        objectImageList.add(new ObjectImage(houseSRB, "/assets/room-4.jpg"));
+        List<String> objectImageList = new ArrayList<>();
+        objectImageList.add("/assets/room-4.jpg");
+        objectImageList.add("/assets/room-3.jpg");
+        objectImageList.add("/assets/room-2.jpg");
 
-        houseSRB.setObjectImages(objectImageList);
+
+
+        apartmentEn.setObjectImages(objectImageList);
 
         resObjectRepository.save(houseSRB);
         resObjectRepository.save(apartmentEn);

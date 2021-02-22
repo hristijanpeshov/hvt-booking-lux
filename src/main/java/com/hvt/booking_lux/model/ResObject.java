@@ -24,8 +24,8 @@ public class ResObject {
     @OneToMany(mappedBy = "resObject")
     private List<Unit> units;
 
-    @OneToMany(mappedBy = "resObject")
-    private List<ObjectImage> objectImages;
+    @ElementCollection
+    private List<String> objectImages;
 
     @ManyToOne
     private User creator;
@@ -87,7 +87,7 @@ public class ResObject {
         return units;
     }
 
-    public List<ObjectImage> getObjectImages() {
+    public List<String> getObjectImages() {
         return objectImages;
     }
 
@@ -119,7 +119,7 @@ public class ResObject {
         this.units = units;
     }
 
-    public void setObjectImages(List<ObjectImage> objectImages) {
+    public void setObjectImages(List<String> objectImages) {
         this.objectImages = objectImages;
     }
 
