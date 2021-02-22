@@ -28,10 +28,11 @@ public class DataHolder  {
     private final PasswordEncoder passwordEncoder;
     private final ReservationRepository reservationRepository;
     private final BedTypesRepository bedTypesRepository;
+    private final ReviewRepository reviewRepository;
     public static HashMap<String, Integer> peopleNumberMap = new HashMap<>();
 
 
-    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ReservationRepository reservationRepository, BedTypesRepository bedTypesRepository) {
+    public DataHolder(CityRepository cityRepository, CountryRepository countryRepository, UnitRepository unitRepository, ResObjectRepository resObjectRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ReservationRepository reservationRepository, BedTypesRepository bedTypesRepository, ReviewRepository reviewRepository) {
         this.cityRepository = cityRepository;
         this.countryRepository = countryRepository;
         this.unitRepository = unitRepository;
@@ -40,6 +41,7 @@ public class DataHolder  {
         this.passwordEncoder = passwordEncoder;
         this.reservationRepository = reservationRepository;
         this.bedTypesRepository = bedTypesRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @PostConstruct
@@ -101,9 +103,11 @@ public class DataHolder  {
         unitRepository.save(unit4);
 
 
-        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+        Reservation reservation = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now().minusDays(10), ZonedDateTime.now().minusDays(6)));
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
         reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+
+//        reviewRepository.save(new Review(reservation, "commment ", user));
 
     }
 
