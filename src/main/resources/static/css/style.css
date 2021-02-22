@@ -1661,7 +1661,7 @@ Custom CSS
 	line-height: 74px;
 	text-align: center;
 	position: absolute;
-	left: -290px;
+	left: 10px;
 	top: 50%;
 	-webkit-transform: translateY(-30px);
 	-ms-transform: translateY(-30px);
@@ -1669,6 +1669,14 @@ Custom CSS
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
+}
+
+a.icon_pencil-edit:hover{
+	color: red!important;
+}
+[contenteditable]:focus {
+	outline: 1px solid;
+	padding: .1rem;
 }
 
 .room__details__pic__slider.owl-carousel .owl-nav button:hover {
@@ -1681,7 +1689,7 @@ Custom CSS
 
 .room__details__pic__slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
-	right: -290px;
+	right: 10px;
 }
 
 .room__details__pic__slider.owl-carousel .owl-nav button i {

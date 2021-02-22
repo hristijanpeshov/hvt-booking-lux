@@ -3,7 +3,7 @@
             <div class="owl-stage-outer">
                 <div class="owl-stage">
                     <div th:each="img : ${resObject.getObjectImages()}" class="owl-item">
-                        <img class="img-fluid" th:src="${img}" alt="${res.getName()}">
+                        <img class="img-fluid" th:src="${img}" alt="${resObject.getName()}">
                     </div>
                 </div>
             </div>
@@ -45,9 +45,19 @@
 </section>
 <script>
     $('.owl-carousel').owlCarousel({
-        loop: true,
+        touchDrag: false,
+        mouseDrag: false,
         nav: true,
-        items: 3,
-        smartSpeed: 900,
-    })
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    });
 </script>

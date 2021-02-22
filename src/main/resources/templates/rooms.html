@@ -16,21 +16,30 @@
         <div class="row">
             <div th:each="res : ${reservationObjects}" class="row">
                 <div class="col-lg-6 p-0 order-lg-2 order-md-2 col-md-6">
-                        <div id="carouselExampleSlidesOnly" class="carousel slide">
-                            <div class="carousel-inner">
-                                <div th:each="img : ${res.getObjectImages()}" class="carousel-item active">
-                                    <img class="d-block w-100" th:src="${img}" alt="${res.getName()}">
+<!--                        <div id="carouselExampleSlidesOnly" class="carousel slide">-->
+<!--                            <div class="carousel-inner">-->
+<!--                                <div th:each="img : ${res.getObjectImages()}" class="carousel-item active">-->
+<!--                                    <img class="d-block w-100" th:src="${img}" alt="${res.getName()}">-->
+<!--                                </div>-->
+<!--                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">-->
+<!--                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                                    <span class="sr-only">Previous</span>-->
+<!--                                </a>-->
+<!--                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">-->
+<!--                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                                    <span class="sr-only">Next</span>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    <div class="room__pic__slider owl-carousel owl-loaded">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage">
+                                <div th:each="img : ${res.getObjectImages()}" class="owl-item">
+                                    <img class="img-fluid" th:src="${img}" alt="${res.getName()}">
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div class="col-lg-6 p-0 order-lg-1 order-md-1 col-md-6">
                     <div class="room__text">
@@ -65,5 +74,18 @@
 </section>
 <script>
 
-    $('#carouselExampleSlidesOnly').carousel();
+    $('.owl-carousel').owlCarousel({
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    });
 </script>
