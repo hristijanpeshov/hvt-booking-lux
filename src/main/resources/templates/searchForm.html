@@ -58,8 +58,8 @@
         }
 
         today = yyyy+'-'+mm+'-'+dd;
-
-        $(".firstdate input").attr("min", today);
+        $('.firstdate input').attr("min", today);
+        $('.seconddate input').attr('min', today);
 
         $('.firstdate input').on('change', function() {
             var datearray = $('.firstdate input').val().split("-");
