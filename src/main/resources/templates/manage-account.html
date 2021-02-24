@@ -1,4 +1,4 @@
-<section class="account__details">
+<section class="account__details" xmlns:th="http://www.thymeleaf.org">
     <div class="row gutters-sm">
         <div class="col-md-4 mb-3">
             <div class="card">
@@ -43,13 +43,14 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form action="/account/manage" method="post">
+                    <form action="/user/manage" method="post" onsubmit="copyContentToInput()">
                         <div class="row">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">First Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <span name="firstName" contenteditable="true">Teodor</span><a class="icon_pencil-edit float-right" data-edit="firstName" onclick="editForm(this)"></a>
+                                <span name="firstName" contenteditable="true" th:text="${user.getFirstName()}">Teodor</span><a class="icon_pencil-edit float-right" data-edit="firstName" onclick="editForm(this)"></a>
+                                <input type="text" hidden="hidden" name="firstName">
                             </div>
                         </div>
                         <hr>
@@ -58,7 +59,8 @@
                                 <h6 class="mb-0">Last Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <span name="lastName" contenteditable="true">Penevski</span><a class="icon_pencil-edit float-right" data-edit="lastName" onclick="editForm(this)"></a>
+                                <span name="lastName" contenteditable="true" th:text="${user.getLastName()}">Penevski</span><a class="icon_pencil-edit float-right" data-edit="lastName" onclick="editForm(this)"></a>
+                                <input type="text" hidden="hidden" name="lastName">
                             </div>
                         </div>
                         <hr>
@@ -68,6 +70,7 @@
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 <span name="email" contenteditable="true">teodorpenevski@hvtinfo.com</span><a class="icon_pencil-edit float-right" data-edit="email" onclick="editForm(this)"></a>
+                                <input type="text" hidden="hidden" name="email">
                             </div>
                         </div>
                         <hr>
@@ -100,7 +103,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <button class="btn primary-btn float-left">Save</button>
+                                <button type="submit" class="btn primary-btn float-left">Save</button>
                             </div>
                         </div>
                     </form>
@@ -116,5 +119,15 @@
         var editName = text.getAttribute('data-edit');
         var toEdit = $(document).find("span[name='" + editName + "']");
         toEdit.focus();
+    }
+    function copyContentToInput(){
+        copyContentForElements(["firstName","lastName","email"]);
+    }
+    function copyContentForElements(arr)
+    {
+        arr.forEach(a => {
+            var input = $("input[name="+ a +"]");
+            input.attr("value",$("span[name=" + a +"]")[0].innerHTML);
+        });
     }
 </script>

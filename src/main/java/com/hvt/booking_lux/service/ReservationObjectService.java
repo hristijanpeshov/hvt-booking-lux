@@ -14,6 +14,7 @@ import java.util.List;
 public interface ReservationObjectService {
     List<ResObject> listAll();
     List<ResObject> listByCountry(long countryId);
+    List<ResObject> listUserAccommodationListings(User user);
     List<Unit> listAllNotAvailable(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);
     List<Unit> listAllAvailableUnitsForResObject(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);
     double lowestPriceForUnit(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);

@@ -63,6 +63,15 @@ public class AccommodationController {
         return "master-template";
     }
 
+    @GetMapping("/myListings")
+    public String getMyListings(Authentication authentication,Model model)
+    {
+        List<ResObject>  resObjects = reservationObjectService.listUserAccommodationListings((User)authentication.getPrincipal());
+        model.addAttribute("resObjects",resObjects);
+        model.addAttribute("bodyContent","myListings");
+        return "master-template";
+    }
+
     @GetMapping("/{resObjectId}")
     public String getSpecificAccommodation(@PathVariable long resObjectId,Model model)
     {

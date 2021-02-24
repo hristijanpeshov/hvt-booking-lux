@@ -27,12 +27,13 @@ public class ReservationController {
         this.unitService = unitService;
     }
 
-    @GetMapping
+    @GetMapping("/myReservations")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
         List<Reservation> reservationList = reservationService.findAllReservationsForUser((User) authentication.getPrincipal());
         model.addAttribute("reservations",reservationList);
-        return "";
+        model.addAttribute("bodyContent","myReservations");
+        return "master-template";
     }
     @GetMapping("/{unitId}")
     public String reserveUnit(@PathVariable long unitId,HttpServletRequest request,Authentication authentication,Model model)

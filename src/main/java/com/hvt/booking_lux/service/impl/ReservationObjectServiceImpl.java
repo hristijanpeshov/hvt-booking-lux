@@ -9,6 +9,7 @@ import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
 import com.hvt.booking_lux.repository.*;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.ReservationService;
+import com.hvt.booking_lux.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -49,6 +50,11 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
         List<ResObject> resObjects = new ArrayList<>();
         country.getCityList().forEach(c-> resObjects.addAll(listByCity(c.getId())));
         return resObjects;
+    }
+
+    @Override
+    public List<ResObject> listUserAccommodationListings(User user) {
+        return resObjectRepository.findAllByCreator(user);
     }
 
     @Override

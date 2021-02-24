@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface ResObjectRepository extends JpaRepository<ResObject, Long> {
 
     List<ResObject> findAllByCity(City city);
+    List<ResObject> findAllByCreator(User user);
 
 
 }

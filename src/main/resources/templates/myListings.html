@@ -1,0 +1,37 @@
+<section class="room-details spad" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h1>My Listings</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Accommodation Name</th>
+                        <th>Accommodation Address</th>
+                        <th>Accommodation Description</th>
+                        <th>Accommodation Category</th>
+                        <th>City</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="accomodation : ${resObjects}">
+                        <td th:text="${accomodation.getName()}"></td>
+                        <td th:text="${accomodation.getAddress()}"></td>
+                        <td th:text="${accomodation.getDescription()}"></td>
+                        <td th:text="${accomodation.getCategory()}"></td>
+                        <td th:text="${accomodation.getCity().getName()}"></td>
+                        <td><a class="ui-button" th:href="('/accommodation/' + ${accomodation.getId()})">Details</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

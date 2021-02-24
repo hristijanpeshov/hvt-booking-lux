@@ -9,13 +9,13 @@
     <div class="filter__form__item">
         <p>Check In</p>
         <div class="filter__form__datepicker firstdate">
-            <input type="date" class="" id="dp1613504077692" name="checkInDate" th:value="${session?.checkIn.toLocalDate()}">
+            <input type="date" class="" id="dp1613504077692" name="checkInDate" th:value="${session?.checkIn?.toLocalDate()}">
         </div>
     </div>
     <div class="filter__form__item">
         <p>Check Out</p>
         <div class="filter__form__datepicker seconddate">
-            <input type="date" class="" name="checkOutDate" th:value="${session?.checkOut.toLocalDate()}">
+            <input type="date" class="" name="checkOutDate" th:value="${session?.checkOut?.toLocalDate()}">
         </div>
     </div>
     <!--datepicker_pop check__in hasDatepicker-->
