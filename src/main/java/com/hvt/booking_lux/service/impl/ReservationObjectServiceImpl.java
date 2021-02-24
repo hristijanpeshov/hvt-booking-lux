@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,8 +50,8 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
         return resObjects;
     }
 
-    @Override
-    public List<Unit> listAllNotAvailable(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+
+    private List<Unit> listAllNotAvailable(long resObjectId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
         List<Unit> units = reservationService.listAll().stream().filter(s-> s.getUnit().getResObject().getId().equals(resObjectId))
                 .filter(s-> (fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))).map(Reservation::getUnit).distinct()
                 .collect(Collectors.toList());
@@ -77,9 +76,9 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
 
     @Override
     public List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city) {
-        List<ResObject> resObjects = reservationService.findAllResObjectsThatAreReservedAtThatTime(fromDate, toDate, numberOfPeople);
+        List<ResObject> resObjects = reservationService.findAllResObjectsThatAreNotReservedAtThatTime(fromDate, toDate, numberOfPeople);
         resObjects.forEach(s-> s.setLowestPrice(lowestPriceForUnit(s.getId(), fromDate, toDate, numberOfPeople)));
-        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city)).collect(Collectors.toList());
+        return resObjects.stream().filter(s-> s.getCity().getName().toLowerCase().contains(city.toLowerCase())).collect(Collectors.toList());
     }
 
     @Override

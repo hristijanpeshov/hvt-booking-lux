@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 
     @Override
-    public List<ResObject> findAllResObjectsThatAreReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
+    public List<ResObject> findAllResObjectsThatAreNotReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {
 //        (start1.isBefore(end2)) && (start2.isBefore(end1));
         List<Unit> units = listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
                 .map(Reservation::getUnit).distinct().collect(Collectors.toList());
@@ -78,6 +78,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findAllReservationsForUser(User user){
-        return findAllReservationsForUser(user);
+        return reservationRepository.findAllByUser(user);
     }
 }
