@@ -32,6 +32,19 @@
     </div>
     <button type="submit">BOOK NOW</button>
 </form>
+<script>
+    $(document).ready(function () {
+        $('.firstdate input').on('change', function() {
+            var datearray = $('.firstdate input').val().split("-");
+            var year = datearray[0];
+            var month = datearray[1];
+            var day = datearray[2];
+            var minDate = (year +"-"+ month +"-"+ day);
+            console.log(minDate);
+            $('.seconddate input').attr('min',minDate);
+        });
+    });
+</script>
 <script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
     $(function() {
         $.get(

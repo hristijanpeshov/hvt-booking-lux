@@ -1,7 +1,7 @@
 package com.hvt.booking_lux.model;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 @Entity
 public class Reservation {
@@ -37,8 +37,16 @@ public class Reservation {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.reservationDate = ZonedDateTime.now();
+
     }
 
+    public int numberOfNights(){
+        return Period.between(LocalDate.of(fromDate.getYear(), fromDate.getMonth(), fromDate.getDayOfMonth()), LocalDate.of(toDate.getYear(), toDate.getMonth(), toDate.getDayOfMonth())).getDays();
+    }
+
+    public double getTotalAmount(){
+        return numberOfNights() * pricePerNight;
+    }
 
 
     public Long getId() {
@@ -55,10 +63,6 @@ public class Reservation {
 
     public double getPricePerNight() {
         return pricePerNight;
-    }
-
-    public int getNumberNights() {
-        return numberNights;
     }
 
     public ZonedDateTime getReservationDate() {

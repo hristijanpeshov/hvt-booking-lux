@@ -30,8 +30,8 @@ public class Unit {
     @ManyToOne
     private ResObject resObject;
 
-    @OneToMany(mappedBy = "unit")
-    private List<UnitImages> unitImages;
+    @ElementCollection
+    private List<String> unitImages;
 
     public Unit() {
     }
@@ -98,7 +98,7 @@ public class Unit {
         return bedTypes.stream().mapToInt(s-> DataHolder.peopleNumberMap.get(s.getBedType().toString()) * s.getCount()).sum();
     }
 
-    public List<UnitImages> getUnitImages() {
+    public List<String> getUnitImages() {
         return unitImages;
     }
 
@@ -126,7 +126,7 @@ public class Unit {
         this.resObject = resObject;
     }
 
-    public void setUnitImages(List<UnitImages> unitImages) {
+    public void setUnitImages(List<String> unitImages) {
         this.unitImages = unitImages;
     }
 }

@@ -94,6 +94,7 @@ public class DataHolder  {
         Unit unit1 = unitRepository.save(new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!"));
         Unit unit2 = unitRepository.save(new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!"));
         Unit unit5 = unitRepository.save(new Unit(houseSRB, 125, 4, 150, "Room for 4 people!"));
+        unit5.setUnitImages(objectImageList);
 
         BedTypes bedTypes = bedTypesRepository.save(new BedTypes(BedType.TWIN, 2));
         BedTypes bedTypes1 = bedTypesRepository.save(new BedTypes(BedType.KING, 1));
@@ -103,6 +104,26 @@ public class DataHolder  {
         unit5.setBedTypes(bedTypesList);
         unitRepository.save(unit5);
 
+        List<BedTypes> bedTypesListUnit3 = new ArrayList<>();
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.DOUBLE, 1)));
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 1)));
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.SOFA, 1)));
+        unit3.setBedTypes(bedTypesListUnit3);
+
+        List<BedTypes> bedTypesListUnit4 = new ArrayList<>();
+        bedTypesListUnit4.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 1)));
+        unit4.setBedTypes(bedTypesListUnit4);
+
+        List<BedTypes> bedTypesListUnit1 = new ArrayList<>();
+        bedTypesListUnit1.add(bedTypesRepository.save(new BedTypes(BedType.KING, 1)));
+        unit1.setBedTypes(bedTypesListUnit1);
+
+        List<BedTypes> bedTypesListUnit2 = new ArrayList<>();
+        bedTypesListUnit2.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 2)));
+        unit2.setBedTypes(bedTypesListUnit2);
+
+        unitRepository.save(unit1);
+        unitRepository.save(unit2);
         unitRepository.save(unit3);
         unitRepository.save(unit4);
 
