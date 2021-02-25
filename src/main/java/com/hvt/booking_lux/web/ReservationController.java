@@ -7,6 +7,7 @@ import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.UnitService;
 import org.h2.api.Interval;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ public class ReservationController {
     }
 
     @GetMapping("/myReservations")
+    @PreAuthorize("isAuthenticated()")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
         List<Reservation> reservationList = reservationService.findAllReservationsForUser((User) authentication.getPrincipal());

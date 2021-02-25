@@ -1,6 +1,9 @@
 package com.hvt.booking_lux.service.impl;
 
+import com.hvt.booking_lux.model.BedTypes;
+import com.hvt.booking_lux.model.enumeration.BedType;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UnitHasNoBedsException;
 import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
@@ -10,7 +13,9 @@ import com.hvt.booking_lux.repository.UnitRepository;
 import com.hvt.booking_lux.service.UnitService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -60,19 +65,44 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit save(long resObjectId, double size, int numberPeople, double price, String description) {
+    public Unit save(long resObjectId, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
         ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
+        List<BedTypes> bedTypesList = this.toBedTypeList(bedTypes,counts);
         Unit unit = new Unit(resObject, size, numberPeople, price, description);
+        unit.setBedTypes(bedTypesList);
         return unitRepository.save(unit);
     }
 
+    private List<BedTypes> toBedTypeList(List<BedType> bedTypes,List<Integer> counts)
+    {
+        List<BedTypes> bedTypesList = new ArrayList<>();
+        Iterator<BedType> bedTypeIterator = bedTypes.iterator();
+        Iterator<Integer> countsIterator = counts.listIterator();
+        while(bedTypeIterator.hasNext() && countsIterator.hasNext())
+        {
+            BedType bedType = bedTypeIterator.next();
+            Integer count = countsIterator.next();
+            if(count>0)
+            {
+                bedTypesList.add(new BedTypes(bedType,count));
+            }
+        }
+        if(bedTypesList.size()==0)
+        {
+            throw new UnitHasNoBedsException();
+        }
+        return bedTypesList;
+    }
+
     @Override
-    public Unit edit(long unitId, double size, int numberPeople, double price, String description) {
+    public Unit edit(long unitId, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
         Unit unit = findById(unitId);
         unit.setSize(size);
         unit.setNumberOf(numberPeople);
         unit.setPrice(price);
         unit.setDescription(description);
+        List<BedTypes> bedTypesList = toBedTypeList(bedTypes,counts);
+        unit.setBedTypes(bedTypesList);
         return unitRepository.save(unit);
     }
 

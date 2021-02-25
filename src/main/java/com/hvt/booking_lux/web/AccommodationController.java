@@ -1,12 +1,12 @@
 package com.hvt.booking_lux.web;
 
 import com.hvt.booking_lux.model.enumeration.Category;
-import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.security.CreatorCheck;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.ReservationService;
+import com.hvt.booking_lux.service.UnitService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -28,11 +27,13 @@ public class AccommodationController {
 
     private final ReservationObjectService reservationObjectService;
     private final CreatorCheck creatorCheck;
+    private final UnitService unitService;
     private final ReservationService reservationService;
 
-    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck,ReservationService reservationService) {
+    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck, UnitService unitService, ReservationService reservationService) {
         this.reservationObjectService = reservationObjectService;
         this.creatorCheck = creatorCheck;
+        this.unitService = unitService;
         this.reservationService = reservationService;
     }
 
@@ -65,6 +66,7 @@ public class AccommodationController {
     }
 
     @GetMapping("/myListings")
+    @PreAuthorize("isAuthenticated()")
     public String getMyListings(Authentication authentication,Model model)
     {
         List<ResObject>  resObjects = reservationObjectService.listUserAccommodationListings((User)authentication.getPrincipal());
@@ -78,10 +80,17 @@ public class AccommodationController {
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
         model.addAttribute("resObject", resObject);
-        ZonedDateTime fromDate = (ZonedDateTime) request.getSession().getAttribute("checkIn");
-        ZonedDateTime toDate = (ZonedDateTime) request.getSession().getAttribute("checkOut");
-        int numPeople = (int) request.getSession().getAttribute("numPeople");
-        model.addAttribute("units", reservationObjectService.listAllAvailableUnitsForResObject(resObjectId, fromDate, toDate, numPeople));
+        Integer numPeople = (Integer) request.getSession().getAttribute("numPeople");
+        if(numPeople!=null)
+        {
+            ZonedDateTime fromDate = (ZonedDateTime) request.getSession().getAttribute("checkIn");
+            ZonedDateTime toDate = (ZonedDateTime) request.getSession().getAttribute("checkOut");
+            model.addAttribute("units", reservationObjectService.listAllAvailableUnitsForResObject(resObjectId, fromDate, toDate, numPeople));
+        }
+        else
+        {
+            model.addAttribute("units",unitService.listAll(resObjectId));
+        }
         model.addAttribute("bodyContent", "AccommodationDetails");
         return "master-template";
     }

@@ -94,6 +94,15 @@ public class DataHolder  {
         Unit unit1 = unitRepository.save(new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!"));
         Unit unit2 = unitRepository.save(new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!"));
         Unit unit5 = unitRepository.save(new Unit(houseSRB, 125, 4, 150, "Room for 4 people!"));
+
+        List<String> unitImages = new ArrayList<String>();
+        unitImages.add("https://images.unsplash.com/photo-1603794067602-9feaa4f70e0c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
+        unitImages.add("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
+        unitImages.add("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/living-room-ideas-rds-work-queens-road-01-1594233253.jpg?crop=1.00xw:0.803xh;0,0.176xh&resize=640:*");
+        unit1.setUnitImages(unitImages);
+
+        unitRepository.save(unit1);
+
         unit5.setUnitImages(objectImageList);
 
         BedTypes bedTypes = bedTypesRepository.save(new BedTypes(BedType.TWIN, 2));

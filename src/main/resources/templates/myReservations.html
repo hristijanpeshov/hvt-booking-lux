@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h1>My Listings</h1>
+                    <h1>My Reservations</h1>
                 </div>
             </div>
         </div>
@@ -12,7 +12,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Hotel</th>
+                        <th>Accommodation</th>
                         <th>Unit</th>
                         <th>Price per night</th>
                         <th>From</th>
@@ -21,8 +21,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="reservation : ${reservations}">
-                        <td><a th:href="('/accommodation/'+${reservation.getUnit().getResObject().getId()})">Hotel</a></td>
-                        <td><a th:href="('/accommodation/'+${reservation.getUnit().getResObject().getId()} + '/unit/' + ${reservation.getUnit().getId()})">Reserved Room</a></td>
+                        <td><a th:href="('/accommodation/'+${reservation.getUnit().getResObject().getId()})">Accommodation</a></td>
+                        <td><a th:href="('/accommodation/'+${reservation.getUnit().getResObject().getId()} + '/unit/' + ${reservation.getUnit().getId()})">Reserved Unit</a></td>
                         <td th:text="${reservation.getPricePerNight()}"></td>
                         <td th:text="${reservation.getFromDate().toLocalDate()}"></td>
                         <td th:text="${reservation.getToDate().toLocalDate()}"></td>
