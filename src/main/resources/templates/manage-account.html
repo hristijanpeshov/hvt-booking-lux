@@ -100,10 +100,22 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <button class="btn primary-btn float-left">Save</button>
+                                <button type="button" class="btn primary-btn float-left" onclick="showToast()">Save</button>
+                            </div>
+                            <div class="col-md-8 float-right mt-2">
+                                <div class="toast float-right border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header">
+                                        <strong class="mr-auto">Successfully updated!</strong> <i class="fa fa-check"></i>
+                                        <!--                                        <small class="text-muted">now</small>-->
+<!--                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">-->
+<!--                                            <span aria-hidden="true">&times;</span>-->
+<!--                                        </button>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
 
@@ -117,4 +129,11 @@
         var toEdit = $(document).find("span[name='" + editName + "']");
         toEdit.focus();
     }
+
+
+    function showToast(){
+        $('.toast').toast({delay: 2000});
+        $('.toast').toast('show');
+    }
+
 </script>

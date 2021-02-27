@@ -27,6 +27,12 @@ public class ReservationController {
         this.unitService = unitService;
     }
 
+    @GetMapping("/review")
+    public String reserveReview(Model model){
+        model.addAttribute("bodyContent", "confirmReservation");
+        return "master-template";
+    }
+
     @GetMapping
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
