@@ -1,4 +1,4 @@
-<section class="spad">
+<section class="spad" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-4 centered">
@@ -100,12 +100,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="font-weight-bold h5">House in Belgrade</p>
+                                <p th:text="${unit.getResObject().getName()}" class="font-weight-bold h5">House in Belgrade</p>
                                 <hr>
-                                <span class="font-weight-bold float-left">Address:</span> <span class="float-right">adresa bb 11 22</span><br/>
-                                <span class="font-weight-bold float-left">Bed:</span><span class="float-right">King Beds</span><br/>
-                                <span class="font-weight-bold float-left">Dates:</span><span class="float-right">25/02/2021 - 26/02/2021</span><br/>
-                                <span class="font-weight-bold float-left">View:</span><span class="float-right">Sea View</span><br/>
+                                <span class="font-weight-bold float-left">Address:</span> <span th:text="${unit.getResObject().getAddress()}" class="float-right"></span><br/>
+                                <span class="font-weight-bold float-left">Bed:</span><span th:text="${unit.getBedsAsString()}" class="float-right"></span><br/>
+                                <span class="font-weight-bold float-left">Dates:</span><span th:text="${checkIn.getDayOfMonth()} + '/' + ${checkIn.getMonthValue()} + '/' + ${checkIn.getYear()} + ' - ' + ${checkOut.getDayOfMonth()} + '/' + ${checkOut.getMonthValue()} + '/' + ${checkOut.getYear()}" class="float-right"></span><br/>
+                                <span class="font-weight-bold float-left">Num. People:</span><span th:text="${unit.getNumberOfPeople()}" class="float-right"></span><br/>
                             </div>
                         </div>
                     </div>

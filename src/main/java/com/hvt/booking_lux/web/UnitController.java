@@ -29,7 +29,8 @@ public class UnitController {
     {
         Unit unit = unitService.findById(unitId);
         model.addAttribute("unit",unit);
-        return "";
+        model.addAttribute("bodyContent", "UnitDetails");
+        return "master-template";
     }
 
     @GetMapping("/add")

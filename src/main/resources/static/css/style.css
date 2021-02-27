@@ -1646,6 +1646,11 @@ Custom CSS
   Room Details Slider
 -----------------------*/
 
+.hoverable-unit:hover{
+	background-color: #e6e6e6!important;
+	cursor: pointer;
+}
+
 .room-details-slider {
 	overflow: hidden;
 }

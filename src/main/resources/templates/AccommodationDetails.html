@@ -32,7 +32,7 @@
                     </div>
                     <div class="room__details__title">
                         <h2 th:text="${resObject.getName()}"></h2>
-                        <a th:href="'/accommodation/book/' + ${resObject.getId()}" class="primary-btn">Book Now</a>
+<!--                        <a th:href="'/accommodation/book/' + ${resObject.getId()}" class="primary-btn">Book Now</a>-->
                     </div>
                     <div class="room__details__desc">
                         <h2>Description:</h2>
@@ -41,9 +41,49 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row text-white p-3" style="background-color: #1a1a1a">
+                <div class="col-sm-3">
+                    <h4>Name</h4>
+                </div>
+                <div class="col-sm-3">
+                    <h4>Size</h4>
+                </div>
+                <div class="col-sm-3">
+                    <h4>Price</h4>
+                </div>
+                <div class="col-sm-4">
+                    <span></span>
+                </div>
+            </div>
+                <div th:each="unit: ${resObject.getUnits()}" class="row p-3 hoverable-unit" th:data-id="${unit.getId()}" th:data-res="${unit.getResObject().getId()}" onclick="redirectToUnit(this)">
+                        <div class="col-sm-3 my-auto border-right">
+                            <p class="mb-0" th:text="${unit.getResObject().getName()}"></p>
+                        </div>
+                        <div class="col-sm-3 my-auto border-right">
+                            <p class="mb-0" th:utext="${unit.getSize()} + ' m<sup>2</sup>'"></p>
+                        </div>
+                        <div class="col-sm-3 my-auto border-right">
+                            <p class="mb-0" th:text="${unit.getPrice()} + '$'"></p>
+                        </div>
+                        <div class="col-sm-3 my-auto mb-0">
+                            <a class="btn primary-btn" th:href="'/reserve/' + ${unit.getId()}">Book Now</a>
+                        </div>
+                </div>
+        </div>
     </div>
 </section>
+
 <script>
+    function redirectToUnit(unit){
+        console.log("Toshe zver");
+        var unitId = $(unit).data('id');
+        var resId = $(unit).data('res');
+        console.log(unitId);
+        console.log(resId);
+        window.location = '/accommodation/' + resId + '/unit/' + unitId;
+    }
+
     $('.owl-carousel').owlCarousel({
         touchDrag: false,
         mouseDrag: false,

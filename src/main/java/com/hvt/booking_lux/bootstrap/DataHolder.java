@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 
 @Component
 @Getter
-public class DataHolder  {
+public class DataHolder {
 
     private final CityRepository cityRepository;
     private final CountryRepository countryRepository;
@@ -45,7 +45,7 @@ public class DataHolder  {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         DataHolder.peopleNumberMap.put(BedType.TWIN.toString(), 1);
         DataHolder.peopleNumberMap.put(BedType.DOUBLE.toString(), 2);
         DataHolder.peopleNumberMap.put(BedType.QUEEN.toString(), 2);
@@ -72,13 +72,12 @@ public class DataHolder  {
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
         ResObject apartmentEn = new ResObject("Rooftop apartment", "england 11 22", "Rooftop apartment with wonderful view", Category.APARTMENT, user, london);
 
-        ResObject hotelMKD = resObjectRepository.save( new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
+        ResObject hotelMKD = resObjectRepository.save(new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
 
         List<String> objectImageList = new ArrayList<>();
         objectImageList.add("/assets/room-4.jpg");
         objectImageList.add("/assets/room-3.jpg");
         objectImageList.add("/assets/room-2.jpg");
-
 
 
         houseSRB.setObjectImages(objectImageList);
@@ -87,13 +86,13 @@ public class DataHolder  {
         resObjectRepository.save(apartmentEn);
 
 
-
         Unit unit3 = new Unit(hotelMKD, 70, 5, 100, "Room for 5 people!");
         Unit unit4 = new Unit(hotelMKD, 25, 2, 35, "Room for 2 people!");
 
         Unit unit1 = unitRepository.save(new Unit(hotelMKD, 22, 2, 20, "Room for 2 people!"));
         Unit unit2 = unitRepository.save(new Unit(hotelMKD, 40, 3, 55, "Room for 4 people!"));
         Unit unit5 = unitRepository.save(new Unit(houseSRB, 125, 4, 150, "Room for 4 people!"));
+        unit5.setUnitImages(objectImageList);
 
         BedTypes bedTypes = bedTypesRepository.save(new BedTypes(BedType.TWIN, 2));
         BedTypes bedTypes1 = bedTypesRepository.save(new BedTypes(BedType.KING, 1));
@@ -103,6 +102,26 @@ public class DataHolder  {
         unit5.setBedTypes(bedTypesList);
         unitRepository.save(unit5);
 
+        List<BedTypes> bedTypesListUnit3 = new ArrayList<>();
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.DOUBLE, 1)));
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 1)));
+        bedTypesListUnit3.add(bedTypesRepository.save(new BedTypes(BedType.SOFA, 1)));
+        unit3.setBedTypes(bedTypesListUnit3);
+
+        List<BedTypes> bedTypesListUnit4 = new ArrayList<>();
+        bedTypesListUnit4.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 1)));
+        unit4.setBedTypes(bedTypesListUnit4);
+
+        List<BedTypes> bedTypesListUnit1 = new ArrayList<>();
+        bedTypesListUnit1.add(bedTypesRepository.save(new BedTypes(BedType.KING, 1)));
+        unit1.setBedTypes(bedTypesListUnit1);
+
+        List<BedTypes> bedTypesListUnit2 = new ArrayList<>();
+        bedTypesListUnit2.add(bedTypesRepository.save(new BedTypes(BedType.QUEEN, 2)));
+        unit2.setBedTypes(bedTypesListUnit2);
+
+        unitRepository.save(unit1);
+        unitRepository.save(unit2);
         unitRepository.save(unit3);
         unitRepository.save(unit4);
 
@@ -111,8 +130,5 @@ public class DataHolder  {
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
         reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
 
-//        reviewRepository.save(new Review(reservation, "commment ", user));
-
     }
-
 }
