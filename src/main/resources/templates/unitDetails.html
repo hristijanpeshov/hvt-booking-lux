@@ -53,7 +53,7 @@
                             <h2 th:utext="('<sup>$</sup>' + ${unit.getPrice()} + '<span>/day</span>')"></h2>
                             <ul>
                                 <li><span>Size:</span><span th:text="${unit.getSize()}"></span></li>
-                                <li th:each="bed:${unit.getBedTypes()}" th:text="${bed.getBedType()} + ' x ' + ${bed.getCount()}"></li>
+                                <li th:each="bed:${unit.getBedTypes()}"><span th:text="${bed.getBedType()} + ':'"></span><span th:text="${bed.getCount()}"></span></li>
                             </ul>
                             <a th:href="'/accommodation/' + ${unit.resObject.getId()}">Back to Hotel</a>
                         </div>

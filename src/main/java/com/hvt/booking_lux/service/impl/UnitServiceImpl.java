@@ -8,6 +8,7 @@ import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
+import com.hvt.booking_lux.repository.BedTypesRepository;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.UnitRepository;
 import com.hvt.booking_lux.service.UnitService;
@@ -23,10 +24,12 @@ public class UnitServiceImpl implements UnitService {
 
     private final UnitRepository unitRepository;
     private final ResObjectRepository resObjectRepository;
+    private final BedTypesRepository bedTypesRepository;
 
-    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository) {
+    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository, BedTypesRepository bedTypesRepository) {
         this.unitRepository = unitRepository;
         this.resObjectRepository = resObjectRepository;
+        this.bedTypesRepository = bedTypesRepository;
     }
 
     @Override
@@ -65,10 +68,10 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit save(long resObjectId, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
+    public Unit save(long resObjectId, String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
         ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
         List<BedTypes> bedTypesList = this.toBedTypeList(bedTypes,counts);
-        Unit unit = new Unit(resObject, size, numberPeople, price, description);
+        Unit unit = new Unit(resObject, title,size, numberPeople, price, description);
         unit.setBedTypes(bedTypesList);
         return unitRepository.save(unit);
     }
@@ -84,7 +87,7 @@ public class UnitServiceImpl implements UnitService {
             Integer count = countsIterator.next();
             if(count>0)
             {
-                bedTypesList.add(new BedTypes(bedType,count));
+                bedTypesList.add(bedTypesRepository.save(new BedTypes(bedType,count)));
             }
         }
         if(bedTypesList.size()==0)
@@ -95,12 +98,13 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit edit(long unitId, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
+    public Unit edit(long unitId, String title,double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
         Unit unit = findById(unitId);
         unit.setSize(size);
         unit.setNumberOf(numberPeople);
         unit.setPrice(price);
         unit.setDescription(description);
+        unit.setTitle(title);
         List<BedTypes> bedTypesList = toBedTypeList(bedTypes,counts);
         unit.setBedTypes(bedTypesList);
         return unitRepository.save(unit);

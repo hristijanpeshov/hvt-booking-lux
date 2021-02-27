@@ -14,8 +14,8 @@ public interface UnitService {
     Unit findTheLeastExpensive();
     Unit findTheLargest();
     Unit findTheSmallest();
-    Unit save(long resObjectId, double size, int numberPeople, double price, String description, List<BedType> bedTypes, List<Integer> counts);
-    Unit edit(long unitId,double size,int numberPeople,double price,String description, List<BedType> bedTypes,List<Integer> counts);
+    Unit save(long resObjectId,String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes, List<Integer> counts);
+    Unit edit(long unitId,String title,double size,int numberPeople,double price,String description, List<BedType> bedTypes,List<Integer> counts);
     Unit findById(long unitId);
     Unit delete(long unitId);
 }

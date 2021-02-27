@@ -14,6 +14,8 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     private double size;
 
     private boolean status;
@@ -36,7 +38,7 @@ public class Unit {
     public Unit() {
     }
 
-    public Unit(ResObject resObject, double size, int numberOf, double price, String description) {
+    public Unit(ResObject resObject,String title, double size, int numberOf, double price, String description) {
         this.resObject = resObject;
         this.size = size;
         this.price = price;
@@ -47,7 +49,7 @@ public class Unit {
         unitImages = new ArrayList<>();
     }
 
-    public Unit(ResObject resObject, double size, int numberOf, double price, String description, List<BedTypes> bedTypes) {
+    public Unit(ResObject resObject,String title, double size, int numberOf, double price, String description, List<BedTypes> bedTypes) {
         this.resObject = resObject;
         this.size = size;
         this.price = price;
@@ -56,6 +58,14 @@ public class Unit {
         this.status = true;
         this.bedTypes = bedTypes;
         unitImages = new ArrayList<>();
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public List<BedTypes> getBedTypes() {

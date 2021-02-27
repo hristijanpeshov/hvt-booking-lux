@@ -74,7 +74,7 @@
                         <div th:each="bedtype : ${T(com.hvt.booking_lux.model.enumeration.BedType).values()}">
                             <label th:text="${bedtype}"></label>
                             <input name="bedType" id="bedType" th:value="${bedtype}" hidden="hidden">
-                            <input type="number" class="form-control" th:value="${unit}!=null ? ${unit.getBedTypes()} : 0" name="count">
+                            <input type="number" class="form-control" th:value="${unit}!=null ? ${T(com.hvt.booking_lux.service.impl.BedTypesService).searchForBedType(bedtype,unit.getBedTypes().stream())} : 0" name="count">
                         </div>
                     </div>
                 </div>

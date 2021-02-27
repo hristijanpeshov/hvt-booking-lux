@@ -10,7 +10,7 @@
         </div>
 
 </section>
-<section class="room-details spad" xmlns:th="http://www.thymeleaf.org">
+<section class="room-details spad" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -30,9 +30,10 @@
                             <span class="review">(1000 Reviews)</span>
                         </div>
                     </div>
-                    <div class="room__details__title">
+                    <div class="room__details__title" th:if="${@creatorCheck.check(resObject.getId(),#authentication)}">
                         <h2 th:text="${resObject.getName()}"></h2>
-                        <a th:href="'/accommodation/book/' + ${resObject.getId()}" class="primary-btn">Book Now</a>
+                        <a th:href="'/accommodation/edit/' + ${resObject.getId()}" class="primary-btn">Edit</a>
+                        <a th:href="'/accommodation/' + ${resObject.id} + '/unit/add'" class="primary-btn">Add new unit!</a>
                     </div>
                     <div class="room__details__desc">
                         <h2>Description:</h2>
@@ -68,7 +69,7 @@
                             </div>
                             <div class="col-lg-6 p-0 order-lg-1 order-md-1 col-md-6">
                                 <div class="room__text">
-                                    <h3 >Premium King Room</h3>
+                                    <h3 th:text="${unit.getTitle()}"></h3>
                                     <h2 th:utext="('<sup>$</sup>' + ${unit.getPrice()} + '<span>/day</span>')"></h2>
                                     <h4 th:text="${unit.getDescription()}"></h4>
                                     <ul>
