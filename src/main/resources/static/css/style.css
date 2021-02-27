@@ -91,7 +91,7 @@ a:hover,
 a:focus {
 	text-decoration: none;
 	outline: none;
-	color: #ffffff;
+	color: #e9ad28;
 }
 
 a{
@@ -1646,6 +1646,11 @@ Custom CSS
   Room Details Slider
 -----------------------*/
 
+.hoverable-unit:hover{
+	background-color: #e6e6e6!important;
+	cursor: pointer;
+}
+
 .room-details-slider {
 	overflow: hidden;
 }
@@ -1671,9 +1676,6 @@ Custom CSS
 	transition: all, 0.3s;
 }
 
-a.icon_pencil-edit:hover{
-	color: red!important;
-}
 [contenteditable]:focus {
 	outline: 1px solid;
 	padding: .1rem;

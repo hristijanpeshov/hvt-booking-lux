@@ -28,6 +28,12 @@ public class ReservationController {
         this.unitService = unitService;
     }
 
+    @GetMapping("/review")
+    public String reserveReview(Model model){
+        model.addAttribute("bodyContent", "confirmReservation");
+        return "master-template";
+    }
+
     @GetMapping("/myReservations")
     @PreAuthorize("isAuthenticated()")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
@@ -38,14 +44,15 @@ public class ReservationController {
         return "master-template";
     }
     @GetMapping("/{unitId}")
-    public String reserveUnit(@PathVariable long unitId,HttpServletRequest request,Authentication authentication,Model model)
+    public String reserveUnit(@PathVariable long unitId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, HttpServletRequest request,Authentication authentication,Model model)
     {
         Unit unit = unitService.findById(unitId);
         model.addAttribute("unit",unit);
         model.addAttribute("city",request.getSession().getAttribute("city"));
-        model.addAttribute("checkIn",request.getSession().getAttribute("checkIn"));
-        model.addAttribute("checkOut",request.getSession().getAttribute("checkOut"));
-        return "";
+        model.addAttribute("checkIn",checkInDate);
+        model.addAttribute("checkOut",checkOutDate);
+        model.addAttribute("bodyContent", "confirmReservation");
+        return "master-template";
     }
     @PostMapping("/{unitId}")
     public String confirmReservation(Authentication authentication,@PathVariable long unitId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate)

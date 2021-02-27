@@ -35,4 +35,5 @@ public class BedTypes {
     public int getCount() {
         return count;
     }
+
 }

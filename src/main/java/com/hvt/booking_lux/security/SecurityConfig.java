@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/","/static/**").permitAll()
                 .anyRequest().permitAll().and()
-                .formLogin().defaultSuccessUrl("/",true)
-                .and().logout().logoutSuccessUrl("/")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/",true)
+                .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID").invalidateHttpSession(true).clearAuthentication(true);
     }
     @Override

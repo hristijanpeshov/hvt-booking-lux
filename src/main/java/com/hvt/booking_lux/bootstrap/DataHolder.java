@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
 
 @Component
 @Getter
-public class DataHolder  {
+public class DataHolder {
 
     private final CityRepository cityRepository;
     private final CountryRepository countryRepository;
@@ -45,7 +45,7 @@ public class DataHolder  {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         DataHolder.peopleNumberMap.put(BedType.TWIN.toString(), 1);
         DataHolder.peopleNumberMap.put(BedType.DOUBLE.toString(), 2);
         DataHolder.peopleNumberMap.put(BedType.QUEEN.toString(), 2);
@@ -72,13 +72,12 @@ public class DataHolder  {
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
         ResObject apartmentEn = new ResObject("Rooftop apartment", "england 11 22", "Rooftop apartment with wonderful view", Category.APARTMENT, user, london);
 
-        ResObject hotelMKD = resObjectRepository.save( new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
+        ResObject hotelMKD = resObjectRepository.save(new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
 
         List<String> objectImageList = new ArrayList<>();
         objectImageList.add("/assets/room-4.jpg");
         objectImageList.add("/assets/room-3.jpg");
         objectImageList.add("/assets/room-2.jpg");
-
 
 
         houseSRB.setObjectImages(objectImageList);
@@ -141,8 +140,5 @@ public class DataHolder  {
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
         reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
 
-//        reviewRepository.save(new Review(reservation, "commment ", user));
-
     }
-
 }

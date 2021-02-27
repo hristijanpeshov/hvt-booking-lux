@@ -108,6 +108,20 @@ public class Unit {
         return bedTypes.stream().mapToInt(s-> DataHolder.peopleNumberMap.get(s.getBedType().toString()) * s.getCount()).sum();
     }
 
+    public String getBedsAsString(){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i<bedTypes.size(); i++){
+            if(i == bedTypes.size()-1){
+                sb.append(bedTypes.get(i).getBedType());
+            }
+            else{
+                sb.append(bedTypes.get(i).getBedType()).append(", ");
+
+            }
+        }
+        return sb.toString();
+    }
+
     public List<String> getUnitImages() {
         return unitImages;
     }

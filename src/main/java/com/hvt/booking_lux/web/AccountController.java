@@ -42,4 +42,5 @@ public class AccountController {
         SecurityContextHolder.getContext().setAuthentication(auth);
         return "redirect:/user/manage";
     }
+
 }
