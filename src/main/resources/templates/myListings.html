@@ -1,5 +1,6 @@
 <div class="breadcrumb-option set-bg"
-     data-setbg="/assets/room.png" style="background-image: url('/assets/room.png');" xmlns:th="http://www.thymeleaf.org">
+     data-setbg="/assets/room.png" style="background-image: url('/assets/room.png');"
+     xmlns:th="http://www.thymeleaf.org" xmlns:pth="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -12,21 +13,23 @@
 </div>
 <section class="spad" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <div class="row hoverable-unit border-bottom border-top py-2" th:data-id="'TUKA STAVI ID OD UNIT'" th:data-res="'TUKA STAVI ID OD RESOBJECT'" onclick="redirectToUnit(this)">
+        <div th:each="resObject : ${resObjects}" class="row hoverable-unit border-bottom border-top py-2" th:data-id="'TUKA STAVI ID OD UNIT'" th:data-res="'TUKA STAVI ID OD RESOBJECT'" onclick="redirectToUnit(this)">
             <div class="row my-2 mb-2">
                 <div class="col-lg-3 p-0 order-lg-1 order-md-1 col-md-3 px-3">
                     <img src="/assets/room-4.jpg">
                 </div>
                 <div class="col-lg-6 p-0 order-lg-2 order-md-2 col-md-6 px-2">
 <!--                    <h5 class="font-weight-light" th:text="${#temporals.format(reservation.getReservationDate(), 'dd-MM-yyyy HH:mm')}">Placeholder text</h5>-->
-                    <h5 class="font-weight-light">Placeholder text</h5>
-                    <h4>Name</h4>
-                    <p>Description</p>
+                    <h5 th:text="${resObject.getCategory()}" class="font-weight-light">Placeholder text</h5>
+                    <h4 th:text="${resObject.getName()}">Name</h4>
+                    <p th:text="${resObject.getDescription()}">Description</p>
                 </div>
                 <div class="col-lg-3 p-0 order-lg-3 order-md-3 col-md-3">
-                    <a class="btn primary-btn mb-2 d-block">Add Unit</a>
-                    <a class="btn primary-btn d-block">Edit</a>
-                    <a class="btn primary-btn mt-2 d-block">Delete</a>
+                    <a th:href="'/accommodation/' + ${resObject.getId()} + '/unit/add'" class="btn primary-btn mb-2 d-block">Add Unit</a>
+                    <a th:href="'/accommodation/edit/' + ${resObject.getId()}" class="btn primary-btn d-block">Edit</a>
+                    <form method="post" th:action="'/accommodation/delete/' + ${resObject.getId()}">
+                        <button type="submit" class="btn primary-btn mt-2 d-block">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
