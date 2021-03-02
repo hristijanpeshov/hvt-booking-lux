@@ -42,5 +42,10 @@ public class AccountController {
         SecurityContextHolder.getContext().setAuthentication(auth);
         return "redirect:/user/manage";
     }
+    @GetMapping("/login")
+    public String getLoginPage(Model model){
+        model.addAttribute("bodyContent", "login");
+        return "master-template";
+    }
 
 }

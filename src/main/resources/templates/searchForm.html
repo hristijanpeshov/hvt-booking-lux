@@ -24,9 +24,8 @@
         <div class="filter__form__select">
             <span class="icon_group"></span>
             <select style="display: none;" name="numPeople">
-                <option value="3">2 Adult, 1 Children</option>
-                <option value="2">2 Adult</option>
-                <option value="1">1 Adult</option>
+                <option value="1">1 Person</option>
+                <option th:each="v : ${#numbers.sequence(2,10)}" th:value="${v}" th:text="${v} + ' People'"></option>
             </select>
         </div>
     </div>

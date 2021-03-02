@@ -59,7 +59,7 @@
             </div>
                 <div th:each="unit: ${resObject.getUnits()}" class="row p-3 hoverable-unit" th:data-id="${unit.getId()}" th:data-res="${unit.getResObject().getId()}" onclick="redirectToUnit(this)">
                         <div class="col-sm-3 my-auto border-right">
-                            <p class="mb-0" th:text="${unit.getResObject().getName()}"></p>
+                            <p class="mb-0" th:text="${unit.getTitle()}"></p>
                         </div>
                         <div class="col-sm-3 my-auto border-right">
                             <p class="mb-0" th:utext="${unit.getSize()} + ' m<sup>2</sup>'"></p>

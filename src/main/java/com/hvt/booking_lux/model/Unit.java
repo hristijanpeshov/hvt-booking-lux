@@ -45,6 +45,7 @@ public class Unit {
         this.numberOf = numberOf;
         this.description = description;
         this.status = true;
+        this.title = title;
         this.bedTypes = new ArrayList<>();
         unitImages = new ArrayList<>();
     }
@@ -57,6 +58,7 @@ public class Unit {
         this.description = description;
         this.status = true;
         this.bedTypes = bedTypes;
+        this.title = title;
         unitImages = new ArrayList<>();
     }
 

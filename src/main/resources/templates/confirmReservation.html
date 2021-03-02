@@ -104,7 +104,7 @@
                                 <hr>
                                 <span class="font-weight-bold float-left">Address:</span> <span th:text="${unit.getResObject().getAddress()}" class="float-right"></span><br/>
                                 <span class="font-weight-bold float-left">Bed:</span><span th:text="${unit.getBedsAsString()}" class="float-right"></span><br/>
-                                <span class="font-weight-bold float-left">Dates:</span><span th:text="${checkIn.getDayOfMonth()} + '/' + ${checkIn.getMonthValue()} + '/' + ${checkIn.getYear()} + ' - ' + ${checkOut.getDayOfMonth()} + '/' + ${checkOut.getMonthValue()} + '/' + ${checkOut.getYear()}" class="float-right"></span><br/>
+                                <span class="font-weight-bold float-left">Dates:</span><span th:text="${checkIn.toLocalDate().getDayOfMonth()} + '/' + ${checkIn.toLocalDate().getMonthValue()} + '/' + ${checkIn.toLocalDate().getYear()} + ' - ' + ${checkOut.toLocalDate().getDayOfMonth()} + '/' + ${checkOut.toLocalDate().getMonthValue()} + '/' + ${checkOut.toLocalDate().getYear()}" class="float-right"></span><br/>
                                 <span class="font-weight-bold float-left">Num. People:</span><span th:text="${unit.getNumberOfPeople()}" class="float-right"></span><br/>
                             </div>
                         </div>

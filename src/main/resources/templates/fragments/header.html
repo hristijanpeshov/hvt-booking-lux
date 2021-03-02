@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
     <div class="header__nav__option">
         <div class="container">
             <div class="row">
@@ -14,11 +14,13 @@
                                 <li><a href="/home">Home</a></li>
                                 <li><a href="/accommodation">Accommodation</a></li>
                                 <li><a href="/about">About Us</a></li>
-                                <li><a href="/accommodation/add">Add</a></li>
                                 <li><a href="/contact">Contact Us</a></li>
-                                <li><a href="#">Account</a>
+                                <li sec:authorize="!isAuthenticated()">
+                                    <a href="/user/login">Login</a>
+                                </li>
+
+                                <li sec:authorize="isAuthenticated()"><a href="#" th:text="${#authentication.getName()}"></a>
                                     <ul class="dropdown">
-                                        <li class="hoverable"><a href="/login">Login</a>
                                         <li class="hoverable"><a href="/accommodation/myListings">My Listings</a></li>
                                         <li class="hoverable"><a href="/reserve/myReservations">My Reservations</a></li>
                                         <li class="hoverable"><a href="/user/manage">Manage Account</a></li>
