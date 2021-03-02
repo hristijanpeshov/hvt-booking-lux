@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -41,18 +42,18 @@ public class AccommodationController {
         List<ResObject> resObjectList = null;
         if(city!=null && checkInDate != null && checkOutDate!=null && numPeople!=null)
         {
-            request.getSession().setAttribute("cityName",city);
-            request.getSession().setAttribute("checkIn",checkInDate);
-            request.getSession().setAttribute("checkOut",checkOutDate);
-            request.getSession().setAttribute("numPeople",numPeople);
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            request.getSession().setAttribute("cityName",city);
+            request.getSession().setAttribute("checkIn",checkIn);
+            request.getSession().setAttribute("checkOut",checkOut);
+            request.getSession().setAttribute("numPeople",numPeople);
 //            resObjectList = reservationObjectService.listByCityName(city);
             if(checkOut.isBefore(checkIn)){
                 return "redirect:/home?error=Check in date should be before check out date!";
             }
             reservationObjectService.listAllAvailableUnitsForResObject(2, checkIn, checkOut, numPeople);
-            resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, 4, city);
+            resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, numPeople, city);
         }
         else{
             resObjectList = reservationObjectService.listAll();
@@ -63,11 +64,24 @@ public class AccommodationController {
         return "master-template";
     }
 
+    @GetMapping("/myListings")
+    public String getMyListings(Authentication authentication,Model model)
+    {
+        List<ResObject>  resObjects = reservationObjectService.listUserAccommodationListings((User)authentication.getPrincipal());
+        model.addAttribute("resObjects",resObjects);
+        model.addAttribute("bodyContent","myListings");
+        return "master-template";
+    }
+
     @GetMapping("/{resObjectId}")
-    public String getSpecificAccommodation(@PathVariable long resObjectId,Model model)
+    public String getSpecificAccommodation(@PathVariable long resObjectId, Model model, HttpServletRequest request)
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
-        model.addAttribute("resObject",resObject);
+        model.addAttribute("resObject", resObject);
+        ZonedDateTime fromDate = (ZonedDateTime) request.getSession().getAttribute("checkIn");
+        ZonedDateTime toDate = (ZonedDateTime) request.getSession().getAttribute("checkOut");
+        int numPeople = (int) request.getSession().getAttribute("numPeople");
+        model.addAttribute("units", reservationObjectService.listAllAvailableUnitsForResObject(resObjectId, fromDate, toDate, numPeople));
         model.addAttribute("bodyContent", "AccommodationDetails");
         return "master-template";
     }

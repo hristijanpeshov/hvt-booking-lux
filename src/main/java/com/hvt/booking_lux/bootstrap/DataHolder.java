@@ -65,23 +65,24 @@ public class DataHolder {
         City manchester = cityRepository.save(new City("Manchester", countryEn));
 
 
-        User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.ROLE_USER));
-        User user2 = userRepository.save(new User("user2@user.com", passwordEncoder.encode("user2"), "User", "user", Role.ROLE_USER));
-        User admin = userRepository.save(new User("admin@admin.com", passwordEncoder.encode("admin"), "User", "user", Role.ROLE_ADMIN));
+        User user = userRepository.save(new User("user@user.com", passwordEncoder.encode("user"), "User", "user", Role.ROLE_USER, "Maleshevska 22a", "072 69 69 69"));
+        User user2 = userRepository.save(new User("user2@user.com", passwordEncoder.encode("user2"), "User", "user", Role.ROLE_USER, "Velko Vlahovik 20/34", "071 111 111"));
+        User admin = userRepository.save(new User("admin@admin.com", passwordEncoder.encode("admin"), "User", "user", Role.ROLE_ADMIN, "Sasa 16/b", "071 234 567"));
 
         ResObject houseSRB = new ResObject("House in Belgrade", "adresa bb 11 22", "Big house in belgrade with fountain", Category.HOUSE, user, belgrade);
         ResObject apartmentEn = new ResObject("Rooftop apartment", "england 11 22", "Rooftop apartment with wonderful view", Category.APARTMENT, user, london);
-
-        ResObject hotelMKD = resObjectRepository.save(new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje));
-
         List<String> objectImageList = new ArrayList<>();
         objectImageList.add("/assets/room-4.jpg");
         objectImageList.add("/assets/room-3.jpg");
         objectImageList.add("/assets/room-2.jpg");
 
+        ResObject hotelMKD = new ResObject("Hotel Makedonija", "adresa 11 22", "Hotel in Macedonia", Category.HOTEL, user, skopje);
+
+        hotelMKD.setObjectImages(objectImageList);
 
         houseSRB.setObjectImages(objectImageList);
 
+        resObjectRepository.save(hotelMKD);
         resObjectRepository.save(houseSRB);
         resObjectRepository.save(apartmentEn);
 

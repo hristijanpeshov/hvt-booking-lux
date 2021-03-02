@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UserService extends UserDetailsService {
 
     User register(String username, String password, String repeatPassword, String firstName, String lastName);
+    User edit(String username,String firstName,String lastName,String email);
+    User changePassword(String username,String password,String repeatPassword);
 }

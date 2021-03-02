@@ -47,12 +47,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, String firstName, String lastName, Role role){
+    public User(String username, String password, String firstName, String lastName, Role role, String address, String phone){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.address = address;
+        this.phone = phone;
         resObjects = new ArrayList<>();
     }
 
@@ -118,5 +120,24 @@ public class User implements UserDetails {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }

@@ -19,8 +19,7 @@ public class CreatorCheck {
 
     public boolean check(long resObjectId, Authentication authentication)
     {
-        return true;
-//        User user = (User) userService.loadUserByUsername(authentication.getName());
-//        return reservationObjectService.findResObjectById(resObjectId).getCreator().equals(user) || user.getAuthorities().contains(Role.ROLE_ADMIN);
+        User user = (User) userService.loadUserByUsername(authentication.getName());
+        return reservationObjectService.findResObjectById(resObjectId).getCreator().equals(user) || user.getAuthorities().contains(Role.ROLE_ADMIN);
     }
 }

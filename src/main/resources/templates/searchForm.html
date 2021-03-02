@@ -9,15 +9,16 @@
     <div class="filter__form__item">
         <p>Check In</p>
         <div class="filter__form__datepicker firstdate">
-            <input type="date" class="datepicker_pop check__in hasDatepicker" id="dp1613504077692" name="checkInDate" th:value="${session?.checkIn}">
+            <input type="date" class="" id="dp1613504077692" name="checkInDate" th:value="${session?.checkIn?.toLocalDate()}">
         </div>
     </div>
     <div class="filter__form__item">
         <p>Check Out</p>
         <div class="filter__form__datepicker seconddate">
-            <input type="date" class="datepicker_pop check__in hasDatepicker" name="checkOutDate" th:value="${session?.checkOut}">
+            <input type="date" class="" name="checkOutDate" th:value="${session?.checkOut?.toLocalDate()}">
         </div>
     </div>
+    <!--datepicker_pop check__in hasDatepicker-->
     <div class="filter__form__item filter__form__item--select">
         <p>Person</p>
         <div class="filter__form__select">
@@ -31,6 +32,19 @@
     </div>
     <button type="submit">BOOK NOW</button>
 </form>
+<script>
+    $(document).ready(function () {
+        $('.firstdate input').on('change', function() {
+            var datearray = $('.firstdate input').val().split("-");
+            var year = datearray[0];
+            var month = datearray[1];
+            var day = datearray[2];
+            var minDate = (year +"-"+ month +"-"+ day);
+            console.log(minDate);
+            $('.seconddate input').attr('min',minDate);
+        });
+    });
+</script>
 <script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
     $(function() {
         $.get(
@@ -46,6 +60,10 @@
 </script>
 <script>
     $(document).ready(function () {
+
+        $( ".firstdate input" ).datepicker("setDate",$( ".firstdate input" ).val());
+        $( ".seconddate input" ).datepicker("setDate",$( ".seconddate input" ).val());
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!

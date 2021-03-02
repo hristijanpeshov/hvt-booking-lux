@@ -27,18 +27,13 @@ public class ReservationController {
         this.unitService = unitService;
     }
 
-    @GetMapping("/review")
-    public String reserveReview(Model model){
-        model.addAttribute("bodyContent", "confirmReservation");
-        return "master-template";
-    }
-
-    @GetMapping
+    @GetMapping("/myReservations")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
         List<Reservation> reservationList = reservationService.findAllReservationsForUser((User) authentication.getPrincipal());
         model.addAttribute("reservations",reservationList);
-        return "";
+        model.addAttribute("bodyContent","myReservations");
+        return "master-template";
     }
     @GetMapping("/{unitId}")
     public String reserveUnit(@PathVariable long unitId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, HttpServletRequest request,Authentication authentication,Model model)

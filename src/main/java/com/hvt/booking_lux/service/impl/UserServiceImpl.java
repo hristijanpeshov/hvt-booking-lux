@@ -35,8 +35,28 @@ public class UserServiceImpl implements UserService {
         if(this.userRepository.findById(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
-        User user = new User(username, passwordEncoder.encode(password), firstName, lastName, Role.ROLE_USER);
+        User user = new User(username, passwordEncoder.encode(password), firstName, lastName, Role.ROLE_USER, "Gjaurska 69", "076 123 456");
         return userRepository.save(user);
+    }
+
+    @Override
+    public User edit(String username, String firstName, String lastName, String email) {
+        User user = (User) loadUserByUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User changePassword(String username, String password, String repeatPassword) {
+        if(password!=repeatPassword)
+        {
+            throw new PasswordNotMatchException();
+        }
+        User user = (User) loadUserByUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
+        return user;
     }
 
     @Override
