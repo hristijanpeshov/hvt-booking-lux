@@ -27,8 +27,8 @@
                 <div class="col-lg-3 p-0 order-lg-3 order-md-3 col-md-3">
                     <a th:href="'/accommodation/' + ${resObject.getId()} + '/unit/add'" class="btn primary-btn mb-2 d-block">Add Unit</a>
                     <a th:href="'/accommodation/edit/' + ${resObject.getId()}" class="btn primary-btn d-block">Edit</a>
-                    <form method="post" th:action="'/accommodation/delete/' + ${resObject.getId()}">
-                        <button type="submit" class="btn primary-btn mt-2 d-block">Delete</button>
+                    <form method="post" th:action="'/accommodation/delete/' + ${resObject.getId()}" style="width: 100%">
+                        <button style="width: 100%" type="submit" class="btn primary-btn mt-2 d-block">Delete</button>
                     </form>
                 </div>
             </div>
