@@ -35,7 +35,6 @@ public class ReservationController {
     }
 
     @GetMapping("/myReservations")
-    @PreAuthorize("isAuthenticated()")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
         List<Reservation> reservationList = reservationService.findAllReservationsForUser((User) authentication.getPrincipal());
@@ -55,7 +54,7 @@ public class ReservationController {
         model.addAttribute("checkIn",checkIn);
         model.addAttribute("checkOut",checkOut);
         model.addAttribute("bodyContent", "confirmReservation");
-        return "confirmReservation";
+        return "master-template";
     }
     @PostMapping("/{unitId}")
     @PreAuthorize("isAuthenticated()")

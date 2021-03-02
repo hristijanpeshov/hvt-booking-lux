@@ -6,9 +6,9 @@
                     <div class="d-flex flex-column align-items-center text-center">
                         <img src="/assets/profile-pic.png" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
-                            <h4>Teodor Penevski</h4>
+                            <h4 th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}">Teodor Penevski</h4>
                             <p class="text-secondary mb-1">Front-End Developer</p>
-                            <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                            <p th:text="${user.getAddress()}" class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
 <!--                            <button class="btn btn-primary">Follow</button>-->
 <!--                            <button class="btn btn-outline-primary">Message</button>-->
                         </div>
@@ -79,16 +79,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <span name="phone" contenteditable="true">(389) 72 696 969</span><a class="icon_pencil-edit float-right" data-edit="phone" onclick="editForm(this)"></a>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <span name="mobile" contenteditable="true">(389) 72 696 969</span><a class="icon_pencil-edit float-right" data-edit="mobile" onclick="editForm(this)"></a>
+                                <span name="phone" contenteditable="true" th:text="${user.getPhone()}">(389) 72 696 969</span><a class="icon_pencil-edit float-right" data-edit="phone" onclick="editForm(this)"></a>
                             </div>
                         </div>
                         <hr>
@@ -97,7 +88,7 @@
                                 <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <span name="address" contenteditable="true">Bay Area, San Francisco, CA</span><a class="icon_pencil-edit float-right" data-edit="address" onclick="editForm(this)"></a>
+                                <span name="address" contenteditable="true" th:text="${user.getAddress()}">Bay Area, San Francisco, CA</span><a class="icon_pencil-edit float-right" data-edit="address" onclick="editForm(this)"></a>
                             </div>
                         </div>
                         <hr>
@@ -132,6 +123,13 @@
         var toEdit = $(document).find("span[name='" + editName + "']");
         toEdit.focus();
     }
+
+
+    function showToast(){
+        $('.toast').toast({delay: 2000});
+        $('.toast').toast('show');
+    }
+
     function copyContentToInput(){
         copyContentForElements(["firstName","lastName","email"]);
     }
@@ -142,11 +140,4 @@
             input.attr("value",$("span[name=" + a +"]")[0].innerHTML);
         });
     }
-
-
-    function showToast(){
-        $('.toast').toast({delay: 2000});
-        $('.toast').toast('show');
-    }
-
 </script>

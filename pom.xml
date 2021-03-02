@@ -66,6 +66,7 @@
             <version>3.0.4.RELEASE</version>
         </dependency>
 
+
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>kernel</artifactId>
@@ -76,7 +77,6 @@
             <artifactId>html2pdf</artifactId>
             <version>3.0.1</version>
         </dependency>
-
     </dependencies>
 
     <build>
