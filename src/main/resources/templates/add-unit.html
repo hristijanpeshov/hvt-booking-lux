@@ -21,7 +21,7 @@
                                class="form-control"
                                type="text"
                                name="title"
-                               th:value="(${unit}!=null ? '':'')"
+                               th:value="(${unit}!=null ? ${unit.getTitle()}:'')"
                                placeholder="title">
                     </div>
                 </div>
