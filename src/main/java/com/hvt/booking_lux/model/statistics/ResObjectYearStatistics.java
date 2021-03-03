@@ -5,5 +5,6 @@ public interface ResObjectYearStatistics {
     long getId();
     int getMonth();
     int getNum();
+    int getTotal();
 
 }

@@ -1,17 +1,67 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>SpringHow html to pdf</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
 </head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    td{
+        text-align: center
+    }
+</style>
 <body>
 <div>
-    <p >Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. Lorum ipsum some text before image. </p>
-    <p >Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image. Lorum ipsum some text after image.</p>
+    <h1 style="width: 100%; text-align: center; color: darkgoldenrod">HVT Booking Lux</h1>
+    <h4>Reservation for <span th:text="${reservation.getUnit().getResObject().getName()}">Hotel Macedonia</span></h4>
+    <h4>Reservation ID: <span th:text="${reservation.getId()}">12</span></h4>
+    <p style="color: darkgoldenrod">Thank you for using HVT Booking Lux. We wish you to have wonderful time travelling and using our services. Have a good time</p>
+    <h4>User: <span th:text="${reservation.getUser().getUsername()}"></span></h4>
+    <br/>
+    <p>Accommodation ID: <span th:text="${reservation.getUnit().getId()}">1</span></p>
+    <p>Number of people: <span th:text="${reservation.getUnit().getNumberOfPeople()}">2</span></p>
+    <p>From date: <span th:text="${reservation.getFromDate().toLocalDate()}">12.02.2021</span></p>
+    <p>To date: <span th:text="${reservation.getToDate().toLocalDate()}">14.02.20212</span></p>
+    <p>Number nights: <span th:text="${reservation.numberOfNights()}">101.99</span></p>
+    <p>Price per Night: <span th:text="${reservation.getPricePerNight()}">101.99</span>$</p>
+    <p>Total Amount: <span th:text="${reservation.getTotalAmount()}">101.99</span>$</p>
+    <h4>Reservation was made at <span th:text="${reservation.getReservationDate().toLocalDateTime()}">12.02.2021 13:10</span></h4>
+    <br/>
     <table>
-        <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
-        <tr><td>Jeans</td><td>2</td><td>10.99</td><td>20.98</td></tr>
-        <tr><td>Shirt</td><td>2</td><td>7.99</td><td>14.98</td></tr>
+        <tr style="width: 100%; color: darkgoldenrod">
+            <th style="text-align: center;">Luxury Reservations</th><th style="text-align: center;">Budget Rooms</th><th style="text-align: center;">Rent your place</th>
+        </tr>
+        <tr>
+            <td style="text-align: justify; padding-right: 2rem">We offer a variety of hotel rooms, apartments and houses. If you want to rent or book
+                a luxurious place, we are your best place to do it.</td>
+            <td style="text-align: justify; padding-right: 2rem">Even if you don't want to spend a lot of money on a reservation, we got you covered.
+                We have budget rooms for those of you that want to stay only a night or are looking
+                for a cheaper place to stay for your vacation.</td>
+            <td style="text-align: justify; padding-right: 2rem">It's easy renting your place. Just fill in a couple of forms and you're done.
+                Your application will be reviewed as soon as our moderators are available.</td>
+        </tr>
     </table>
+
+    <br/>
+
+    <table>
+        <tr style="width: 100%; color: darkgoldenrod">
+            <th style="text-align: center;">Statistics</th><th style="text-align: center;">Excellent Customer Support</th><th style="text-align: center;">Reviews</th>
+        </tr>
+        <tr>
+            <td style="text-align: justify; padding-right: 2rem">Check your statistics for your rented or booked places like monthly income,
+                number of reservations and more.</td>
+            <td style="text-align: justify; padding-right: 2rem">If there are any problems with our service, our customer support is available 24/7.
+                Contact us on our support e-mail or live chat, and we'll help you as soon as we can.</td>
+            <td style="text-align: justify; padding-right: 2rem">We provide a critical analysis of your place by letting people review as clients
+                and as landlords.</td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>

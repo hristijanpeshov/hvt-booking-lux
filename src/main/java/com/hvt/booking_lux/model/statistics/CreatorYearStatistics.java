@@ -4,5 +4,6 @@ public interface CreatorYearStatistics {
 
     int getMonth();
     int getNum();
+    int getTotal();
 
 }

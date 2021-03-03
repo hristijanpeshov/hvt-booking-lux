@@ -6,10 +6,12 @@ import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
 import com.hvt.booking_lux.repository.ResObjectRepository;
+import com.hvt.booking_lux.repository.ReservationRepository;
 import com.hvt.booking_lux.repository.UnitRepository;
 import com.hvt.booking_lux.service.UnitService;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,10 +20,18 @@ public class UnitServiceImpl implements UnitService {
 
     private final UnitRepository unitRepository;
     private final ResObjectRepository resObjectRepository;
+    private final ReservationRepository reservationRepository;
 
-    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository) {
+    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository, ReservationRepository reservationRepository) {
         this.unitRepository = unitRepository;
         this.resObjectRepository = resObjectRepository;
+        this.reservationRepository = reservationRepository;
+    }
+
+    @Override
+    public boolean isUnitFree(long unitId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople){
+        return reservationRepository.findAll().stream().filter(s -> s.getUnit().getId().equals(unitId))
+                .noneMatch(s -> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)));
     }
 
     @Override

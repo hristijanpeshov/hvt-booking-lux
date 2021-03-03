@@ -1,19 +1,17 @@
 package com.hvt.booking_lux.web;
 
-import com.hvt.booking_lux.model.ResObject;
-import com.hvt.booking_lux.model.Unit;
-import com.hvt.booking_lux.service.LocationService;
-import com.hvt.booking_lux.service.ReservationObjectService;
-import com.hvt.booking_lux.service.ReservationService;
-import com.hvt.booking_lux.service.ReviewService;
-import com.hvt.booking_lux.service.UnitService;
+import com.hvt.booking_lux.model.Reservation;
+import com.hvt.booking_lux.model.User;
+import com.hvt.booking_lux.service.*;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,8 +19,8 @@ import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = {"/","/home"})
@@ -33,15 +31,17 @@ public class HomeController {
     private final ReservationService reservationService;
     private final UnitService unitService;
     private final LocationService locationService;
+    private final UserStatisticsService userStatisticsService;
     private final ReviewService reviewService;
 
     private final ServletContext servletContext;
     private final TemplateEngine templateEngine;
 
-    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, ReviewService reviewService, LocationService locationService, ServletContext servletContext, TemplateEngine templateEngine) {
+    public HomeController(ReservationObjectService reservationObjectService, ReservationService reservationService, UnitService unitService, UserStatisticsService userStatisticsService, ReviewService reviewService, LocationService locationService, ServletContext servletContext, TemplateEngine templateEngine) {
         this.reservationObjectService = reservationObjectService;
         this.reservationService = reservationService;
         this.unitService = unitService;
+        this.userStatisticsService = userStatisticsService;
         this.locationService = locationService;
         this.reviewService = reviewService;
         this.servletContext = servletContext;
@@ -49,7 +49,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String homePage(Model model, HttpServletRequest request){
+    public String homePage(Model model, HttpServletRequest request, HttpSession session, Authentication authentication){
 //        List<Country> countryList = locationService.listAllCountries();
 //        model.addAttribute("countries",countryList);
         model.addAttribute("cities",locationService.listAllCities());
@@ -68,15 +68,14 @@ public class HomeController {
         return "master-template";
     }
 
-    @GetMapping(value = "/pdf")
-    public ResponseEntity<?> getPDF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping(value = "/{id}/pdf")
+    public ResponseEntity<?> getPDF(HttpServletRequest request, HttpServletResponse response, @PathVariable long id) throws IOException {
 
-        ResObject resObject = reservationObjectService.findResObjectById(1);
+        Reservation reservation = reservationService.findReservationById(id);
 
         WebContext context = new WebContext(request, response, servletContext);
-        context.setVariable("resObject", resObject);
-        context.setVariable("units", resObject.getUnits());
-        String orderHtml = templateEngine.process("AccommodationDetails", context);
+        context.setVariable("reservation", reservation);
+        String orderHtml = templateEngine.process("pdf", context);
 
 //        ByteArrayOutputStream target = new ByteArrayOutputStream();
 //        InputStream inputStream = new FileInputStream("src/main/resources/templates/pdf.html");
