@@ -138,8 +138,9 @@ public class DataHolder {
 
 
         Reservation reservation = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now().minusDays(10), ZonedDateTime.now().minusDays(6)));
+        Reservation reservation1 = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now().minusDays(40), ZonedDateTime.now().minusDays(35)));
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
+        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now().plusDays(5)));
 
     }
 }

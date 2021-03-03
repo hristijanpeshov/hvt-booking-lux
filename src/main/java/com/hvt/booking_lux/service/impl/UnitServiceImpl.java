@@ -10,11 +10,13 @@ import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.exceptions.UnitNumberIsZeroException;
 import com.hvt.booking_lux.repository.BedTypesRepository;
 import com.hvt.booking_lux.repository.ResObjectRepository;
+import com.hvt.booking_lux.repository.ReservationRepository;
 import com.hvt.booking_lux.repository.UnitRepository;
 import com.hvt.booking_lux.service.UnitService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +26,20 @@ public class UnitServiceImpl implements UnitService {
 
     private final UnitRepository unitRepository;
     private final ResObjectRepository resObjectRepository;
+    private final ReservationRepository reservationRepository;
     private final BedTypesRepository bedTypesRepository;
 
-    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository, BedTypesRepository bedTypesRepository) {
+    public UnitServiceImpl(UnitRepository unitRepository, ResObjectRepository resObjectRepository, BedTypesRepository bedTypesRepository, ReservationRepository reservationRepository) {
         this.unitRepository = unitRepository;
         this.resObjectRepository = resObjectRepository;
         this.bedTypesRepository = bedTypesRepository;
+        this.reservationRepository = reservationRepository;
+    }
+
+    @Override
+    public boolean isUnitFree(long unitId, ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople){
+        return reservationRepository.findAll().stream().filter(s -> s.getUnit().getId().equals(unitId))
+                .noneMatch(s -> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)));
     }
 
     @Override
