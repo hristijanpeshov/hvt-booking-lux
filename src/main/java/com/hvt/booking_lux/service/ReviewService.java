@@ -10,6 +10,7 @@ public interface ReviewService {
 
     Review deleteReview(long reviewId);
     Review saveReview(String username, String comment, long reservationId);
+    Review editReview(String comment, long reviewId);
     boolean canUserWriteReview(long reservationId, String username);
     boolean alreadyWrite(long reservationId, String username);
     Review findById(long id);

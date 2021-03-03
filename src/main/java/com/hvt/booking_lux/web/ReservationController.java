@@ -34,6 +34,7 @@ public class ReservationController {
         return "master-template";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/myReservations")
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
@@ -44,33 +45,36 @@ public class ReservationController {
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{unitId}")
-    public String reserveUnit(@PathVariable long unitId, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, HttpServletRequest request,Authentication authentication,Model model)
+    public String reserveUnit(@PathVariable long unitId, HttpServletRequest request,Authentication authentication,Model model)
     {
         Unit unit = unitService.findById(unitId);
         model.addAttribute("unit",unit);
-        model.addAttribute("city",request.getSession().getAttribute("city"));
+        model.addAttribute("user",(User)authentication.getPrincipal());
+        /*if(checkInDate!=null)
         ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
         ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
         model.addAttribute("checkIn",checkIn);
-        model.addAttribute("checkOut",checkOut);
+         @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate
+        model.addAttribute("checkOut",checkOut);*/
         model.addAttribute("bodyContent", "confirmReservation");
         return "master-template";
     }
     @PostMapping("/{unitId}")
     @PreAuthorize("isAuthenticated()")
-    public String confirmReservation(Authentication authentication,@PathVariable long unitId, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate)
+    public String confirmReservation(HttpServletRequest request,Authentication authentication,@PathVariable long unitId)
     {
-        ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
-        ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
-        reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkInDate,checkOutDate).getDays(),checkIn,checkOut);
-        return "";
+
+        ZonedDateTime checkIn = (ZonedDateTime) request.getSession().getAttribute("checkIn");
+        ZonedDateTime checkOut = (ZonedDateTime) request.getSession().getAttribute("checkOut");
+        reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);
+        return "redirect:/reserve/myReservations";
     }
 
     @PostMapping("/cancel/{resId}")
     public String cancelReservation(@PathVariable long resId)
     {
         reservationService.cancel(resId);
-        return "redirect:/reserve";
+        return "redirect:/reserve/myReservations";
     }
 
 }

@@ -27,6 +27,22 @@ public class Review {
         this.user = user;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

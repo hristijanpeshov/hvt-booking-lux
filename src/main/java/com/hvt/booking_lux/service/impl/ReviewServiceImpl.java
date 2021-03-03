@@ -2,9 +2,9 @@ package com.hvt.booking_lux.service.impl;
 
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Review;
-import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.exceptions.ReviewNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UserNotCreatorOfReservationException;
 import com.hvt.booking_lux.repository.ReviewRepository;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.ReviewService;
@@ -46,11 +46,20 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public Review editReview(String comment, long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(()->new ReviewNotFoundException(reviewId));
+        review.setComment(comment);
+        return reviewRepository.save(review);
+    }
+
+    @Override
     public boolean canUserWriteReview(long reservationId, String username) {
         User user = (User) userService.loadUserByUsername(username);
-        if(alreadyWrite(reservationId, username))
-            return false;
         Reservation reservation = reservationService.findReservationById(reservationId);
+        if(!reservation.getUser().equals(user))
+        {
+            throw new UserNotCreatorOfReservationException(username,reservationId);
+        }
         return reservation.getToDate().isBefore(ZonedDateTime.now()) && ZonedDateTime.now().isBefore(reservation.getToDate().plusDays(15));
     }
 

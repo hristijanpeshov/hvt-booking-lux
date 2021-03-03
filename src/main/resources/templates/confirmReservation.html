@@ -22,10 +22,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="font-weight-bold">Your Information</p>
-                                <p>Teodor Penevski</p>
-                                <p>Bay Area, San Francisco, CA</p>
-                                <p>teodorpenevski@hvtinfo.com</p>
-                                <p>(389) 72 696 969</p>
+                                <p th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}">Teodor Penevski</p>
+                                <p th:text="${user.getAddress()}">Bay Area, San Francisco, CA</p>
+                                <p th:text="${user.getUsername()}">teodorpenevski@hvtinfo.com</p>
+                                <p th:text="${user.getPhone()}">(389) 72 696 969</p>
                             </div>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                                 <p><i class="fa fa-money mr-2"></i>Direct Payment</p>
                                 <br/>
                                 <p class="font-weight-bold">Billing Details</p>
-                                <p>Teodor Penevski</p>
-                                <p>Bay Area, San Francisco, CA</p>
+                                <p th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}">Teodor Penevski</p>
+                                <p th:text="${user.getAddress()}">Bay Area, San Francisco, CA</p>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,9 @@
                                 <p>By clicking the Confirm button, you confirm that you have read and understood,
                                     and accept our <u>Terms and Conditions</u>, <u>Return Policy</u> and <u>Privacy Policy</u>.
                                 </p>
-                                <button class="btn primary-btn float-right">Confirm</button>
+                                <form method="post" th:action="'/reserve/' + ${unit.getId()}">
+                                    <button type="submit" class="btn primary-btn float-right">Confirm</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -104,7 +106,7 @@
                                 <hr>
                                 <span class="font-weight-bold float-left">Address:</span> <span th:text="${unit.getResObject().getAddress()}" class="float-right"></span><br/>
                                 <span class="font-weight-bold float-left">Bed:</span><span th:text="${unit.getBedsAsString()}" class="float-right"></span><br/>
-                                <span class="font-weight-bold float-left">Dates:</span><span th:text="${checkIn.toLocalDate().getDayOfMonth()} + '/' + ${checkIn.toLocalDate().getMonthValue()} + '/' + ${checkIn.toLocalDate().getYear()} + ' - ' + ${checkOut.toLocalDate().getDayOfMonth()} + '/' + ${checkOut.toLocalDate().getMonthValue()} + '/' + ${checkOut.toLocalDate().getYear()}" class="float-right"></span><br/>
+                                <span class="font-weight-bold float-left">Dates:</span><span th:text="${#session.getAttribute('checkIn').toLocalDate().getDayOfMonth()} + '/' + ${#session.getAttribute('checkIn').toLocalDate().getMonthValue()} + '/' + ${#session.getAttribute('checkIn').toLocalDate().getYear()} + ' - ' + ${#session.getAttribute('checkOut').toLocalDate().getDayOfMonth()} + '/' + ${#session.getAttribute('checkOut').toLocalDate().getMonthValue()} + '/' + ${#session.getAttribute('checkOut').toLocalDate().getYear()}" class="float-right"></span><br/>
                                 <span class="font-weight-bold float-left">Num. People:</span><span th:text="${unit.getNumberOfPeople()}" class="float-right"></span><br/>
                             </div>
                         </div>

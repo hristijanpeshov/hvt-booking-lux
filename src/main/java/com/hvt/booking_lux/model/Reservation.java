@@ -26,6 +26,13 @@ public class Reservation {
 
     private ZonedDateTime toDate;
 
+    @OneToOne(mappedBy = "reservation")
+    private Review review;
+
+    public Review getReview() {
+        return review;
+    }
+
     public Reservation() {
     }
 

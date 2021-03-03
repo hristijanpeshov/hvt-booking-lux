@@ -1,0 +1,15 @@
+<section class="spad" xmlns:th="http://www.thymeleaf.org">
+    <div class="container text-center">
+        <h2>
+            Review your stay
+        </h2>
+        <form th:action="${edit}?'/review/edit/' + ${review.getId()}:'/review/' + ${reservationId} +'/add'" method="post">
+
+            <div class="row">
+                <textarea id="reviewText" name="comment" rows="4" cols="50" th:text="${review!=null}? ${review.getComment()} : ''">
+                </textarea>
+            </div>
+            <button type="submit" class="btn primary-btn float-right">Submit!</button>
+        </form>
+    </div>
+</section>
