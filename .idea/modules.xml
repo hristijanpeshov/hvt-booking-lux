@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/bookmark-lux/booking_lux.iml" filepath="$PROJECT_DIR$/bookmark-lux/booking_lux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/booking_lux/booking_lux.iml" filepath="$PROJECT_DIR$/booking_lux/booking_lux.iml" />
       <module fileurl="file://$PROJECT_DIR$/gs-multi-module.iml" filepath="$PROJECT_DIR$/gs-multi-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-registry/service-registry.iml" filepath="$PROJECT_DIR$/service-registry/service-registry.iml" />
     </modules>

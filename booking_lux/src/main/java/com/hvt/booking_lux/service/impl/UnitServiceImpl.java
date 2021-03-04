@@ -2,6 +2,7 @@ package com.hvt.booking_lux.service.impl;
 
 import com.hvt.booking_lux.model.BedTypes;
 import com.hvt.booking_lux.model.enumeration.BedType;
+import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
 import com.hvt.booking_lux.model.exceptions.UnitHasNoBedsException;
 import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
@@ -129,7 +130,8 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public Unit delete(long unitId) {
         Unit unit = findById(unitId);
-        unitRepository.delete(unit);
-        return unit;
+        unit.setStatus(Status.DELETED);
+        return unitRepository.save(unit);
+
     }
 }

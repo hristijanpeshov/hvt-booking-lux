@@ -1,5 +1,8 @@
 package com.hvt.booking_lux.model;
 
+import com.hvt.booking_lux.model.enumeration.Status;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.time.*;
 
@@ -28,6 +31,17 @@ public class Reservation {
 
     @OneToOne(mappedBy = "reservation")
     private Review review;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status = Status.ACTIVE;
 
     public Review getReview() {
         return review;

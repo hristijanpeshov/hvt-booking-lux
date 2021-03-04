@@ -1,6 +1,8 @@
 package com.hvt.booking_lux.model;
 
 import com.hvt.booking_lux.model.enumeration.Category;
+import com.hvt.booking_lux.model.enumeration.Status;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -36,6 +38,10 @@ public class ResObject {
     @ManyToOne
     private City city;
 
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status = Status.ACTIVE;
+
     public ResObject() {
     }
 
@@ -58,9 +64,6 @@ public class ResObject {
         this.lowestPrice = lowestPrice;
     }
 
-    public boolean getStatus(){
-        return units.size() > 0;
-    }
 
     public Long getId() {
         return id;
@@ -129,5 +132,12 @@ public class ResObject {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

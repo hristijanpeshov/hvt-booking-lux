@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>bookmark-lux</module>
+        <module>booking_lux</module>
 	<module>service-registry</module>
     </modules>
 

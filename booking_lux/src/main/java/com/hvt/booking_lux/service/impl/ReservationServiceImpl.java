@@ -4,6 +4,7 @@ import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
+import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ReservationNotFoundException;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.ReservationRepository;
@@ -73,7 +74,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation cancel(long reservationId) {
-        return null;
+        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(()->new ReservationNotFoundException(reservationId));
+        reservation.setStatus(Status.DELETED);
+        return reservationRepository.save(reservation);
     }
 
     @Override
