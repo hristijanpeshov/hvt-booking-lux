@@ -43,8 +43,9 @@ public class AccountController {
         return "redirect:/user/manage";
     }
     @GetMapping("/login")
-    public String getLoginPage(Model model){
+    public String getLoginPage(Model model,@RequestParam(required = false) String badLogin){
         model.addAttribute("bodyContent", "login");
+        model.addAttribute("message",badLogin);
         return "master-template";
     }
 

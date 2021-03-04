@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/","/static/**").permitAll()
                 .anyRequest().permitAll().and()
-                .formLogin().loginPage("/user/login").successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                .formLogin().loginPage("/user/login").successHandler(new SavedRequestAwareAuthenticationSuccessHandler()).failureUrl("/user/login?badLogin=Username or password is incorrect")
                 .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID").invalidateHttpSession(true).clearAuthentication(true);
     }
