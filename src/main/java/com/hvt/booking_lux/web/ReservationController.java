@@ -6,6 +6,7 @@ import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.ReviewService;
 import com.hvt.booking_lux.service.UnitService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class ReservationController {
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{unitId}")
-    public String reserveUnit(@PathVariable long unitId, HttpServletRequest request,Authentication authentication,Model model,@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate)
+    public String reserveUnit(@PathVariable long unitId, HttpServletRequest request, Authentication authentication, Model model, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate)
     {
         if(checkInDate!=null && checkOutDate!=null)
         {
