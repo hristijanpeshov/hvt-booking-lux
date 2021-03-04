@@ -4,9 +4,8 @@ import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.service.ReservationService;
+import com.hvt.booking_lux.service.ReviewService;
 import com.hvt.booking_lux.service.UnitService;
-import org.h2.api.Interval;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,16 +15,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/reserve")
 public class ReservationController {
     private final ReservationService reservationService;
     private final UnitService unitService;
+    private final ReviewService reviewService;
 
-    public ReservationController(ReservationService reservationService, UnitService unitService) {
+    public ReservationController(ReservationService reservationService, UnitService unitService, ReviewService reviewService) {
         this.reservationService = reservationService;
         this.unitService = unitService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/review")
@@ -39,7 +41,9 @@ public class ReservationController {
     public String myReservations(HttpServletRequest request,Authentication authentication, Model model)
     {
         List<Reservation> reservationList = reservationService.findAllReservationsForUser((User) authentication.getPrincipal());
+        List<Boolean> canWriteList = reservationList.stream().map(res -> !reviewService.alreadyWrite(res.getId(), authentication.getName()) && reviewService.canUserWriteReview(res.getId(), authentication.getName())).collect(Collectors.toList());
         model.addAttribute("reservations",reservationList);
+        model.addAttribute("canWriteList", canWriteList);
         model.addAttribute("bodyContent","myReservations");
         return "master-template";
     }
