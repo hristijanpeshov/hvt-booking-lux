@@ -24,8 +24,8 @@
         <div class="filter__form__select">
             <span class="icon_group"></span>
             <select style="display: none;" name="numPeople">
-                <option value="1">1 Person</option>
-                <option th:each="v : ${#numbers.sequence(2,10)}" th:value="${v}" th:text="${v} + ' People'"></option>
+                <option value="1" th:selected="${#session?.getAttribute('numPeople')==1}">1 Person</option>
+                <option th:each="v : ${#numbers.sequence(2,10)}" th:value="${v}" th:text="${v} + ' People'" th:selected="${#session?.getAttribute('numPeople')==v}"></option>
             </select>
         </div>
     </div>

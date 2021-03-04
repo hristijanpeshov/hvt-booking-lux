@@ -34,6 +34,7 @@ public class UnitController {
     {
         Unit unit = unitService.findById(unitId);
         model.addAttribute("unit",unit);
+        model.addAttribute("resObjectId",resObjectId);
         model.addAttribute("bodyContent","unitDetails");
         return "master-template";
     }

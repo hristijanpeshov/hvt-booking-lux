@@ -45,9 +45,23 @@ public class ReservationController {
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{unitId}")
-    public String reserveUnit(@PathVariable long unitId, HttpServletRequest request,Authentication authentication,Model model)
+    public String reserveUnit(@PathVariable long unitId, HttpServletRequest request,Authentication authentication,Model model,@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate)
     {
+        if(checkInDate!=null && checkOutDate!=null)
+        {
+            ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
+            request.getSession().setAttribute("checkIn",checkIn);
+            request.getSession().setAttribute("checkOut",checkOut);
+        }
+        ZonedDateTime checkIn = (ZonedDateTime) request.getSession().getAttribute("checkIn");
+        ZonedDateTime checkOut = (ZonedDateTime) request.getSession().getAttribute("checkOut");
         Unit unit = unitService.findById(unitId);
+        if(checkIn==null || checkOut==null)
+        {
+            return "redirect:/accommodation/" + unit.getResObject().getId() + "/unit/" + unitId;
+        }
+
         model.addAttribute("unit",unit);
         model.addAttribute("user",(User)authentication.getPrincipal());
         /*if(checkInDate!=null)
@@ -63,7 +77,6 @@ public class ReservationController {
     @PreAuthorize("isAuthenticated()")
     public String confirmReservation(HttpServletRequest request,Authentication authentication,@PathVariable long unitId)
     {
-
         ZonedDateTime checkIn = (ZonedDateTime) request.getSession().getAttribute("checkIn");
         ZonedDateTime checkOut = (ZonedDateTime) request.getSession().getAttribute("checkOut");
         reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);

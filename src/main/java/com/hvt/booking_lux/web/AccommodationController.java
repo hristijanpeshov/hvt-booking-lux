@@ -41,7 +41,7 @@ public class AccommodationController {
     @GetMapping
     public String listBySearchParams(HttpServletRequest request, @RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam(required = false) Integer numPeople , Model model){
         List<ResObject> resObjectList = null;
-        if(city!=null && checkInDate != null && checkOutDate!=null && numPeople!=null)
+        if(city!=null && !city.equals("") && checkInDate != null && checkOutDate!=null && numPeople!=null)
         {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
