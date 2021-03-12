@@ -9,19 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
+@Where(clause = "status='ACTIVE'")
 public class ResObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String name;
+
     private String address;
 
     @Column(length = 2000)
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @Enumerated(EnumType.STRING)
     private Category category;
 
@@ -40,10 +44,6 @@ public class ResObject {
     @ManyToOne
     private City city;
 
-
-    @Enumerated(value = EnumType.STRING)
-    private Status status = Status.ACTIVE;
-
     public ResObject() {
     }
 
@@ -56,6 +56,15 @@ public class ResObject {
         this.city = city;
         objectImages = new ArrayList<>();
         units = new ArrayList<>();
+        this.status = Status.ACTIVE;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatusDeleted(){
+        return status;
     }
 
     public double getLowestPrice() {
@@ -134,12 +143,5 @@ public class ResObject {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-    public void setStatus(Status status) {
-        this.status = status;
     }
 }

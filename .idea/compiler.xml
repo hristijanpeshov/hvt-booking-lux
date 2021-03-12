@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="service-registry" />
         <module name="booking_lux" />
+        <module name="service-registry" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="booking_lux" target="11" />
-      <module name="gs-multi-module" target="1.5" />
+      <module name="pro" target="1.5" />
       <module name="service-registry" target="11" />
     </bytecodeTargetLevel>
   </component>

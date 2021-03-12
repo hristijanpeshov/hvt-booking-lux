@@ -1,0 +1,69 @@
+<section class="account__details" xmlns:th="http://www.thymeleaf.org">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-md-8">
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var positive = [[${positive}]];
+    var negative = [[${negative}]];
+    data = {
+        datasets: [{
+            data: [10, 20, 30]
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+            'Positive',
+            'Negative'
+        ]
+    };
+    var ctx = document.getElementById('myChart');
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data : {
+            datasets: [{
+                data: [positive, negative],
+                backgroundColor: [
+                    "#649568",
+                    "#ed2939"
+                ]}],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Positive',
+                'Negative'
+            ]
+
+        },
+        options: {}
+    });
+
+    var ctx1 = document.getElementById('myChart1');
+
+    var myDoughnutChart1 = new Chart(ctx1, {
+        type: 'doughnut',
+        data : {
+            datasets: [{
+                data: [positive, negative],
+                backgroundColor: [
+                    "#649568",
+                    "#ed2939"
+                ]}],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Positive',
+                'Negative'
+            ]
+
+        },
+        options: {}
+    });
+</script>

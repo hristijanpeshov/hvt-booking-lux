@@ -49,40 +49,40 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0" th:if="${leastExpensive} != null">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-1.png" style="background-image: url('/assets/hr-1.png');">
                     <div class="home__room__title">
                         <h4>Cheapest Room</h4>
                         <h2 th:utext="('<sup>$</sup>' + ${leastExpensive.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
-                    <a href="#">More Details</a>
+                    <a th:href="'/accommodation/' + ${leastExpensive.getResObject().getId()} + '/unit/' + ${leastExpensive.getId()}">More Details</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0" th:if="${mostExpensive} != null">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-2.png" style="background-image: url('/assets/hr-2.png');">
                     <div class="home__room__title">
                         <h4>The Most Expensive Room</h4>
                         <h2 th:utext="('<sup>$</sup>' + ${mostExpensive.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
-                    <a href="#">More Details</a>
+                    <a th:href="'/accommodation/' + ${mostExpensive.getResObject().getId()} + '/unit/' + ${mostExpensive.getId()}">More Details</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0" th:if="${smallest} != null">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-3.png" style="background-image: url('/assets/hr-3.png');">
                     <div class="home__room__title">
                         <h4>Smallest Room</h4>
                         <h2 th:utext="('<sup>$</sup>' + ${smallest.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
-                    <a href="#">More Details</a>
+                    <a th:href="'/accommodation/' +  ${smallest.getResObject().getId()} + '/unit/' + ${smallest.getId()}">More Details</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0" th:if="${largest} != null">
                 <div class="home__room__item set-bg" data-setbg="/assets/hr-4.png" style="background-image: url('/assets/hr-4.png');">
                     <div class="home__room__title">
                         <h4>Largest Room</h4>
                         <h2 th:utext="('<sup>$</sup>' + ${largest.getPrice()} + '<span>/day</span>')"></h2>
                     </div>
-                    <a href="#">More Details</a>
+                    <a th:href="'/accommodation/' +  ${largest.getResObject().getId()} + '/unit/' + ${largest.getId()}">More Details</a>
                 </div>
             </div>
         </div>

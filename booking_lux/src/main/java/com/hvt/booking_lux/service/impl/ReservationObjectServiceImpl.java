@@ -122,6 +122,7 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     public ResObject delete(long resObjectId) {
         ResObject resObject = findResObjectById(resObjectId);
         resObject.setStatus(Status.DELETED);
+        resObject.getUnits().forEach(unit -> unit.setStatus(Status.DELETED));
         return resObjectRepository.save(resObject);
     }
 

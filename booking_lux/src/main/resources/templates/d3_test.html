@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Test</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/fontawesome.min.css" integrity="sha512-shT5e46zNSD6lt4dlJHb+7LoUko9QZXTGlmWWx0qjI9UhQrElRb+Q5DM7SVte9G9ZNmovz2qIaV7IWv0xQkBkw==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/elegant-icons.css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/template.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.js"></script>
+
+
+</head>
+<body>
+<header th:replace="fragments/header"/>
+<!-- Create a div where the graph will take place -->
+<!-- Load d3.js -->
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<p th:text="${positive}"></p>
+</div>
+
+<!-- Color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<!--<script src="https://d3js.org/d3-scale-chromatic.v1.min.js%22%3E"></script>-->
+<!--<script src="../static/js/d3.min.js"></script>-->
+<!--<script>-->
+<!--    alert( 'Hello, world!' );-->
+<!--</script>-->
+<script>
+    /*<![CDATA[*/
+
+    // var positive = [[${positive}]];
+    var positive = 10;
+    console.log(positive);
+
+    /*]]>*/
+    // set the dimensions and margins of the graph
+    var width = 450
+    height = 450
+    margin = 40
+
+    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+    var radius = Math.min(width, height) / 2 - margin
+
+    // append the svg object to the div called 'my_dataviz'
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    // Create dummy data
+    var data = {positive: positive, negative: 100 - positive}
+
+    // set the color scale
+    var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(d3.schemeSet2);
+
+    // Compute the position of each group on the pie:
+    var pie = d3.pie()
+        .value(function(d) {return d.value; })
+    var data_ready = pie(d3.entries(data))
+    // Now I know that group A goes from 0 degrees to x degrees and so on.
+
+    // shape helper to build arcs:
+    var arcGenerator = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    svg
+        .selectAll('mySlices')
+        .data(data_ready)
+        .enter()
+        .append('path')
+        .attr('d', arcGenerator)
+        .attr('fill', function(d){
+            if (d.data.key ==='positive')
+                return(d3.color('darkgreen'));
+            else return(d3.color('darkred')) })
+        .attr("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.8)
+
+    // Now add the annotation. Use the centroid method to get the best coordinates
+    svg
+        .selectAll('mySlices')
+        .data(data_ready)
+        .enter()
+        .append('text')
+        .text(function(d){
+            if(d.data.key === 'positive') {
+                if (positive < 12)
+                    return "";
+                else return "positive";
+            }
+            else
+            {
+                if((100 - positive) < 12)
+                    return "";
+                else return "negative";
+            }
+            })
+        .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
+        .style("text-anchor", "middle")
+        .style("font-size", 17)
+
+
+</script>
+</body>
+</html>
+

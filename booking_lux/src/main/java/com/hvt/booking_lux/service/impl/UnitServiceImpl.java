@@ -56,25 +56,25 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     public Unit findTheMostExpensive() {
-        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getPrice)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheLeastExpensive() {
-        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getPrice)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheLargest() {
-        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getSize)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheSmallest() {
-        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getSize)).orElse(null);
         return unit;
     }
 
@@ -132,6 +132,5 @@ public class UnitServiceImpl implements UnitService {
         Unit unit = findById(unitId);
         unit.setStatus(Status.DELETED);
         return unitRepository.save(unit);
-
     }
 }

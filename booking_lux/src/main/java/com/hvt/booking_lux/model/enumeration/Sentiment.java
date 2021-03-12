@@ -1,8 +1,7 @@
 package com.hvt.booking_lux.model.enumeration;
 
-public enum Status {
+public enum Sentiment {
 
-    ACTIVE,
-    DELETED
-
+    POSITIVE,
+    NEGATIVE
 }
