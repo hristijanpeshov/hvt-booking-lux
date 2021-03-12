@@ -18,12 +18,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             " and ?2 = extract(year from r.reservation_date) group by month", nativeQuery = true)
     List<CreatorYearStatistics> findAnnualPropertyReservationCount(String creator, int year);
 
-    @Query(value = "select ro.id, extract(month from r.reservation_date) as month, count(ro.id) as num, sum(DATEDIFF(day, r.from_date, r.to_date) * r.price_per_night) as total" +
+    @Query(value = "select ro.id, ro.name as name,extract(month from r.reservation_date) as month, count(ro.id) as num, sum(DATEDIFF(day, r.from_date, r.to_date) * r.price_per_night) as total" +
             " from Reservation as r " +
             "join Unit as u on u.id = r.unit_id " +
             "join RES_OBJECT as ro on ro.id = u.res_object_id where ro.creator_username=?1" +
             " and ?2 = extract(year from r.reservation_date) and ro.id = ?3" +
-            " group by ro.id, month", nativeQuery = true)
+            " group by ro.id, month,name", nativeQuery = true)
     List<ResObjectYearStatistics> findAnnualReservationCountForProperty(String creator, int year, long id);
 
     List<Reservation> findAllByUser(User user);

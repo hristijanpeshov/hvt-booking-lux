@@ -1,22 +1,24 @@
 package com.hvt.booking_lux.service.impl;
 
+import com.google.gson.Gson;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ReservationNotFoundException;
+import com.hvt.booking_lux.model.statistics.ResObjectYearStatistics;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.ReservationRepository;
 import com.hvt.booking_lux.repository.UserRepository;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.UnitService;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +47,43 @@ public class ReservationServiceImpl implements ReservationService {
         return reservation;
     }
 
+    public List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user)
+    {
+        List<ResObject> resObjectList = resObjectRepository.findAllByCreator(user);
+        List<Map<String,String>> jsonData = new ArrayList<>();
+        for (int i=0;i<12;i++)
+        {
+            jsonData.add(i,new HashMap<String,String>());
+        }
+        jsonData.get(0).put("Month","January");
+        jsonData.get(1).put("Month","February");
+        jsonData.get(2).put("Month","March");
+        jsonData.get(3).put("Month","April");
+        jsonData.get(4).put("Month","May");
+        jsonData.get(5).put("Month","June");
+        jsonData.get(6).put("Month","July");
+        jsonData.get(7).put("Month","August");
+        jsonData.get(8).put("Month","September");
+        jsonData.get(9).put("Month","October");
+        jsonData.get(10).put("Month","November");
+        jsonData.get(11).put("Month","December");
+        for (ResObject accommodation:
+             resObjectList) {
+            List<ResObjectYearStatistics> data = reservationRepository.findAnnualReservationCountForProperty(user.getUsername(), LocalDate.now().getYear()-1,accommodation.getId());
+            for (int i=0;i<12;i++)
+            {
+                Map<String,String> hashMapForMonth = jsonData.get(i);
+                hashMapForMonth.put(accommodation.getName() + " " + accommodation.getId().toString(),"0");
+            }
+            for (ResObjectYearStatistics stats:
+                 data) {
+                Map<String,String> hashMapForMoth = jsonData.get(stats.getMonth()-1);
+                hashMapForMoth.put(accommodation.getName() + " " + accommodation.getId().toString(),String.valueOf(stats.getTotal()));
+            }
+        }
+
+        return jsonData;
+    }
 
 
     @Override

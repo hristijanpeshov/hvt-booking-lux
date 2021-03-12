@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface ReservationService {
@@ -17,4 +18,5 @@ public interface ReservationService {
     Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate,ZonedDateTime toDate);
     Reservation cancel(long reservationId);
     List<Reservation> findAllReservationsForUser(User user);
+    List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user);
 }

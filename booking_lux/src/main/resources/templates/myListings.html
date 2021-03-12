@@ -34,7 +34,80 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 centered">
+                <canvas id="myChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
 </section>
+<script>
+
+    $( document ).ready(function(){
+        d3.json("/api/data/income", function(data) {
+
+            var colorslist = ["blue","orange","magenta","green","syrup","navy","bumblebee","turkish","army","ferrari"];
+
+            let months = data.map(function(d){
+                return d["Month"];
+            })
+
+            let labels = Object.keys(data[0])
+            labels = labels.filter(word=>word != "Month")
+
+            console.log(labels)
+
+            let myDatasets = []
+
+            labels.forEach(createDataSets)
+
+            function createDataSets(item,index){
+                let itemData = data.map(function (d){
+                    return d[item]
+                })
+                let label = item.toString().slice(0,item.toString().lastIndexOf(" "))
+                myDatasets.push({label:label,data:itemData,backgroundColor: getRandomColor()})
+            }
+
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            let finalData = {
+                labels : months,
+                datasets: myDatasets
+            }
+
+            console.log(finalData)
+
+            var ctx = document.getElementById("myChart")
+            var myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: finalData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: true
+                        }],
+                        xAxes: [{
+                            stacked: true,
+                        }]
+                    }
+                }
+            });
+
+
+        })
+    })
+
+</script>
 
 <script>
     function redirectToUnit(unit){
