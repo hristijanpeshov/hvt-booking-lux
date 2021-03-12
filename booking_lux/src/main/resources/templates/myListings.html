@@ -65,6 +65,7 @@
 
             function createDataSets(item,index){
                 let itemData = data.map(function (d){
+                    return Math.random()
                     return d[item]
                 })
                 let label = item.toString().slice(0,item.toString().lastIndexOf(" "))

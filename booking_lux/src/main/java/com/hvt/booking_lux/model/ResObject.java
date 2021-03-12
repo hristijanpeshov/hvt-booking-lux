@@ -75,6 +75,9 @@ public class ResObject {
         this.lowestPrice = lowestPrice;
     }
 
+    public boolean getStatus(){
+        return units.stream().anyMatch(x->x.getStatus().equals(Status.ACTIVE));
+    }
 
     public Long getId() {
         return id;

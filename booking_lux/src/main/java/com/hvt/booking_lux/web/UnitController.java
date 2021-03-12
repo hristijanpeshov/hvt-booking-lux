@@ -59,7 +59,7 @@ public class UnitController {
         return "redirect:/accommodation/"+resObjectId;
     }
 
-    @PostMapping("/delete/{unitId}")
+    @GetMapping("/delete/{unitId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
     public String delete(Authentication authentication,@PathVariable long resObjectId,@PathVariable long unitId)
     {

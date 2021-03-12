@@ -59,4 +59,11 @@ public class ReviewController {
         reviewService.editReview(comment,reviewId);
         return "redirect:/reserve/myReservations";
     }
+    @GetMapping
+    public String showPercentage(Model model){
+        model.addAttribute("positive", 100);
+        model.addAttribute("negative", 50);
+        model.addAttribute("bodyContent","statistics");
+        return "master-template";
+    }
 }
