@@ -1,5 +1,7 @@
 package com.hvt.booking_lux.model;
 
+import com.hvt.booking_lux.model.enumeration.Sentiment;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,9 @@ public class Review {
 
     @Column(length = 2000)
     private String comment;
+
+    @Enumerated(EnumType.STRING)
+    private Sentiment sentiment;
 
     @ManyToOne
     private User user;
@@ -59,4 +64,11 @@ public class Review {
         return user;
     }
 
+    public Sentiment getSentiment() {
+        return sentiment;
+    }
+
+    public void setSentiment(Sentiment sentiment) {
+        this.sentiment = sentiment;
+    }
 }

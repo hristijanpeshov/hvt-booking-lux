@@ -2,12 +2,15 @@ package com.hvt.booking_lux.model;
 
 import com.hvt.booking_lux.bootstrap.DataHolder;
 import com.hvt.booking_lux.model.enumeration.BedType;
+import com.hvt.booking_lux.model.enumeration.Status;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Where(clause = "status='ACTIVE'")
 public class Unit {
 
     @Id
@@ -18,11 +21,14 @@ public class Unit {
 
     private double size;
 
-    private boolean status;
+//    private boolean status;
 
     private double price;
 
     private int numberOf;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany
     private List<BedTypes> bedTypes;
@@ -44,7 +50,7 @@ public class Unit {
         this.price = price;
         this.numberOf = numberOf;
         this.description = description;
-        this.status = true;
+        this.status = Status.ACTIVE;
         this.title = title;
         this.bedTypes = new ArrayList<>();
         unitImages = new ArrayList<>();
@@ -56,7 +62,7 @@ public class Unit {
         this.price = price;
         this.numberOf = numberOf;
         this.description = description;
-        this.status = true;
+        this.status = Status.ACTIVE;
         this.bedTypes = bedTypes;
         this.title = title;
         unitImages = new ArrayList<>();
@@ -86,8 +92,16 @@ public class Unit {
         return size;
     }
 
-    public boolean isStatus() {
+//    public boolean isStatus() {
+//        return status;
+//    }
+
+    public Status getStatus() {
         return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getNumberOf() {
@@ -132,9 +146,9 @@ public class Unit {
         this.size = size;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+//    public void setStatus(boolean status) {
+//        this.status = status;
+//    }
 
     public void setNumberOf(int numberPeople) {
         this.numberOf = numberPeople;

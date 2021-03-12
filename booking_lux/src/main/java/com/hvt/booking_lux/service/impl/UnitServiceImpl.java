@@ -2,6 +2,7 @@ package com.hvt.booking_lux.service.impl;
 
 import com.hvt.booking_lux.model.BedTypes;
 import com.hvt.booking_lux.model.enumeration.BedType;
+import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
 import com.hvt.booking_lux.model.exceptions.UnitHasNoBedsException;
 import com.hvt.booking_lux.model.exceptions.UnitNotFoundException;
@@ -55,25 +56,25 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     public Unit findTheMostExpensive() {
-        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getPrice)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheLeastExpensive() {
-        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getPrice)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getPrice)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheLargest() {
-        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().max(Comparator.comparing(Unit::getSize)).orElse(null);
         return unit;
     }
 
     @Override
     public Unit findTheSmallest() {
-        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getSize)).orElseThrow(UnitNumberIsZeroException::new);
+        Unit unit = unitRepository.findAll().stream().min(Comparator.comparing(Unit::getSize)).orElse(null);
         return unit;
     }
 
@@ -129,7 +130,7 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public Unit delete(long unitId) {
         Unit unit = findById(unitId);
-        unitRepository.delete(unit);
-        return unit;
+        unit.setStatus(Status.DELETED);
+        return unitRepository.save(unit);
     }
 }

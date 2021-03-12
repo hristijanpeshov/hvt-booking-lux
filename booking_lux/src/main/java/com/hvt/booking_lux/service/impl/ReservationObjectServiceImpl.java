@@ -2,6 +2,7 @@ package com.hvt.booking_lux.service.impl;
 
 import com.hvt.booking_lux.model.*;
 import com.hvt.booking_lux.model.enumeration.Category;
+import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.CityNotFoundException;
 import com.hvt.booking_lux.model.exceptions.CountryNotFoundException;
 import com.hvt.booking_lux.model.exceptions.ResObjectNotFoundException;
@@ -120,8 +121,9 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     @Override
     public ResObject delete(long resObjectId) {
         ResObject resObject = findResObjectById(resObjectId);
-        resObjectRepository.delete(resObject);
-        return resObject;
+        resObject.setStatus(Status.DELETED);
+        resObject.getUnits().forEach(unit -> unit.setStatus(Status.DELETED));
+        return resObjectRepository.save(resObject);
     }
 
     @Override
