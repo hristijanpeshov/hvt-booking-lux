@@ -4,6 +4,7 @@ import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.statistics.ResObjectYearStatistics;
+import com.hvt.booking_lux.model.statistics.ReviewSentimentStatistics;
 import com.hvt.booking_lux.repository.ReservationRepository;
 import com.hvt.booking_lux.repository.UserRepository;
 import com.hvt.booking_lux.service.UserStatisticsService;
@@ -12,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserStatisticsServiceImpl implements UserStatisticsService {
@@ -44,6 +47,16 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
         List<ResObjectYearStatistics> objects = new ArrayList<>();
         objects = reservationRepository.findAnnualReservationCountForProperty(creator.getUsername(), year, resObjectId);
         return objects;
+    }
+
+    @Override
+    public Map<String, Integer> findSentimentForResObject(Long resObjectId) {
+        Map<String, Integer> map = new HashMap<>();
+        map.putIfAbsent("POSITIVE", 0);
+        map.putIfAbsent("NEGATIVE", 0);
+        List<ReviewSentimentStatistics> reviewSentimentStatisticsList =  reservationRepository.findAllReviewsSentiment(resObjectId);
+        reviewSentimentStatisticsList.forEach(s-> map.computeIfPresent(s.getSentiment().toString(), (k, v)  -> v + 1));
+        return map;
     }
 }
 

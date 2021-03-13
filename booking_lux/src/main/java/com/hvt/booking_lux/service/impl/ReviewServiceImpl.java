@@ -3,6 +3,7 @@ package com.hvt.booking_lux.service.impl;
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Review;
 import com.hvt.booking_lux.model.User;
+import com.hvt.booking_lux.model.enumeration.Sentiment;
 import com.hvt.booking_lux.model.exceptions.ReviewNotFoundException;
 import com.hvt.booking_lux.model.exceptions.UserNotCreatorOfReservationException;
 import com.hvt.booking_lux.repository.ReviewRepository;
@@ -38,10 +39,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review saveReview(String username, String comment, long reservationId) {
+    public Review saveReview(String username, String comment, long reservationId, boolean sentiment) {
         Reservation reservation = reservationService.findReservationById(reservationId);
         User user = (User) userService.loadUserByUsername(username);
         Review review = new Review(reservation, comment, user);
+        review.setSentiment(sentiment ? Sentiment.POSITIVE : Sentiment.NEGATIVE);
         return reviewRepository.save(review);
     }
 

@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.controllers;
 
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.User;

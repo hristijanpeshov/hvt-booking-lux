@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.controllers;
 
 import com.hvt.booking_lux.model.BedTypes;
 import com.hvt.booking_lux.model.ResObject;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,9 @@ public class UnitController {
     }
 
     @GetMapping("/{unitId}")
-    public String getUnit(@PathVariable long resObjectId,@PathVariable long unitId, Model model)
+    public String getUnit(@PathVariable long resObjectId, @PathVariable long unitId, Model model, @RequestParam(required = false) String error)
     {
+        model.addAttribute("error", error);
         Unit unit = unitService.findById(unitId);
         model.addAttribute("unit",unit);
         model.addAttribute("resObjectId",resObjectId);

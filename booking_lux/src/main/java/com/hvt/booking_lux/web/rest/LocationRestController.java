@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.rest;
 
 import com.hvt.booking_lux.model.City;
 import com.hvt.booking_lux.service.LocationService;

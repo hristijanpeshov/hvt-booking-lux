@@ -1,4 +1,4 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.controllers;
 
 import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.ResObject;
@@ -58,7 +58,7 @@ public class AccommodationController {
             if(checkOut.isBefore(checkIn)){
                 return "redirect:/home?error=Check in date should be before check out date!";
             }
-            reservationObjectService.listAllAvailableUnitsForResObject(2, checkIn, checkOut, numPeople);
+//            reservationObjectService.listAllAvailableUnitsForResObject(2, checkIn, checkOut, numPeople);
             resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, numPeople, city);
         }
         else{

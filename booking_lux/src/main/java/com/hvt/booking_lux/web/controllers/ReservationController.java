@@ -1,8 +1,9 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.controllers;
 
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
+import com.hvt.booking_lux.model.exceptions.UnitIsReservedException;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.ReviewService;
 import com.hvt.booking_lux.service.UnitService;
@@ -84,7 +85,13 @@ public class ReservationController {
     {
         ZonedDateTime checkIn = (ZonedDateTime) request.getSession().getAttribute("checkIn");
         ZonedDateTime checkOut = (ZonedDateTime) request.getSession().getAttribute("checkOut");
-        reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);
+        try {
+            reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);
+        }
+        catch (UnitIsReservedException ur){
+            long resObject = unitService.findById(unitId).getResObject().getId();
+            return "redirect:/accommodation/" + resObject + "/unit/" + unitId + "?error=" + ur.getMessage();
+        }
         return "redirect:/reserve/myReservations";
     }
 

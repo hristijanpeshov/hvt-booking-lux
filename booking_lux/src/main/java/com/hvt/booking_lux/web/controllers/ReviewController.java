@@ -1,20 +1,28 @@
-package com.hvt.booking_lux.web;
+package com.hvt.booking_lux.web.controllers;
 
 import com.hvt.booking_lux.model.Reservation;
 import com.hvt.booking_lux.model.Review;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.ReviewService;
+import com.hvt.booking_lux.web.requestHelper.RequestHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
     private final ReviewService reviewService;
     private final ReservationService reservationService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public ReviewController(ReviewService reviewService, ReservationService reservationService) {
         this.reviewService = reviewService;
@@ -49,7 +57,9 @@ public class ReviewController {
     @PostMapping("/{reservationId}/add")
     public String addComment(Authentication authentication, @PathVariable Long reservationId, @RequestParam String comment)
     {
-        reviewService.saveReview(authentication.getName(),comment,reservationId);
+        HttpEntity<MultiValueMap<String, Object>> request = RequestHelper.createRequestMap("comment", comment);
+        boolean sentiment = Boolean.parseBoolean(restTemplate.postForEntity(RequestHelper.relativeUrl+"/review", request, String.class).getBody());
+        reviewService.saveReview(authentication.getName(),comment,reservationId, sentiment);
         return "redirect:/reserve/myReservations";
     }
     @PreAuthorize("isAuthenticated()")

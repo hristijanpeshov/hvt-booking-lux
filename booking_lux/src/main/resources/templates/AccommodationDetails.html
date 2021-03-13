@@ -75,7 +75,9 @@
                         <div class="col-sm-3 my-auto mb-0" th:if="${#session.getAttribute('checkIn')==null || #session.getAttribute('checkOut')==null}">
                             <a class="btn primary-btn" th:href="'/accommodation/' + ${resObjectId} + '/unit/' + ${unit.getId()}">Book Now</a>
                         </div>
+
                 </div>
+
         </div>
     </div>
 </section>

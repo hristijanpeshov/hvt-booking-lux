@@ -114,9 +114,29 @@
             </div>
 
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn primary-btn" onclick="showPieChart()">Show Statistics</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3"></div>
+        <div class="col-md-4 mb-3">
+            <select id="selectObject" onchange="showPieChart()">
+                <option th:if="${resObjects != null}" th:each="object : ${resObjects}" th:value="${object.getId()}" th:text="${object.getName()}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <canvas id="myChart"></canvas>
+            <p id="charText"></p>
+        </div>
     </div>
 </section>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     function editForm(text){
         var editName = text.getAttribute('data-edit');
@@ -140,4 +160,60 @@
             input.attr("value",$("span[name=" + a +"]")[0].innerHTML);
         });
     }
+
+    function showPieChart(){
+        let id = document.getElementById("selectObject").value
+        d3.json("/api/statistics/" + id + "/pie", function(sdata){
+            if(sdata['POSITIVE'] === 0 && sdata['NEGATIVE'] === 0){
+                document.getElementById('charText').innerHTML = "There are no reviews for this accommodation!";
+                let canvas = document.getElementById("myChart")
+                let canvasParent = canvas.parentNode
+                canvasParent.removeChild(canvas);
+                canvas = document.createElement("canvas")
+                canvas.setAttribute("id","myChart")
+                // canvas.setAttribute("height","100")
+                canvasParent.appendChild(canvas)
+                return
+            }
+            document.getElementById('charText').innerHTML = "";
+
+            var positive = sdata['POSITIVE'];
+            var negative = sdata['NEGATIVE'];
+            data = {
+                datasets: [{
+                    data: [positive, negative]
+                }],
+
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Positive',
+                    'Negative'
+                ]
+            };
+            var ctx = document.getElementById('myChart');
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data : {
+                    datasets: [{
+                        data: [positive, negative],
+                        backgroundColor: [
+                            "#649568",
+                            "#ed2939"
+                        ]}],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: [
+                        'Positive',
+                        'Negative'
+                    ]
+
+                },
+                options: {}
+            });
+        })
+    }
+    //
+    // $( document ).ready(function(){
+    //     showPieChart()
+    // })
 </script>
