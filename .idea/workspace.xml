@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7ed95451-0c73-469c-bbba-80891de13572" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pro.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/confirmReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/confirmReservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/manage-account.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/manage-account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myListings.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myListings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myReservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myReservations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/pdf.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1piODGIclD5K5IZmwfXi76ZAsRg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../web-labs" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.BookingLuxApplication">
+    <configuration name="BookingLuxApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="booking_lux" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hvt.booking_lux.BookingLuxApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceRegistryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="service-registry" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hvt.dians.serviceregistry.ServiceRegistryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ed95451-0c73-469c-bbba-80891de13572" name="Default Changelist" comment="" />
+      <created>1615662324790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615662324790</updated>
+      <workItem from="1615662326448" duration="8364000" />
+      <workItem from="1615678669763" duration="11000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="765" y="220" key="#com.intellij.ide.util.MemberChooser" timestamp="1615662529384">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="220" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615662529384" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1615669752550">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615669752550" />
+    <state width="1877" height="27" key="GridCell.Tab.0.bottom" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.0.center" timestamp="1615670767984">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767984" />
+    <state width="1877" height="27" key="GridCell.Tab.0.left" timestamp="1615670767984">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767984" />
+    <state width="1877" height="27" key="GridCell.Tab.0.right" timestamp="1615670767984">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767984" />
+    <state width="1877" height="27" key="GridCell.Tab.1.bottom" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.1.center" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.1.left" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.1.right" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.2.bottom" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.2.center" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.2.left" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state width="1877" height="27" key="GridCell.Tab.2.right" timestamp="1615670767985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="27" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615670767985" />
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615664561124">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615664561124" />
+  </component>
+</project>

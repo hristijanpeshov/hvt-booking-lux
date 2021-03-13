@@ -28,10 +28,19 @@
                     <a th:href="'/accommodation/' + ${resObject.getId()} + '/unit/add'" class="btn primary-btn mb-2 d-block">Add Unit</a>
                     <a th:href="'/accommodation/edit/' + ${resObject.getId()}" class="btn primary-btn d-block">Edit</a>
                     <form method="post" th:action="'/accommodation/delete/' + ${resObject.getId()}" style="width: 100%">
-                        <button style="width: 100%" type="submit" class="btn primary-btn mt-2 d-block">Delete</button>
+                        <button style="width: 100%" type="button" class="btn primary-btn delete-btn mt-2 d-block" onclick="deleteAlert(this)">Delete</button>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="confirm" class="modal">
+        <div class="modal-body">
+            Are you sure?
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
+            <button type="button" data-dismiss="modal" class="btn">Cancel</button>
         </div>
     </div>
     <div class="container">
@@ -43,6 +52,9 @@
     </div>
 
 </section>
+
+<script src="/js/bootbox.min.js"></script>
+
 <script>
 
     $( document ).ready(function(){
@@ -106,7 +118,7 @@
 
 
         })
-    })
+    });
 
 </script>
 
@@ -118,5 +130,28 @@
         console.log(resId);
         window.location = '/accommodation/' + resId;
             //+ '/unit/' + unitId;
+    }
+
+    function deleteAlert(deleteBtn){
+        event.stopImmediatePropagation();
+        bootbox.dialog({
+            message: "Are you sure you want to delete this?",
+            centerVertical: true,
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success',
+                    callback: function(){
+                        var $form = $(deleteBtn).parent('form');
+                        $form.trigger('submit');
+                    }
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            }
+        });
+
     }
 </script>
