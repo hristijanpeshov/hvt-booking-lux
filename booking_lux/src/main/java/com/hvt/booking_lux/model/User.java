@@ -27,6 +27,8 @@ public class User implements UserDetails {
 
     private String phone;
 
+    private String profilePic;
+
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
@@ -56,6 +58,7 @@ public class User implements UserDetails {
         this.address = address;
         this.phone = phone;
         resObjects = new ArrayList<>();
+        this.profilePic = "/assets/profile-pic.jpg";
     }
 
     @Override
@@ -141,4 +144,11 @@ public class User implements UserDetails {
         return lastName;
     }
 
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
 }

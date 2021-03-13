@@ -28,7 +28,7 @@
     <p>To date: <span th:text="${reservation.getToDate().toLocalDate()}">14.02.20212</span></p>
     <p>Number nights: <span th:text="${reservation.numberOfNights()}">101.99</span></p>
     <p>Price per Night: <span th:text="${reservation.getPricePerNight()}">101.99</span>$</p>
-    <p>Total Amount: <span th:text="${reservation.getTotalAmount()}">101.99</span>$</p>
+    <p>Total Amount: <span th:text="${#numbers.formatDecimal(reservation.getTotalAmount() * 1.15, 0, 'COMMA', 2, 'POINT')}">101.99</span>$</p>
     <h4>Reservation was made at <span th:text="${reservation.getReservationDate().toLocalDateTime()}">12.02.2021 13:10</span></h4>
     <br/>
     <table>

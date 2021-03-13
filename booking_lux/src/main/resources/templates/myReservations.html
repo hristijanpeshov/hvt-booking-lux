@@ -35,6 +35,8 @@
                     <h5><span class="font-weight-light" th:text="${reservation.numberOfNights()} + ' nights x ' + ${reservation.getUnit().getPrice()} + '$'"></span></h5>
                     <br>
                     <h4>Total amount: </h4><h3 th:text="${reservation.getTotalAmount()} + '$'"></h3>
+                    <br>
+                    <a th:href="'/' + ${reservation.getId() + '/pdf'}" class="btn-sm primary-btn text-white"><i class="fa fa-file-pdf-o"> <span style="font-family: 'DM Sans', sans-serif"> Receipt</span> </i></a>
                 </div>
             </div>
         </div>

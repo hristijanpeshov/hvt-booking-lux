@@ -70,6 +70,8 @@ public class ReservationController {
 
         model.addAttribute("unit",unit);
         model.addAttribute("user",(User)authentication.getPrincipal());
+        int nights = Period.between(LocalDate.of(checkIn.getYear(), checkIn.getMonth(), checkIn.getDayOfMonth()), LocalDate.of(checkOut.getYear(), checkOut.getMonth(), checkOut.getDayOfMonth())).getDays();
+        model.addAttribute("numNights", nights);
         /*if(checkInDate!=null)
         ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
         ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
@@ -81,12 +83,15 @@ public class ReservationController {
     }
     @PostMapping("/{unitId}")
     @PreAuthorize("isAuthenticated()")
-    public String confirmReservation(HttpServletRequest request,Authentication authentication,@PathVariable long unitId)
+    public String confirmReservation(HttpServletRequest request,Authentication authentication,@PathVariable long unitId, @RequestParam String pdfRedir)
     {
         ZonedDateTime checkIn = (ZonedDateTime) request.getSession().getAttribute("checkIn");
         ZonedDateTime checkOut = (ZonedDateTime) request.getSession().getAttribute("checkOut");
         try {
-            reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);
+            Reservation res = reservationService.reserve((User) authentication.getPrincipal(),unitId, Period.between(checkIn.toLocalDate(),checkOut.toLocalDate()).getDays(),checkIn,checkOut);
+            if(Boolean.parseBoolean(pdfRedir)){
+                return "redirect:/" + res.getId() + "/pdf";
+            }
         }
         catch (UnitIsReservedException ur){
             long resObject = unitService.findById(unitId).getResObject().getId();
