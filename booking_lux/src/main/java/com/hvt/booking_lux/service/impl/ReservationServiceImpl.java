@@ -7,6 +7,7 @@ import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ReservationNotFoundException;
+import com.hvt.booking_lux.model.exceptions.UnitIsReservedException;
 import com.hvt.booking_lux.model.statistics.ResObjectYearStatistics;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.ReservationRepository;
@@ -45,6 +46,12 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation findReservationById(long id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new ReservationNotFoundException(id));
         return reservation;
+    }
+
+//    @Override
+    private boolean checkIfUnitIsReserved(ZonedDateTime fromDate, ZonedDateTime toDate, long unitId) {
+        return listAll().stream().filter(s-> fromDate.isBefore(s.getToDate()) && (s.getFromDate().isBefore(toDate)))
+                .map(s-> s.getUnit().getId()).distinct().collect(Collectors.toList()).contains(unitId);
     }
 
     public List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user)
@@ -107,6 +114,9 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate, ZonedDateTime toDate) {
         Unit unit = unitService.findById(unitId);
+        if(checkIfUnitIsReserved(fromDate, toDate, unitId)){
+            throw new UnitIsReservedException(unitId);
+        }
         Reservation reservation = new Reservation(user, unit, unit.getPrice(), nights, fromDate, toDate);
         return reservationRepository.save(reservation);
     }

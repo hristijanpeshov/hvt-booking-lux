@@ -14,6 +14,7 @@ import java.util.Map;
 public interface ReservationService {
     List<Reservation> listAll();
     Reservation findReservationById(long id);
+//    boolean checkIfUnitIsReserved(ZonedDateTime fromDate, ZonedDateTime toDate, long unitId);
     List<ResObject> findAllResObjectsThatAreNotReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople);
     Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate,ZonedDateTime toDate);
     Reservation cancel(long reservationId);

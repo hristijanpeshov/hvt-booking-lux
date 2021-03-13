@@ -1,9 +1,12 @@
 package com.hvt.booking_lux.repository;
 
 import com.hvt.booking_lux.model.Reservation;
+import com.hvt.booking_lux.model.Review;
+import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.statistics.CreatorYearStatistics;
 import com.hvt.booking_lux.model.statistics.ResObjectYearStatistics;
+import com.hvt.booking_lux.model.statistics.ReviewSentimentStatistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -27,4 +30,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<ResObjectYearStatistics> findAnnualReservationCountForProperty(String creator, int year, long id);
 
     List<Reservation> findAllByUser(User user);
+
+    @Query(value = "select re.id, re.sentiment from reservation r join unit u on r.unit_id = u.id join res_object ro on ro.id = u.res_object_id join review re on re.reservation_id = r.id where u.res_object_id = ?1",
+            nativeQuery = true)
+    List<ReviewSentimentStatistics> findAllReviewsSentiment(Long resObjectId);
 }
