@@ -71,6 +71,30 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Review</th>
+                            <th>Sentiment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reservation : ${unit.getReservations()}" th:if="${reservation.getReview()!=null}">
+                        <td th:text="${reservation.getUser().getUsername()}"></td>
+                        <td th:text="${reservation.getReview().getComment()}"></td>
+                        <td th:text="${reservation.getReview().getSentiment()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
 </section>
 
 <script>

@@ -41,6 +41,9 @@ public class Unit {
     @ElementCollection
     private List<String> unitImages;
 
+    @OneToMany(mappedBy = "unit")
+    private List<Reservation> reservations;
+
     public Unit() {
     }
 
@@ -168,5 +171,13 @@ public class Unit {
 
     public void setUnitImages(List<String> unitImages) {
         this.unitImages = unitImages;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }
