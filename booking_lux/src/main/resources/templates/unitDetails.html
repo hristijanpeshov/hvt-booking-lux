@@ -11,6 +11,10 @@
 
 </section>
 <section class="room-details spad" xmlns:th="http://www.thymeleaf.org">
+    <div class="container" th:if="${@creatorCheck.check(unit.resObject.getId(),#authentication)}">
+        <a th:href="'/accommodation/' + ${unit.resObject.id} + '/unit/edit/' + ${unit.getId()}" class="primary-btn">Edit</a>
+        <a th:href="'/accommodation/' + ${unit.resObject.getId()} + '/unit/delete/'+${unit.getId()}" class="primary-btn">Delete</a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-md-6 col-sm-5">
@@ -31,7 +35,7 @@
                         </div>
                     </div>
                     <div class="room__details__title">
-                        <h2 th:text="${unit.getResObject().getName()}"></h2>
+                        <h2 th:text="${unit.getTitle()}"></h2>
                     </div>
                     <div class="room__details__desc">
                         <h2>Description:</h2>
@@ -61,7 +65,6 @@
                             <div class="col-3">
                                 <button type="submit">Book Now</button>
                             </div>
-
                         </div>
                     </form>
                 </div>

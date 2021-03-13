@@ -5,6 +5,7 @@ import com.hvt.booking_lux.model.enumeration.Status;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,8 @@ public class ResObject {
     @ManyToOne
     private City city;
 
+    private ZonedDateTime dateCreated;
+
     public ResObject() {
     }
 
@@ -57,6 +60,7 @@ public class ResObject {
         objectImages = new ArrayList<>();
         units = new ArrayList<>();
         this.status = Status.ACTIVE;
+        dateCreated = ZonedDateTime.now();
     }
 
     public void setStatus(Status status) {
@@ -146,5 +150,9 @@ public class ResObject {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public ZonedDateTime getDateCreated() {
+        return dateCreated;
     }
 }

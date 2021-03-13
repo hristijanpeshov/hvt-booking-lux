@@ -7,6 +7,7 @@ import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.model.enumeration.Status;
 import com.hvt.booking_lux.model.exceptions.ReservationNotFoundException;
+import com.hvt.booking_lux.model.statistics.ResObjectMonthlyVisitorCount;
 import com.hvt.booking_lux.model.statistics.ResObjectYearStatistics;
 import com.hvt.booking_lux.repository.ResObjectRepository;
 import com.hvt.booking_lux.repository.ReservationRepository;
@@ -47,9 +48,9 @@ public class ReservationServiceImpl implements ReservationService {
         return reservation;
     }
 
-    public List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user)
+
+    private List<Map<String,String>> createHashMapWithMonths()
     {
-        List<ResObject> resObjectList = resObjectRepository.findAllByCreator(user);
         List<Map<String,String>> jsonData = new ArrayList<>();
         for (int i=0;i<12;i++)
         {
@@ -67,9 +68,17 @@ public class ReservationServiceImpl implements ReservationService {
         jsonData.get(9).put("Month","October");
         jsonData.get(10).put("Month","November");
         jsonData.get(11).put("Month","December");
+        return jsonData;
+    }
+
+    @Override
+    public List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user,Integer year)
+    {
+        List<ResObject> resObjectList = resObjectRepository.findAllByCreator(user);
+        List<Map<String,String>> jsonData = createHashMapWithMonths();
         for (ResObject accommodation:
              resObjectList) {
-            List<ResObjectYearStatistics> data = reservationRepository.findAnnualReservationCountForProperty(user.getUsername(), LocalDate.now().getYear()-1,accommodation.getId());
+            List<ResObjectYearStatistics> data = reservationRepository.findAnnualReservationCountForProperty(user.getUsername(), year,accommodation.getId());
             for (int i=0;i<12;i++)
             {
                 Map<String,String> hashMapForMonth = jsonData.get(i);
@@ -85,6 +94,28 @@ public class ReservationServiceImpl implements ReservationService {
         return jsonData;
     }
 
+    @Override
+    public List<Map<String,String>> yearlyVisitorsStatistic(User user,Integer year)
+    {
+        List<ResObject> resObjectList = resObjectRepository.findAllByCreator(user);
+        List<Map<String,String>> jsonData = createHashMapWithMonths();
+        for (ResObject accommodation:
+                resObjectList) {
+            List<ResObjectMonthlyVisitorCount> data = reservationRepository.findMonthlyVisitors(user.getUsername(), year,accommodation.getId());
+            for (int i=0;i<12;i++)
+            {
+                Map<String,String> hashMapForMonth = jsonData.get(i);
+                hashMapForMonth.put(accommodation.getName() + " " + accommodation.getId().toString(),"0");
+            }
+            for (ResObjectMonthlyVisitorCount stats:
+                    data) {
+                Map<String,String> hashMapForMoth = jsonData.get(stats.getMonth()-1);
+                hashMapForMoth.put(accommodation.getName() + " " + accommodation.getId().toString(),String.valueOf(stats.getNum()));
+            }
+        }
+
+        return jsonData;
+    }
 
     @Override
     public List<ResObject> findAllResObjectsThatAreNotReservedAtThatTime(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople) {

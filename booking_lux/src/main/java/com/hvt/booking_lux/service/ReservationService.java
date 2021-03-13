@@ -18,5 +18,6 @@ public interface ReservationService {
     Reservation reserve(User user, long unitId, int nights, ZonedDateTime fromDate,ZonedDateTime toDate);
     Reservation cancel(long reservationId);
     List<Reservation> findAllReservationsForUser(User user);
-    List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user);
+    List<Map<String,String>> lastYearIncomeForCreatorsAccommodations(User user,Integer year);
+    List<Map<String,String>> yearlyVisitorsStatistic(User user,Integer year);
 }
