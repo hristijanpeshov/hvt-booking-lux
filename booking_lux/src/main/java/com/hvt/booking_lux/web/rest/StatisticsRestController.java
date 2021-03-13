@@ -25,12 +25,6 @@ public class StatisticsRestController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/barplot")
-    @PreAuthorize("isAuthenticated()")
-    public List<Map<String,String>> myListingsLastYearIncomeData(Authentication authentication){
-        return reservationService.lastYearIncomeForCreatorsAccommodations((User) authentication.getPrincipal());
-    }
-
     @GetMapping("/{id}/pie")
     @PreAuthorize("isAuthenticated() && @creatorCheck.check(#id,authentication)")
     public Map<String,Integer> sentimentAnalysis(@PathVariable Long id){

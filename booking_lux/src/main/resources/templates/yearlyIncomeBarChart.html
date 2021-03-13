@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-11"></div>
         <div class="col-1">
-            <select id="selectYear" onchange="updateBarChart()">
+            <select id="selectYearIncome" onchange="updateBarChartIncome()">
                 <option th:each="year : ${#numbers.sequence(#dates.year(#dates.createNow()),2015,-1)}" th:value="${year}" th:text="${year}" th:selected="${year==#dates.year(#dates.createNow())-1}"></option>
             </select>
         </div>
@@ -15,9 +15,9 @@
 </div>
 
 <script>
-    function updateBarChart(){
+    function updateBarChartIncome(){
 
-        let year = document.getElementById("selectYear").value
+        let year = document.getElementById("selectYearIncome").value
 
         d3.json("/api/data/income/"+year, function(data) {
 
@@ -81,7 +81,7 @@
         })
     }
     $( document ).ready(function(){
-        updateBarChart()
+        updateBarChartIncome()
     })
 
 </script>
