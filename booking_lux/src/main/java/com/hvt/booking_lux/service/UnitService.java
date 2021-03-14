@@ -19,5 +19,6 @@ public interface UnitService {
     Unit save(long resObjectId,String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes, List<Integer> counts);
     Unit edit(long unitId,String title,double size,int numberPeople,double price,String description, List<BedType> bedTypes,List<Integer> counts);
     Unit findById(long unitId);
+    Unit findByIdFromReservation(long unitId);
     Unit delete(long unitId);
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Where(clause = "status='ACTIVE'")
+//@Where(clause = "status='ACTIVE'")
 public class ResObject {
 
     @Id
@@ -31,6 +31,7 @@ public class ResObject {
     private Category category;
 
     @OneToMany(mappedBy = "resObject")
+    @Where(clause = "status = 'ACTIVE'")
     private List<Unit> units;
 
     @ElementCollection

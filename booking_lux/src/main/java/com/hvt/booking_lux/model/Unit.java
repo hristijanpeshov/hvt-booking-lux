@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Where(clause = "status='ACTIVE'")
+//@Where(clause = "status='ACTIVE'")
 public class Unit {
 
     @Id

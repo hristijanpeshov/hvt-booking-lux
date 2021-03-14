@@ -139,6 +139,6 @@ public class AccommodationController {
     public String delete(@PathVariable long resObjectId)
     {
         reservationObjectService.delete(resObjectId);
-        return "redirect:/accommodation";
+        return "redirect:/accommodation/myListings";
     }
 }

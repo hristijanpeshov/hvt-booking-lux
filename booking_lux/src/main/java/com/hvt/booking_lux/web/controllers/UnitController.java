@@ -41,6 +41,16 @@ public class UnitController {
         return "master-template";
     }
 
+    @GetMapping("/reservation/{unitId}")
+    public String getUnitFromReservation(@PathVariable long resObjectId,@PathVariable long unitId, Model model)
+    {
+        Unit unit = unitService.findByIdFromReservation(unitId);
+        model.addAttribute("unit",unit);
+        model.addAttribute("resObjectId",resObjectId);
+        model.addAttribute("bodyContent","unitDetails");
+        return "master-template";
+    }
+
     @GetMapping("/add")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
     public String addForm(Authentication authentication,@PathVariable long resObjectId, Model model)
