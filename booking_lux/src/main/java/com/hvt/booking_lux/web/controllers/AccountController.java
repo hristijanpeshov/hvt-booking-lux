@@ -50,5 +50,10 @@ public class AccountController {
         model.addAttribute("message",badLogin);
         return "master-template";
     }
+    @GetMapping("/admin")
+    public String getAdminPage(Model model){
+        model.addAttribute("bodyContent", "adminPage");
+        return "master-template";
+    }
 
 }

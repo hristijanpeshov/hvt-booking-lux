@@ -106,15 +106,15 @@
             </div>
         </div>
             <div th:each="reservation: ${reservations}" th:if="${reservation.getReview()!=null}" class="row p-3">
-                    <div class="col-sm-3 my-auto border-right">
-                        <p class="mb-0" th:text="${reservation.getReview().getUser().getFirstName() + ' ' + reservation.getReview().getUser().getLastName()}"></p>
-                    </div>
-                    <div class="col-sm-7 my-auto border-right">
-                        <p class="mb-0" th:text="${reservation.getReview().getComment()}"></p>
-                    </div>
-                    <div class="col-sm-2 my-auto border-right">
-                        <p class="mb-0" th:text="${reservation.getReview().getSentiment()}"></p>
-                    </div>
+                <div class="col-sm-3 my-auto border-right">
+                    <p class="mb-0" th:text="${reservation.getReview().getUser().getFirstName() + ' ' + reservation.getReview().getUser().getLastName()}"></p>
+                </div>
+                <div class="col-sm-7 my-auto border-right">
+                    <p class="mb-0" th:text="${reservation.getReview().getComment()}"></p>
+                </div>
+                <div class="col-sm-2 my-auto border-right">
+                    <p class="mb-0" th:text="${reservation.getReview().getSentiment()}"></p>
+                </div>
             </div>
     </div>
     <div class="text-center" th:if="${!unit.hasReviews()}">

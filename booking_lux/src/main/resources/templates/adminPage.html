@@ -1,3 +1,85 @@
-<section class="spad">
-
+<section class="spad" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <form method="get" action="" class="filter__form">
+            <div class="filter__form__item filter__form__item--search col-md-10">
+                <div class="filter__form__input">
+                    <input id="userInput" type="text" placeholder="Search User" name="user">
+                    <span class="icon_search"></span>
+                </div>
+            </div>
+            <button type="button"><i class="fa fa-search"></i> Search</button>
+        </form>
+        <div class="row mt-lg-5 text-center">
+            <div class="col-md-4 mb-3 mx-auto">
+                <canvas id="myChart"></canvas>
+                <p id="charText"></p>
+            </div>
+            <div class="col-md-4 mb-3 mx-auto">
+                <select id="selectObject" onchange="showPieChart()">
+                    <option th:if="${resObjects != null}" th:each="object : ${resObjects}" th:value="${object.getId()}" th:text="${object.getName()}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-lg-5 text-center">
+            <div th:replace="yearlyVisitorCount"></div>
+            <div th:replace="yearlyIncomeBarChart"></div>
+        </div>
+    </div>
 </section>
+
+<script>
+    function showPieChart(){
+        $('#statsContainer').removeAttr('style');
+        var body = $("html, body");
+        body.stop().animate({scrollTop:$('#statsContainer').offset().top}, '500');
+        let id = document.getElementById("selectObject").value
+        d3.json("/api/statistics/" + id + "/pie", function(sdata){
+            if(sdata['POSITIVE'] === 0 && sdata['NEGATIVE'] === 0){
+                document.getElementById('charText').innerHTML = "There are no reviews for this accommodation!";
+                let canvas = document.getElementById("myChart")
+                let canvasParent = canvas.parentNode
+                canvasParent.removeChild(canvas);
+                canvas = document.createElement("canvas")
+                canvas.setAttribute("id","myChart")
+                // canvas.setAttribute("height","100")
+                canvasParent.appendChild(canvas)
+                return
+            }
+            document.getElementById('charText').innerHTML = "";
+
+            var positive = sdata['POSITIVE'];
+            var negative = sdata['NEGATIVE'];
+            data = {
+                datasets: [{
+                    data: [positive, negative]
+                }],
+
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Positive',
+                    'Negative'
+                ]
+            };
+            var ctx = document.getElementById('myChart');
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data : {
+                    datasets: [{
+                        data: [positive, negative],
+                        backgroundColor: [
+                            "#649568",
+                            "#ed2939"
+                        ]}],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: [
+                        'Positive',
+                        'Negative'
+                    ]
+
+                },
+                options: {}
+            });
+        })
+    }
+</script>
