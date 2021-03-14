@@ -21,6 +21,7 @@ import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UnitServiceImpl implements UnitService {
@@ -79,11 +80,13 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit save(long resObjectId, String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
+    public Unit save(long resObjectId, String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
         ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
         List<BedTypes> bedTypesList = this.toBedTypeList(bedTypes,counts);
         Unit unit = new Unit(resObject, title,size, numberPeople, price, description);
         unit.setBedTypes(bedTypesList);
+        List<String> finalImages = images.stream().filter(x->!x.equals("")).collect(Collectors.toList());
+        unit.setUnitImages(finalImages);
         return unitRepository.save(unit);
     }
 
@@ -109,7 +112,7 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit edit(long unitId, String title,double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts) {
+    public Unit edit(long unitId, String title,double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
         Unit unit = findById(unitId);
         unit.setSize(size);
         unit.setNumberOf(numberPeople);
@@ -118,6 +121,8 @@ public class UnitServiceImpl implements UnitService {
         unit.setTitle(title);
         List<BedTypes> bedTypesList = toBedTypeList(bedTypes,counts);
         unit.setBedTypes(bedTypesList);
+        List<String> finalImages = images.stream().filter(x->!x.equals("")).collect(Collectors.toList());
+        unit.setUnitImages(finalImages);
         return unitRepository.save(unit);
     }
 
@@ -132,5 +137,10 @@ public class UnitServiceImpl implements UnitService {
         Unit unit = findById(unitId);
         unit.setStatus(Status.DELETED);
         return unitRepository.save(unit);
+    }
+
+    @Override
+    public List<Unit> listAllMoreThan(Long resObjectId, Integer number) {
+        return this.listAll(resObjectId).stream().filter(x->x.getNumberOfPeople()>number).collect(Collectors.toList());
     }
 }

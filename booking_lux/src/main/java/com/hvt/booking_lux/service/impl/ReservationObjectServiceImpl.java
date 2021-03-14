@@ -99,17 +99,20 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     public ResObject save(String name, String address, String description, Category category, User creator, long cityId, List<String> images) {
         City city = cityRepository.findById(cityId).orElseThrow(()->new CityNotFoundException(cityId));
         ResObject resObject = new ResObject(name, address, description, category, creator, city);
-        resObject.setObjectImages(images);
+        List<String> finalImages = images.stream().filter(x->!x.equals("")).collect(Collectors.toList());
+        resObject.setObjectImages(finalImages);
         return resObjectRepository.save(resObject);
     }
 
     @Override
-    public ResObject edit(long resObjectId, String name, String address, String description, Category category) {
+    public ResObject edit(long resObjectId, String name, String address, String description, Category category, List<String> images) {
         ResObject resObject = findResObjectById(resObjectId);
         resObject.setName(name);
         resObject.setAddress(address);
         resObject.setDescription(description);
         resObject.setCategory(category);
+        List<String> finalImages = images.stream().filter(x->!x.equals("")).collect(Collectors.toList());
+        resObject.setObjectImages(finalImages);
         return resObjectRepository.save(resObject);
     }
 

@@ -20,7 +20,7 @@ public interface ReservationObjectService {
     List<ResObject> findAllAvailable(ZonedDateTime fromDate, ZonedDateTime toDate, int numberOfPeople, String city  );
     List<ResObject> listByCity(long cityId);
     ResObject save(String name, String address, String description, Category category, User creator, long cityId, List<String> images);
-    ResObject edit(long resObjectId,String name, String address, String description, Category category);
+    ResObject edit(long resObjectId,String name, String address, String description, Category category, List<String> images);
     ResObject findResObjectById(long resObjectId);
     ResObject delete(long resObjectId);
     List<ResObject> listByCityName(String city);

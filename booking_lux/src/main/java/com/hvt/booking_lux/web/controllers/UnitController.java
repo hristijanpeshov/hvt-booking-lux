@@ -4,6 +4,7 @@ import com.hvt.booking_lux.model.BedTypes;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.Unit;
 import com.hvt.booking_lux.model.enumeration.BedType;
+import com.hvt.booking_lux.model.exceptions.UnitHasNoBedsException;
 import com.hvt.booking_lux.security.CreatorCheck;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.UnitService;
@@ -54,10 +55,10 @@ public class UnitController {
 
     @PostMapping("/add")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
-    public String addUnit(Authentication authentication, @PathVariable long resObjectId, @RequestParam double size, @RequestParam int numberPeople, @RequestParam String description, @RequestParam double price, @RequestParam String title,@RequestParam  List<BedType> bedType, @RequestParam List<Integer> count)
+    public String addUnit(Authentication authentication, @PathVariable long resObjectId, @RequestParam double size, @RequestParam int numberPeople, @RequestParam String description, @RequestParam double price, @RequestParam String title,@RequestParam  List<BedType> bedType, @RequestParam List<Integer> count,@RequestParam List<String> images)
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
-        unitService.save(resObjectId,title, size, numberPeople, price, description,bedType,count);
+        unitService.save(resObjectId,title, size, numberPeople, price, description,bedType,count,images);
         return "redirect:/accommodation/"+resObjectId;
     }
 
@@ -85,14 +86,14 @@ public class UnitController {
 
     @PostMapping("/edit/{unitId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
-    public String editUnit(Authentication authentication,@PathVariable long resObjectId, @RequestParam String title,@PathVariable long unitId, @RequestParam double size,@RequestParam int numberPeople,@RequestParam String description,@RequestParam double price,@RequestParam  List<BedType> bedType, @RequestParam List<Integer> count)
+    public String editUnit(Authentication authentication,@PathVariable long resObjectId, @RequestParam String title,@PathVariable long unitId, @RequestParam double size,@RequestParam int numberPeople,@RequestParam String description,@RequestParam double price,@RequestParam  List<BedType> bedType, @RequestParam List<Integer> count,@RequestParam List<String> images)
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
         /*if(!resObject.getCreator().equals(authentication.getPrincipal()))
         {
             throw new InvalidCreatorException();
         }*/
-        unitService.edit(unitId,title,size,numberPeople,price,description,bedType,count);
-        return "redirect:/accommodation/"+resObjectId;
+        unitService.edit(unitId,title,size,numberPeople,price,description,bedType,count,images);
+        return "redirect:/accommodation/"+resObjectId+"/unit/"+unitId;
     }
 }

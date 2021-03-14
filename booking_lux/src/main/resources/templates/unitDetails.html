@@ -2,7 +2,7 @@
     <div class="room__details__pic__slider owl-carousel owl-loaded">
         <div class="owl-stage-outer">
             <div class="owl-stage">
-                <div th:each="img : ${unit.getResObject().getObjectImages()}" class="owl-item">
+                <div th:each="img : ${unit.getUnitImages()}" class="owl-item">
                     <img class="img-fluid" th:src="${img}" alt="${unit.getResObject().getName()}">
                 </div>
             </div>

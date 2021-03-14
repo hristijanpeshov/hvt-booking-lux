@@ -20,6 +20,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/accommodation")
@@ -39,8 +40,9 @@ public class AccommodationController {
 
 
     @GetMapping
-    public String listBySearchParams(HttpServletRequest request, @RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam(required = false) Integer numPeople , Model model){
+    public String listBySearchParams(HttpServletRequest request, @RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam Integer numPeople , Model model){
         List<ResObject> resObjectList = null;
+        request.getSession().setAttribute("numPeople",numPeople);
         if(checkInDate != null && checkOutDate!=null)
         {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
@@ -53,13 +55,18 @@ public class AccommodationController {
             ZonedDateTime checkIn = ZonedDateTime.of(checkInDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             ZonedDateTime checkOut = ZonedDateTime.of(checkOutDate, LocalTime.parse("00:00"), ZoneId.systemDefault());
             request.getSession().setAttribute("cityName",city);
-            request.getSession().setAttribute("numPeople",numPeople);
 //            resObjectList = reservationObjectService.listByCityName(city);
             if(checkOut.isBefore(checkIn)){
                 return "redirect:/home?error=Check in date should be before check out date!";
             }
 //            reservationObjectService.listAllAvailableUnitsForResObject(2, checkIn, checkOut, numPeople);
             resObjectList = reservationObjectService.findAllAvailable(checkIn, checkOut, numPeople, city);
+        }else if(city!=null && !city.equals("") && numPeople!=null)
+        {
+            resObjectList = reservationObjectService.listAll();
+        } else if(city!=null && !city.equals(""))
+        {
+            resObjectList = reservationObjectService.listByCityName(city);
         }
         else{
             resObjectList = reservationObjectService.listAll();
@@ -86,11 +93,16 @@ public class AccommodationController {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
         model.addAttribute("resObject", resObject);
         Integer numPeople = (Integer) request.getSession().getAttribute("numPeople");
-        if(numPeople!=null)
+        ZonedDateTime fromDate = (ZonedDateTime) request.getSession().getAttribute("checkIn");
+        ZonedDateTime toDate = (ZonedDateTime) request.getSession().getAttribute("checkOut");
+        if(numPeople!=null && fromDate!=null && toDate!=null)
         {
-            ZonedDateTime fromDate = (ZonedDateTime) request.getSession().getAttribute("checkIn");
-            ZonedDateTime toDate = (ZonedDateTime) request.getSession().getAttribute("checkOut");
+
             model.addAttribute("units", reservationObjectService.listAllAvailableUnitsForResObject(resObjectId, fromDate, toDate, numPeople));
+        }
+        else if(numPeople!=null)
+        {
+            model.addAttribute("units",unitService.listAllMoreThan(resObjectId,numPeople));
         }
         else
         {
@@ -127,11 +139,11 @@ public class AccommodationController {
 
     @PostMapping("/edit/{resObjectId}")
     @PreAuthorize("@creatorCheck.check(#resObjectId,authentication)")
-    public String edit(Model model,Authentication authentication,@PathVariable long resObjectId, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category)
+    public String edit(Model model,Authentication authentication,@PathVariable long resObjectId, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam List<String> images)
     {
         ResObject resObject = reservationObjectService.findResObjectById(resObjectId);
-        reservationObjectService.edit(resObjectId,name,address,description,category);
-        return "redirect:/accommodation";
+        reservationObjectService.edit(resObjectId,name,address,description,category,images);
+        return "redirect:/accommodation/"+resObjectId;
     }
 
     @PostMapping("/delete/{resObjectId}")
