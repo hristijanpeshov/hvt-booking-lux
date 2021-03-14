@@ -133,6 +133,11 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    public Unit findByIdFromReservation(long unitId) {
+        return unitRepository.findAllById(unitId).orElseThrow(() -> new UnitNotFoundException(unitId));
+    }
+
+    @Override
     public Unit delete(long unitId) {
         Unit unit = findById(unitId);
         unit.setStatus(Status.DELETED);

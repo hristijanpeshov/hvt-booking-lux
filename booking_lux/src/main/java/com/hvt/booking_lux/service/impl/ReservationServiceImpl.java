@@ -154,7 +154,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation cancel(long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(()->new ReservationNotFoundException(reservationId));
-        reservation.setStatus(Status.DELETED);
+//        reservation.setStatus(Status.DELETED);
         return reservationRepository.save(reservation);
     }
 

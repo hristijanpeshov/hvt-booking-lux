@@ -43,4 +43,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query(value = "select re.id, re.sentiment from reservation r join unit u on r.unit_id = u.id join res_object ro on ro.id = u.res_object_id join review re on re.reservation_id = r.id where u.res_object_id = ?1",
             nativeQuery = true)
     List<ReviewSentimentStatistics> findAllReviewsSentiment(Long resObjectId);
+
+
+    @Query(value = "select * from reservation r join unit u on r.unit_id = u.id where u.status = 'ACTIVE'", nativeQuery = true)
+    List<Reservation> findAll();
 }
