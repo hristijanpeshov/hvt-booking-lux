@@ -155,4 +155,8 @@ public class ResObject {
     public ZonedDateTime getDateCreated() {
         return dateCreated;
     }
+
+    public void addImage(String image){
+        this.objectImages.add(image);
+    }
 }

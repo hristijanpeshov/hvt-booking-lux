@@ -130,6 +130,19 @@ ol {
 	height: auto;
 }
 
+.btn-round{
+	border-radius: 50%;
+	padding: 0.3rem 0.4rem 0.3rem 0.4rem;
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+}
+.btn-round:hover{
+	background-color: #257028;
+}
+
 /*---------------------
 Custom CSS
 -------------------*/

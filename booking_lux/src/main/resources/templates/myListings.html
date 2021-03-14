@@ -16,7 +16,7 @@
         <div th:each="resObject : ${resObjects}" class="row hoverable-unit border-bottom border-top py-2" th:data-id="'TUKA STAVI ID OD UNIT'" th:data-res="${resObject.getId()}" onclick="redirectToUnit(this)">
             <div class="row my-2 mb-2">
                 <div class="col-lg-3 p-0 order-lg-1 order-md-1 col-md-3 px-3">
-                    <img src="/assets/room-4.jpg">
+                    <img th:src="${resObject.getObjectImages().get(0)}">
                 </div>
                 <div class="col-lg-6 p-0 order-lg-2 order-md-2 col-md-6 px-2">
 <!--                    <h5 class="font-weight-light" th:text="${#temporals.format(reservation.getReservationDate(), 'dd-MM-yyyy HH:mm')}">Placeholder text</h5>-->

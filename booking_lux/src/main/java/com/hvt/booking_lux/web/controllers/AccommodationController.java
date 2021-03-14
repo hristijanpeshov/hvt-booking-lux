@@ -108,9 +108,9 @@ public class AccommodationController {
     }
 
     @PostMapping("/add")
-    public String save(Model model,Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam long cityId)
+    public String save(Model model,Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam long cityId, @RequestParam List<String> images)
     {
-        reservationObjectService.save(name,address,description,category, (User) authentication.getPrincipal(),cityId);
+        reservationObjectService.save(name, address, description, category, (User) authentication.getPrincipal(), cityId, images);
         return "redirect:/accommodation";
     }
 

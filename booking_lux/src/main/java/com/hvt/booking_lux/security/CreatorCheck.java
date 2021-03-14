@@ -22,6 +22,9 @@ public class CreatorCheck {
 
     public boolean check(long resObjectId, Authentication authentication)
     {
+        if(authentication == null){
+            return false;
+        }
         User user = null;
         try{
             user = (User) userService.loadUserByUsername(authentication.getName());
