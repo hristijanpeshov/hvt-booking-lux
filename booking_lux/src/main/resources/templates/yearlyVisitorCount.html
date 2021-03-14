@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row">
-        <div class="col-11"></div>
+    <div class="row mb-2">
+        <div class="col-11"><h2>Annual Visitor Count Statistics</h2></div>
         <div class="col-1">
             <select id="selectYearVisitor" onchange="updateBarChartVisitor()">
                 <option th:each="year : ${#numbers.sequence(#dates.year(#dates.createNow()),2015,-1)}" th:value="${year}" th:text="${year}" th:selected="${year==#dates.year(#dates.createNow())-1}"></option>

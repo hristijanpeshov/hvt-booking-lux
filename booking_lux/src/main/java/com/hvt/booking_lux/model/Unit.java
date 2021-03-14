@@ -141,6 +141,9 @@ public class Unit {
         return sb.toString();
     }
 
+    public boolean hasReviews(){
+        return !this.getReservations().stream().allMatch(r -> r.getReview() == null);
+    }
     public List<String> getUnitImages() {
         return unitImages;
     }
