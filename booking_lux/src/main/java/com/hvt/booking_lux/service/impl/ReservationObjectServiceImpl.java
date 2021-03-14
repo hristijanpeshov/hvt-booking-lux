@@ -96,9 +96,10 @@ public class ReservationObjectServiceImpl implements ReservationObjectService {
     }
 
     @Override
-    public ResObject save(String name, String address, String description, Category category, User creator, long cityId) {
+    public ResObject save(String name, String address, String description, Category category, User creator, long cityId, List<String> images) {
         City city = cityRepository.findById(cityId).orElseThrow(()->new CityNotFoundException(cityId));
         ResObject resObject = new ResObject(name, address, description, category, creator, city);
+        resObject.setObjectImages(images);
         return resObjectRepository.save(resObject);
     }
 

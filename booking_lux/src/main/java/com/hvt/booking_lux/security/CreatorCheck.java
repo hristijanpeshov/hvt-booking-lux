@@ -22,8 +22,7 @@ public class CreatorCheck {
 
     public boolean check(long resObjectId, Authentication authentication)
     {
-        if(authentication==null)
-        {
+        if(authentication == null){
             return false;
         }
         User user = null;
