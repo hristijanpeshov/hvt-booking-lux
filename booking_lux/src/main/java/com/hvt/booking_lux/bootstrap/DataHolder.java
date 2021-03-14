@@ -90,12 +90,12 @@ public class DataHolder {
 
 
 
-        Unit unit3 = new Unit(hotelMKD, "Room for 5 people!",70, 5, 100, "Room for 5 people!");
-        Unit unit4 = new Unit(hotelMKD, "Room for 2 people!",25, 2, 35, "Room for 2 people!");
+        Unit unit3 = new Unit(hotelMKD, "Room for 5 people!",70,  100, "Room for 5 people!");
+        Unit unit4 = new Unit(hotelMKD, "Room for 2 people!",25, 35, "Room for 2 people!");
 
-        Unit unit1 = unitRepository.save(new Unit(hotelMKD,"Room for 2 people!" ,22, 2, 20, "Room for 2 people!"));
-        Unit unit2 = unitRepository.save(new Unit(hotelMKD,"Room for 4 people!" ,40, 3, 55, "Room for 4 people!"));
-        Unit unit5 = unitRepository.save(new Unit(houseSRB, "Room for 4 people!",125, 4, 150, "Room for 4 people!"));
+        Unit unit1 = unitRepository.save(new Unit(hotelMKD,"Room for 2 people!" ,22,  20, "Room for 2 people!"));
+        Unit unit2 = unitRepository.save(new Unit(hotelMKD,"Room for 4 people!" ,40,  55, "Room for 4 people!"));
+        Unit unit5 = unitRepository.save(new Unit(houseSRB, "Room for 4 people!",125,  150, "Room for 4 people!"));
 
         List<String> unitImages = new ArrayList<String>();
         unitImages.add("https://images.unsplash.com/photo-1603794067602-9feaa4f70e0c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60");
@@ -139,10 +139,10 @@ public class DataHolder {
         unitRepository.save(unit4);
 
 
-        Reservation reservation = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now().minusDays(10), ZonedDateTime.now().minusDays(6)));
-        Reservation reservation1 = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now().minusDays(40), ZonedDateTime.now().minusDays(35)));
+        Reservation reservation = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOfPeople(), ZonedDateTime.now().minusDays(10), ZonedDateTime.now().minusDays(6)));
+        Reservation reservation1 = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOfPeople(), ZonedDateTime.now().minusDays(40), ZonedDateTime.now().minusDays(35)));
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now().plusDays(5)));
+        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOfPeople(), ZonedDateTime.now(), ZonedDateTime.now().plusDays(5)));
 
     }
 }

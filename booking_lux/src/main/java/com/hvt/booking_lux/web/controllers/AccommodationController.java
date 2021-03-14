@@ -40,7 +40,7 @@ public class AccommodationController {
 
 
     @GetMapping
-    public String listBySearchParams(HttpServletRequest request, @RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam Integer numPeople , Model model){
+    public String listBySearchParams(HttpServletRequest request, @RequestParam(required = false) String city, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkInDate, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate checkOutDate, @RequestParam(required = false) Integer numPeople , Model model){
         List<ResObject> resObjectList = null;
         request.getSession().setAttribute("numPeople",numPeople);
         if(checkInDate != null && checkOutDate!=null)

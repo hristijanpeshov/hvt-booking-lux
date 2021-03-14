@@ -80,10 +80,10 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit save(long resObjectId, String title, double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
+    public Unit save(long resObjectId, String title, double size, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
         ResObject resObject = resObjectRepository.findById(resObjectId).orElseThrow(() -> new ResObjectNotFoundException(resObjectId));
         List<BedTypes> bedTypesList = this.toBedTypeList(bedTypes,counts);
-        Unit unit = new Unit(resObject, title,size, numberPeople, price, description);
+        Unit unit = new Unit(resObject, title,size, price, description);
         unit.setBedTypes(bedTypesList);
         List<String> finalImages = images.stream().filter(x->!x.equals("")).collect(Collectors.toList());
         unit.setUnitImages(finalImages);
@@ -112,10 +112,9 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public Unit edit(long unitId, String title,double size, int numberPeople, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
+    public Unit edit(long unitId, String title,double size, double price, String description, List<BedType> bedTypes,List<Integer> counts,List<String> images) {
         Unit unit = findById(unitId);
         unit.setSize(size);
-        unit.setNumberOf(numberPeople);
         unit.setPrice(price);
         unit.setDescription(description);
         unit.setTitle(title);

@@ -25,7 +25,6 @@ public class Unit {
 
     private double price;
 
-    private int numberOf;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -47,11 +46,10 @@ public class Unit {
     public Unit() {
     }
 
-    public Unit(ResObject resObject,String title, double size, int numberOf, double price, String description) {
+    public Unit(ResObject resObject,String title, double size, double price, String description) {
         this.resObject = resObject;
         this.size = size;
         this.price = price;
-        this.numberOf = numberOf;
         this.description = description;
         this.status = Status.ACTIVE;
         this.title = title;
@@ -59,11 +57,10 @@ public class Unit {
         unitImages = new ArrayList<>();
     }
 
-    public Unit(ResObject resObject,String title, double size, int numberOf, double price, String description, List<BedTypes> bedTypes) {
+    public Unit(ResObject resObject,String title, double size, double price, String description, List<BedTypes> bedTypes) {
         this.resObject = resObject;
         this.size = size;
         this.price = price;
-        this.numberOf = numberOf;
         this.description = description;
         this.status = Status.ACTIVE;
         this.bedTypes = bedTypes;
@@ -107,9 +104,6 @@ public class Unit {
         this.status = status;
     }
 
-    public int getNumberOf() {
-        return numberOf;
-    }
 
     public double getPrice() {
         return price;
@@ -156,9 +150,6 @@ public class Unit {
 //        this.status = status;
 //    }
 
-    public void setNumberOf(int numberPeople) {
-        this.numberOf = numberPeople;
-    }
 
     public void setPrice(double price) {
         this.price = price;
