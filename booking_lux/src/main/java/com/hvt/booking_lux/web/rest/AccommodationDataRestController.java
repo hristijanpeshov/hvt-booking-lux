@@ -1,6 +1,7 @@
 package com.hvt.booking_lux.web.rest;
 
 import com.hvt.booking_lux.model.User;
+import com.hvt.booking_lux.model.enumeration.Role;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +24,7 @@ public class AccommodationDataRestController {
    @GetMapping("income/{year}")
    @PreAuthorize("isAuthenticated()")
    public List<Map<String,String>> myListingsLastYearIncomeData(Authentication authentication, @PathVariable Integer year, @RequestParam(required = false) String username){
-        if(username != null){
+        if(username != null && !username.equals("") && authentication.getAuthorities().contains(Role.ROLE_ADMIN)){
             User user = (User) userService.loadUserByUsername(username);
             return reservationService.lastYearIncomeForCreatorsAccommodations(user, year);
         }
@@ -33,7 +34,7 @@ public class AccommodationDataRestController {
    @PreAuthorize("isAuthenticated()")
    public List<Map<String,String>> yearlyVisitorCount(Authentication authentication,@PathVariable Integer year, @RequestParam(required = false) String username)
    {
-       if(username != null){
+       if(username != null && !username.equals("") && authentication.getAuthorities().contains(Role.ROLE_ADMIN)){
            User user = (User) userService.loadUserByUsername(username);
            return reservationService.yearlyVisitorsStatistic(user, year);
        }

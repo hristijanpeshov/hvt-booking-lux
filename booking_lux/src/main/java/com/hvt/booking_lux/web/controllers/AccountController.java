@@ -51,6 +51,7 @@ public class AccountController {
         return "master-template";
     }
     @GetMapping("/admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getAdminPage(Model model){
         model.addAttribute("bodyContent", "adminPage");
         return "master-template";

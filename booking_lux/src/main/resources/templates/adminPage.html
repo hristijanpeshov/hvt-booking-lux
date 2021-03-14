@@ -7,7 +7,7 @@
                     <span class="icon_search"></span>
                 </div>
             </div>
-            <button type="button"><i class="fa fa-search"></i> Search</button>
+            <button type="button" onclick="showCharts()"><i class="fa fa-search"></i> Search</button>
         </form>
         <div class="row mt-lg-5 text-center">
             <div class="col-md-4 mb-3 mx-auto">
@@ -28,12 +28,49 @@
 </section>
 
 <script>
+    $(function() {
+        $.get(
+            "/api/users",
+            function(data){
+                var allUsers = data;
+                $( "#userInput" ).autocomplete({
+                    source: allUsers
+                });
+            }
+        )
+    });
+</script>
+
+<script>
+    let user = undefined
+    function showCharts()
+    {
+        console.log("xd")
+        let username = document.getElementById("userInput").value;
+        if(username!=undefined)
+        {
+            user = username
+        }
+        updateBarChartVisitor();
+        updateBarChartIncome();
+        showPieChart();
+
+    }
     function showPieChart(){
+
         $('#statsContainer').removeAttr('style');
         var body = $("html, body");
         body.stop().animate({scrollTop:$('#statsContainer').offset().top}, '500');
         let id = document.getElementById("selectObject").value
-        d3.json("/api/statistics/" + id + "/pie", function(sdata){
+
+        let url = "/api/statistics/" + id + "/pie";
+
+        if(user!=undefined)
+        {
+            url += ("?username="+user)
+        }
+
+        d3.json(url, function(sdata){
             if(sdata['POSITIVE'] === 0 && sdata['NEGATIVE'] === 0){
                 document.getElementById('charText').innerHTML = "There are no reviews for this accommodation!";
                 let canvas = document.getElementById("myChart")

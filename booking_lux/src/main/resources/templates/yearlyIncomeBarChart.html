@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-12 centered">
-            <canvas id="myBarChart" height="100"></canvas>
+            <canvas id="myBarChartIncome" height="100"></canvas>
         </div>
     </div>
 </div>
@@ -19,13 +19,20 @@
 
         let year = document.getElementById("selectYearIncome").value
 
-        d3.json("/api/data/income/"+year, function(data) {
+        let url = "/api/data/income/"+year;
 
-            let canvas = document.getElementById("myBarChart")
+        if(user!=undefined)
+        {
+            url += ("?username="+user)
+        }
+
+        d3.json(url, function(data) {
+
+            let canvas = document.getElementById("myBarChartIncome")
             let canvasParent = canvas.parentNode
             canvasParent.removeChild(canvas);
             canvas = document.createElement("canvas")
-            canvas.setAttribute("id","myBarChart")
+            canvas.setAttribute("id","myBarChartIncome")
             canvas.setAttribute("height","100")
             canvasParent.appendChild(canvas)
 
@@ -63,7 +70,7 @@
                 datasets: myDatasets
             }
 
-            var ctx = document.getElementById("myBarChart")
+            var ctx = document.getElementById("myBarChartIncome")
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: finalData,

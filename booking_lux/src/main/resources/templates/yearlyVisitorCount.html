@@ -19,7 +19,14 @@
 
         let year = document.getElementById("selectYearVisitor").value
 
-        d3.json("/api/data/visitors/"+year, function(data) {
+        let url = "/api/data/visitors/"+year;
+
+        if(user!=undefined)
+        {
+            url += ("?username="+user)
+        }
+
+        d3.json(url, function(data) {
 
             let canvas = document.getElementById("myBarChartVisitors")
             let canvasParent = canvas.parentNode

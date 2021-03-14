@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -57,6 +60,11 @@ public class UserServiceImpl implements UserService {
         User user = (User) loadUserByUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         return user;
+    }
+
+    @Override
+    public List<String> findAllUsernames() {
+        return userRepository.findAll().stream().map(x->x.getUsername()).collect(Collectors.toList());
     }
 
     @Override
