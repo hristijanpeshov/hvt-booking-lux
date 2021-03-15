@@ -28,17 +28,35 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ed95451-0c73-469c-bbba-80891de13572" name="Default Changelist" comment="Accommodation/Unit edit Images">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7ed95451-0c73-469c-bbba-80891de13572" name="Default Changelist" comment="AfterMergeFixes">
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/static/assets/room-9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/bootstrap/DataHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/bootstrap/DataHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/model/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/model/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/service/UnitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/service/UnitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/service/impl/UnitServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/service/impl/UnitServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/repository/ReservationRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/controllers/AccommodationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/controllers/AccommodationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/controllers/UnitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/java/com/hvt/booking_lux/web/controllers/UnitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/add-unit.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/add-unit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/application-prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/add-accommodation.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/add-accommodation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/adminPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/adminPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myListings.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/myListings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/yearlyIncomeBarChart.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/yearlyIncomeBarChart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/yearlyVisitorCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/booking_lux/src/main/resources/templates/yearlyVisitorCount.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +103,17 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RunManager" selected="Spring Boot.BookingLuxApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BookingLuxApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="booking_lux" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.hvt.booking_lux.BookingLuxApplication" />
@@ -112,7 +141,7 @@
       <workItem from="1615678669763" duration="11000" />
       <workItem from="1615729498821" duration="5181000" />
       <workItem from="1615742202864" duration="1950000" />
-      <workItem from="1615757670012" duration="724000" />
+      <workItem from="1615757670012" duration="7910000" />
     </task>
     <task id="LOCAL-00001" summary="AdminPageFixup">
       <created>1615749447709</created>
@@ -128,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615757346900</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="AfterMergeFixes">
+      <created>1615758706643</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615758706643</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +197,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="AdminPageFixup" />
     <MESSAGE value="Accommodation/Unit edit Images" />
-    <option name="LAST_COMMIT_MESSAGE" value="Accommodation/Unit edit Images" />
+    <MESSAGE value="AfterMergeFixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="AfterMergeFixes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="441" y="96" key="#Project_Structure" timestamp="1615757638054">
@@ -173,69 +210,73 @@
     </state>
     <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615757076236" />
     <state x="765" y="220" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615662529384" />
+    <state x="362" y="118" width="1278" height="837" key="#xdebugger.evaluate" timestamp="1615764203078">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="362" y="118" width="1278" height="837" key="#xdebugger.evaluate/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764203078" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1615669752550">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615669752550" />
-    <state width="1877" height="65" key="GridCell.Tab.0.bottom" timestamp="1615758264599">
+    <state width="1877" height="469" key="GridCell.Tab.0.bottom" timestamp="1615764940429">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.0.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264599" />
+    <state width="1877" height="469" key="GridCell.Tab.0.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764940429" />
     <state width="966" height="260" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.0.center" timestamp="1615758264599">
+    <state width="1877" height="469" key="GridCell.Tab.0.center" timestamp="1615764940429">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.0.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264599" />
+    <state width="1877" height="469" key="GridCell.Tab.0.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764940429" />
     <state width="966" height="260" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.0.left" timestamp="1615758264599">
+    <state width="1877" height="469" key="GridCell.Tab.0.left" timestamp="1615764940428">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.0.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264599" />
+    <state width="1877" height="469" key="GridCell.Tab.0.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764940428" />
     <state width="966" height="260" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.0.right" timestamp="1615758264599">
+    <state width="1877" height="469" key="GridCell.Tab.0.right" timestamp="1615764940429">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.0.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264599" />
+    <state width="1877" height="469" key="GridCell.Tab.0.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764940429" />
     <state width="966" height="260" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.1.bottom" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.1.bottom" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.1.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.1.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.1.center" timestamp="1615758264455">
+    <state width="1877" height="469" key="GridCell.Tab.1.center" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.1.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264455" />
+    <state width="1877" height="469" key="GridCell.Tab.1.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.1.left" timestamp="1615758264455">
+    <state width="1877" height="469" key="GridCell.Tab.1.left" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.1.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264455" />
+    <state width="1877" height="469" key="GridCell.Tab.1.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.1.right" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.1.right" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.1.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.1.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.2.bottom" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.2.bottom" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.2.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.2.bottom/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.2.center" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.2.center" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.2.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.2.center/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.2.left" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.2.left" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.2.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.2.left/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
-    <state width="1877" height="65" key="GridCell.Tab.2.right" timestamp="1615758264456">
+    <state width="1877" height="469" key="GridCell.Tab.2.right" timestamp="1615764938616">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state width="1877" height="65" key="GridCell.Tab.2.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758264456" />
+    <state width="1877" height="469" key="GridCell.Tab.2.right/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615764938616" />
     <state width="966" height="260" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615744169026" />
     <state x="186" y="86" key="MergeDialog" timestamp="1615749517743">
       <screen x="0" y="0" width="1920" height="1044" />
@@ -245,10 +286,10 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="599" y="283" key="MultipleFileMergeDialog/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615749517746" />
-    <state x="553" y="255" key="Vcs.Push.Dialog.v2" timestamp="1615757361089">
+    <state x="553" y="255" key="Vcs.Push.Dialog.v2" timestamp="1615758711081">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state x="553" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615757361089" />
+    <state x="553" y="255" key="Vcs.Push.Dialog.v2/0.0.1920.1044/3840.0.960.504@0.0.1920.1044" timestamp="1615758711081" />
     <state x="777" y="435" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615749401159">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>

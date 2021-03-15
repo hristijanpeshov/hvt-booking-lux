@@ -4,6 +4,7 @@ import com.hvt.booking_lux.model.enumeration.Category;
 import com.hvt.booking_lux.model.ResObject;
 import com.hvt.booking_lux.model.User;
 import com.hvt.booking_lux.security.CreatorCheck;
+import com.hvt.booking_lux.service.LocationService;
 import com.hvt.booking_lux.service.ReservationObjectService;
 import com.hvt.booking_lux.service.ReservationService;
 import com.hvt.booking_lux.service.UnitService;
@@ -20,7 +21,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/accommodation")
@@ -30,12 +30,14 @@ public class AccommodationController {
     private final CreatorCheck creatorCheck;
     private final UnitService unitService;
     private final ReservationService reservationService;
+    private final LocationService locationService;
 
-    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck, UnitService unitService, ReservationService reservationService) {
+    public AccommodationController(ReservationObjectService reservationObjectService, CreatorCheck creatorCheck, UnitService unitService, ReservationService reservationService, LocationService locationService) {
         this.reservationObjectService = reservationObjectService;
         this.creatorCheck = creatorCheck;
         this.unitService = unitService;
         this.reservationService = reservationService;
+        this.locationService = locationService;
     }
 
 
@@ -113,13 +115,16 @@ public class AccommodationController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public String addForm(Model model){
         model.addAttribute("bodyContent", "add-accommodation");
         model.addAttribute("edit",false);
+        model.addAttribute("cities",locationService.listAllCities());
         return "master-template";
     }
 
     @PostMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public String save(Model model,Authentication authentication, @RequestParam String name, @RequestParam String address, @RequestParam String description, @RequestParam Category category, @RequestParam long cityId, @RequestParam List<String> images)
     {
         reservationObjectService.save(name, address, description, category, (User) authentication.getPrincipal(), cityId, images);

@@ -15,15 +15,20 @@
 </div>
 
 <script>
-    function updateBarChartIncome(){
+    let user2 = undefined
+    function updateBarChartIncome(username){
 
         let year = document.getElementById("selectYearIncome").value
 
         let url = "/api/data/income/"+year;
 
-        if(user!=undefined)
+        if(username!=undefined)
         {
-            url += ("?username="+user)
+            user2 = username
+        }
+        if(user2!=undefined)
+        {
+            url += ("?username="+user2)
         }
 
         d3.json(url, function(data) {

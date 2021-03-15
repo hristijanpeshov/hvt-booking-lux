@@ -32,6 +32,7 @@ public class Unit {
     @OneToMany
     private List<BedTypes> bedTypes;
 
+    @Column(length = 2000)
     private String description;
 
     @ManyToOne

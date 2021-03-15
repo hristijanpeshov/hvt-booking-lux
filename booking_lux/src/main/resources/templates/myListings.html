@@ -13,6 +13,11 @@
 </div>
 <section class="spad" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <a class="btn primary-btn delete-btn mt-2 d-block" href="/accommodation/add">Add accommodation</a>
+            </div>
+        </div>
         <div th:each="resObject : ${resObjects}" class="row hoverable-unit border-bottom border-top py-2" th:data-id="'TUKA STAVI ID OD UNIT'" th:data-res="${resObject.getId()}" onclick="redirectToUnit(this)">
             <div class="row my-2 mb-2">
                 <div class="col-lg-3 p-0 order-lg-1 order-md-1 col-md-3 px-3">

@@ -15,15 +15,20 @@
 </div>
 
 <script>
-    function updateBarChartVisitor(){
+    let user1 = undefined;
+    function updateBarChartVisitor(username){
 
         let year = document.getElementById("selectYearVisitor").value
 
         let url = "/api/data/visitors/"+year;
 
-        if(user!=undefined)
+        if(username!=undefined)
         {
-            url += ("?username="+user)
+            user1 = username
+        }
+        if(user1!=undefined)
+        {
+            url += ("?username="+user1)
         }
 
         d3.json(url, function(data) {

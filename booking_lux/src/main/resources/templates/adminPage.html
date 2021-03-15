@@ -42,19 +42,12 @@
 </script>
 
 <script>
-    let user = undefined
     function showCharts()
     {
-        console.log("xd")
         let username = document.getElementById("userInput").value;
-        if(username!=undefined)
-        {
-            user = username
-        }
-        updateBarChartVisitor();
-        updateBarChartIncome();
+        updateBarChartVisitor(username);
+        updateBarChartIncome(username);
         showPieChart();
-
     }
     function showPieChart(){
 

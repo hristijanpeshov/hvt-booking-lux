@@ -46,13 +46,30 @@ public class DataHolder {
 
     @PostConstruct
     public void init() {
+
+
+        /*Country countryMKD = countryRepository.save(new Country("Macedonia", "MKD", "flag"));
+        Country countryEn = countryRepository.save(new Country("England", "EN", "flag"));
+        Country countrySRB = countryRepository.save(new Country("Serbia", "SRB", "flag"));
+
+
+        City skopje = cityRepository.save(new City("Skopje", countryMKD));
+        City bitola = cityRepository.save(new City("Bitola", countryMKD));
+        City veles = cityRepository.save(new City("Veles", countryMKD));
+        City belgrade = cityRepository.save(new City("Belgrade", countrySRB));
+        City london = cityRepository.save(new City("London", countryEn));
+        City manchester = cityRepository.save(new City("Manchester", countryEn));*/
+
+
+
+
         DataHolder.peopleNumberMap.put(BedType.TWIN.toString(), 1);
         DataHolder.peopleNumberMap.put(BedType.DOUBLE.toString(), 2);
         DataHolder.peopleNumberMap.put(BedType.QUEEN.toString(), 2);
         DataHolder.peopleNumberMap.put(BedType.KING.toString(), 2);
         DataHolder.peopleNumberMap.put(BedType.SOFA.toString(), 1);
 
-        Country countryMKD = countryRepository.save(new Country("Macedonia", "MKD", "flag"));
+        /*Country countryMKD = countryRepository.save(new Country("Macedonia", "MKD", "flag"));
         Country countryEn = countryRepository.save(new Country("England", "EN", "flag"));
         Country countrySRB = countryRepository.save(new Country("Serbia", "SRB", "flag"));
 
@@ -142,7 +159,7 @@ public class DataHolder {
         Reservation reservation = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOfPeople(), ZonedDateTime.now().minusDays(10), ZonedDateTime.now().minusDays(6)));
         Reservation reservation1 = reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOfPeople(), ZonedDateTime.now().minusDays(40), ZonedDateTime.now().minusDays(35)));
 //        reservationRepository.save(new Reservation(user, unit1, unit1.getPrice(), unit1.getNumberOf(), ZonedDateTime.now(), ZonedDateTime.now()));
-        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOfPeople(), ZonedDateTime.now(), ZonedDateTime.now().plusDays(5)));
+        reservationRepository.save(new Reservation(user, unit2, unit2.getPrice(), unit2.getNumberOfPeople(), ZonedDateTime.now(), ZonedDateTime.now().plusDays(5)));*/
 
     }
 }

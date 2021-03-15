@@ -57,7 +57,7 @@
                             <button class="btn-round fa fa-minus" style="background-color: red" type="button" onclick="removeField(this)"></button>
                         </div>
                     </div>
-                    <div class="row pl-1 mb-3" th:each="image: ${reservationObject.getObjectImages()}">
+                    <div class="row pl-1 mb-3" th:each="image: ${reservationObject?.getObjectImages()}">
                         <div class="col-md-10">
                             <input class="form-control"
                                    name="images"
@@ -81,10 +81,7 @@
                 <div class="col-md-12" th:if="${edit}==false">
                     <div class="form-group">
                         <select class="mt-1rem" id="city" name="cityId" style="display:none;">
-                            <option value="1">SKOPJE</option>
-                            <option value="2">BITOLA</option>
-                            <option value="3">VELES</option>
-                            <option value="4">STRUMICA</option>
+                            <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getName()}"></option>
                         </select>
                     </div>
                 </div>
