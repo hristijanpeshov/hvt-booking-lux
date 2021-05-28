@@ -5,5 +5,6 @@
 
 Application for booking apartments, hotels and houses
 
-Teodor Penevski e zver
+
+HTML template credits - https://colorlib.com/wp/template/hiroto/
 
