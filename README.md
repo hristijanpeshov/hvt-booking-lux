@@ -5,6 +5,5 @@
 
 Application for booking apartments, hotels and houses
 
-
-HTML template credits - https://colorlib.com/wp/template/hiroto/
+Copyright © 2021 | HTML credits - [Colorlib](https://colorlib.com/wp/template/hiroto/)
 
