@@ -5,5 +5,5 @@
 
 Application for booking apartments, hotels and houses
 
-Copyright © 2021 | HTML credits - [Colorlib](https://colorlib.com/wp/template/hiroto/)
+HTML Template credits - [Colorlib](https://colorlib.com/wp/template/hiroto/) | HTML Temlplate Copyright © 2021 - [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 
